@@ -28,8 +28,9 @@
                  }
                  else{
                     //LOAD NEW SEARCH RESULTS PAGE HERE 
-                   window.location.pathname = "/promotionSearchResults.html/"; 
-                    return true;
+                   //window.location.pathname = "/promotionSearchResults.html"; 
+                   loadpage.pathname = "/promotionSearchResults.html"; 
+                   // return true;
                  }
             }
     
@@ -92,7 +93,7 @@
               <div id="left-sidebar" class="sidebar">
 				<ul id="main-menu" class="metismenu">
                     <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Promotions</b></li></center>
-					<li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add Promotion</a></li>
+					 <li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add Promotion</a></li>
 					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Promotion</a></li>
 					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Promotions</a></li>
 				</ul>
@@ -135,7 +136,7 @@
  										<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
  									</div>
  									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
+                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
                                     </form>    
  									</fieldset>
 									</div>
@@ -168,7 +169,7 @@
  										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
  									</div>
  									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
+                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
                                     </form>    
  									</fieldset>
 									</div>
@@ -201,8 +202,8 @@
  									<div class="form-group">
  										<input class="form-control" placeholder="Amount Off" name="promotionAmountOff" id="promotionAmountOff" type="text">
  									</div>
-                                        <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
+                                        <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit" href="#promotionSearchResults.html">Submit</button>
+                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
                                     </form>    
  									</fieldset>
 									</div>

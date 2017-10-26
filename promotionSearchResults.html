@@ -75,7 +75,7 @@ window.onload = addRowHandlers();
     height: 10em;
    }      
 
-    tr:hover td {background:#36465d;}
+    tr:hover td {background:#36465d; cursor: pointer;}
     tr:hover p  {color:#ffffff;}   
     p{
            font-size: 100%; 
@@ -215,13 +215,13 @@ window.onload = addRowHandlers();
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
+                                  <tr data-toggle="modal" data-target="#promotionDetailModal">
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                   </tr>
-                                  <tr>
+                                  <tr data-toggle="modal" data-target="#promotionDetailModal">
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
@@ -240,6 +240,100 @@ window.onload = addRowHandlers();
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
+    
+    <!-- START OF MODAL PROMOTION PROMPTS -->
+    
+      
+    <!-- Button trigger details modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#promotionDetailModal">
+  Row to click on.
+</button>
+
+<!-- Promotion Details Modal -->
+<div class="modal fade" id="promotionDetailModal" tabindex="-1" role="dialog" aria-labelledby="promotionDetailTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="promotionDetailTitle" style="bottom-padding: 10px;"><b>Promotion Details:</b></h3>
+        <button type="button" class="close" data-dismiss="modal" style="bottom-padding: 10px;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="promotionDetailsTable" name="promotionDetailsTable">
+            <thead>
+              <tr>
+                <th>Detail 1</th>
+                <th>Detail 2</th>
+                <th>Detail 3</th>
+                <th>Detail 4</th>
+                <th>Detail 5</th>
+              </tr>          
+            </thead>
+            <tbody>
+              <tr>
+                <td>Data</td>
+                <td>Data</td>      
+                <td>Data</td>      
+                <td>Data</td>      
+                <td>Data</td>        
+              </tr>
+            </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#promotionEditModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>   
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    
+<!-- Promotion Edit Modal -->
+<div class="modal fade" id="promotionEditModal" tabindex="-1" role="dialog" aria-labelledby="promotionEditModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="promotionEditModal" style="bottom-padding: 10px;"><b>Edit Promotion:</b></h3>
+        <button type="button" class="close" data-dismiss="modal" style="bottom-padding: 10px;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="promotionUpdateForm" onsubmit="validatePromotionUpdate()">    
+ 			<div class="form-group">
+              <h5>Item Description:</h5>    
+ 			  <input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
+ 			</div>
+ 			<div class="form-group">
+                <h5>Item Category:</h5> 
+                <input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+ 			</div>
+ 			<div class="form-group">
+              <h5>Department Name:</h5>     
+ 			  <input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+ 			</div>
+ 			<div class="form-group">
+              <h5>Purchase Cost:</h5>     
+ 			  <input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+ 			</div>
+ 			<div class="form-group">
+              <h5>Full Retail Price:</h5>     
+ 			  <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+ 			</div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" type="submit" value="Submit"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save changes</button>
+      </div>
+      </form>      
+    </div>
+  </div>
+</div>    
+    
+<!-- END OF MODAL PROMOTION PROMPTS -->    
 	
 </body>
 
