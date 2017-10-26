@@ -32,6 +32,26 @@
             }
     
     </script>
+    <script>
+       function addRowHandlers() {
+            var table = document.getElementById("table");
+            var rows = table.getElementsByTagName("tr");
+            for (i = 0; i < rows.length; i++) {
+                var currentRow = table.rows[i];
+                var createClickHandler = 
+            function(row) {
+                return function() { 
+                                        var cell = row.getElementsByTagName("td")[0];
+                                        var id = cell.innerHTML;
+                                        alert("id:" + id);
+                                 };
+            };
+
+        currentRow.onclick = createClickHandler(currentRow);
+    }
+}
+window.onload = addRowHandlers();
+    </script>
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Promotions</title>
@@ -53,7 +73,13 @@
 
    textarea:focus {
     height: 10em;
-   }        
+   }      
+
+    tr:hover td {background:#36465d;}
+    tr:hover p  {color:#ffffff;}   
+    p{
+           font-size: 100%; 
+    }    
 	</style>
 	
 </head>
@@ -179,7 +205,7 @@
                          <div class="jumbotron">    
                             <h2 style="padding-bottom: 20px;"><b>Promotion Search Results:</b></h2> 
                             <center>    
-                            <table class="table">
+                            <table class="table" id="table">
                                 <thead>
                                   <tr>    
                                     <th>Example 1</th>
@@ -190,16 +216,16 @@
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td>Result 1</td>
-                                    <td>Result 2</td>
-                                    <td>Result 3</td>
-                                    <td>Result 4</td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
                                   </tr>
                                   <tr>
-                                    <td>Result 5</td>
-                                    <td>Result 6</td>
-                                    <td>Result 7</td>
-                                    <td>Result 8</td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
+                                    <td><p>Result 1</p></td>
                                   </tr>      
                                 </tbody>
                             </table>

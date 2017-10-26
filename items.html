@@ -75,7 +75,6 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-				<form accept-charset="UTF-8" role="form" action="" method="POST">
 					<div class="tab-content">
 						<div id="addNewItem" class="tab-pane fade in active">
 							<!-- This is for the panel creation -->
@@ -86,6 +85,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
+                                    <form name="itemAddForm" onsubmit="validateItemAdd()">    
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -103,6 +103,7 @@
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
  									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
  									</fieldset>
 									</div>
 								</div>
@@ -117,6 +118,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
+                                    <form name="itemUpdateForm" onsubmit="validateItemUpdate()">    
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -134,6 +136,7 @@
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
  									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
  									</fieldset>
 									</div>
 								</div>
@@ -148,6 +151,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
+                                    <form name="itemSearchForm" onsubmit="validateItemSearch()">    
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -165,13 +169,13 @@
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
  									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
  									</fieldset>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>				
-				</form>
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->
