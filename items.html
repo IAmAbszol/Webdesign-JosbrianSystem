@@ -10,7 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
-
+	<title>Josbrian Interface - Items</title>
 	<style>
 		@media (min-width: 768px)
    .sidebar {
@@ -27,37 +27,47 @@
       border-right: 1px solid #eee;
    }
 	</style>
-
+	
 </head>
 
-<body>
+<body style="background: #36465d;">
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                     <span class="sr-only">Toggle Navigation</span>   
+                     <span class="icon-bar"></span>      
+                     <span class="icon-bar"></span>      
+                     <span class="icon-bar"></span>             
+                 </button>  
+                <div class="navbar-collapse collapse">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
 				</div>
 				<ul class="nav navbar-nav">
 					<li><a href="index.html">Homepage</a></li>
-					<li class="active"><a href="items.html">Items</a>
-					</li>
+					<li class="active"><a href="items.html">Items</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
 				</ul>
 			</div>
+            </div>
 		</nav>
 		<!-- END NAVBAR -->
-		<nav class="">
-		
-		<nav class="navbar navbar-fixed-top">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav">
+		<!-- LEFT SIDEBAR -->
+			<nav id="left-sidebar-nav" class="sidebar-nav">
+              <div class="navbar-collapse collapse">
+              <div id="left-sidebar" class="sidebar">
+				<ul id="main-menu" class="metismenu">
+                    <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
 					<li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add New Item</a></li>
 					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a></li>
 					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search For An Existing Item</a></li>
 				</ul>
-			</div>
-		</nav>
+                </div>
+                </div>
+			</nav>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
@@ -65,7 +75,6 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-				<form accept-charset="UTF-8" role="form" action="" method="POST">
 					<div class="tab-content">
 						<div id="addNewItem" class="tab-pane fade in active">
 							<!-- This is for the panel creation -->
@@ -75,25 +84,27 @@
 										<h3 class="panel-title">Add New Item</h3>
 									</div>
 									<div class="panel-body">
-									<fieldset>
-									<div class="form-group">
-										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
-									</div>
-									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
-									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-									</fieldset>
+								    <fieldset>
+                                    <form name="itemAddForm" onsubmit="validateItemAdd()">    
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+ 									</div>
+ 									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+ 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
+ 									</fieldset>
 									</div>
 								</div>
 							</div>
@@ -106,20 +117,27 @@
 										<h3 class="panel-title">Update Existing Item</h3>
 									</div>
 									<div class="panel-body">
-										<fieldset>
-										<div class="form-group">
-											<input class="form-control" placeholder="E-mail" name="email" id="email" type="text">
-										</div>
-										<div class="form-group">
-											<input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
-										</div>
-										<div class="checkbox">
-											<label>
-												<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-											</label>
-										</div>
-										<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Login">
-										</fieldset>
+								    <fieldset>
+                                    <form name="itemUpdateForm" onsubmit="validateItemUpdate()">    
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+ 									</div>
+ 									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+ 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
+ 									</fieldset>
 									</div>
 								</div>
 							</div>
@@ -132,33 +150,39 @@
 										<h3 class="panel-title">Search Existing Item</h3>
 									</div>
 									<div class="panel-body">
-										<fieldset>
-										<div class="form-group">
-											<input class="form-control" placeholder="E-mail" name="email" id="email" type="text">
-										</div>
-										<div class="form-group">
-											<input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
-										</div>
-										<div class="checkbox">
-											<label>
-												<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-											</label>
-										</div>
-										<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Login">
-										</fieldset>
+								    <fieldset>
+                                    <form name="itemSearchForm" onsubmit="validateItemSearch()">    
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+ 									</div>
+ 									<div class="form-group">
+ 										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+ 									</div>
+ 									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+ 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+                                    </form>    
+ 									</fieldset>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</form>
+					</div>				
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-
+	
 </body>
 
 </html>
