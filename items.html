@@ -27,6 +27,30 @@
       border-right: 1px solid #eee;
    }
 	</style>
+	<script>
+		function addItemValidation() {
+			validateCost();
+			validatePrice();
+		}
+
+		function validateCost() {
+			var x = document.getElementById("purchaseCost").value;
+      if (x.match(/^\d+(?:\.\d{0,2})$/)) {
+        return;
+      } else {
+        alert("Purchase Cost is invalid");
+      }
+		}
+
+		function validatePrice() {
+			var x = document.getElementById("retailPrice").value;
+      if (x.match(/^\d+(?:\.\d{0,2})$/)) {
+        return;
+      } else {
+        alert("Retail Price is invalid");
+      }
+		}
+	</script>
 
 </head>
 
@@ -85,7 +109,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="itemAddForm" onsubmit="validateItemAdd()" method="POST" action="/app/add_item.php">
+                                    <form name="itemAddForm" onsubmit="validateItemAdd()" method="POST" action="app/add_item.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -96,12 +120,12 @@
  										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
  									</div>
  									<div class="form-group">
- 										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+ 										<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
  									</div>
  									<div class="form-group">
- 										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+ 										<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
  									</div>
- 									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+ 									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="addItemValidation();" value="Submit">
  									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
                                     </form>
  									</fieldset>
@@ -118,7 +142,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="itemUpdateForm" onsubmit="validateItemUpdate()" method="POST" action="/app/update_item.php">
+                                    <form name="itemUpdateForm" onsubmit="validateItemUpdate()" method="POST" action="app/update_item.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -151,7 +175,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="itemSearchForm" onsubmit="validateItemSearch()" method="POST" action="/app/search_item.php">
+                                    <form name="itemSearchForm" onsubmit="validateItemSearch()" method="POST" action="app/search_item.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
