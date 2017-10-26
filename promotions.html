@@ -10,29 +10,29 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/scripts/validatePromotionForms.js" type="text/javascript"></script>
     <script>
-    
+
             function validatePromotionSearch() {
-    
+
                  var promoName = document.forms["promotionSearchForm"]["promotionName"].value;
                  var promoType = document.forms["promotionSearchForm"]["promotionType"].value;
                  var promoAmountOff = document.forms["promotionSearchForm"]["promotionAmountOff"].value;
-                
-                 if(promoName == "" && promoType == "" && promoAmountOff == ""){    
+
+                 if(promoName == "" && promoType == "" && promoAmountOff == ""){
                      alert("Nothing entered.");
                      return false;
                  }
-                
+
                  if((promoType == "" && promoAmountOff != "") || (promoType != "" && promoAmountOff == "")){
                      alert("Promotion Type and Amount Off must be entered together");
                      return false;
                  }
                  else{
-                    //LOAD NEW SEARCH RESULTS PAGE HERE 
-                   window.location.pathname = "/promotionSearchResults.html/"; 
+                    //LOAD NEW SEARCH RESULTS PAGE HERE
+                   window.location.pathname = "/promotionSearchResults.html/";
                     return true;
                  }
             }
-    
+
     </script>
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -55,9 +55,9 @@
 
    textarea:focus {
     height: 10em;
-   }        
+   }
 	</style>
-	
+
 </head>
 
 <body style="background: #36465d;">
@@ -67,11 +67,11 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="sr-only">Toggle Navigation</span>   
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>             
-                 </button>  
+                     <span class="sr-only">Toggle Navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
                 <div class="navbar-collapse collapse">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
@@ -117,7 +117,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionAddForm" onsubmit="validatePromotionAdd()">    
+                                    <form name="promotionAddForm" onsubmit="validatePromotionAdd()" method="POST" action="/app/add_promotion.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
  									</div>
@@ -136,7 +136,7 @@
  									</div>
  									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
-                                    </form>    
+                                    </form>
  									</fieldset>
 									</div>
 								</div>
@@ -151,7 +151,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionUpdateForm" onsubmit="validatePromotionUpdate()">    
+                                    <form name="promotionUpdateForm" onsubmit="validatePromotionUpdate()" method="POST" action="/app/edit_promotion.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -169,7 +169,7 @@
  									</div>
  									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
-                                    </form>    
+                                    </form>
  									</fieldset>
 									</div>
 								</div>
@@ -184,7 +184,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionSearchForm" onsubmit="validatePromotionSearch()">
+                                    <form name="promotionSearchForm" onsubmit="validatePromotionSearch()" method="POST" action="/app/search_promotion.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
  									</div>
@@ -203,13 +203,13 @@
  									</div>
                                         <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
-                                    </form>    
+                                    </form>
  									</fieldset>
 									</div>
 								</div>
 							</div>
 						</div>
-        <!--  TABLE TO RETURN DATA TO              
+        <!--  TABLE TO RETURN DATA TO
                         <div id="searchResults">
                             <table>
                                 <thead></thead>
@@ -219,7 +219,7 @@
                             </table>
                         </div>
      -->
-					</div>				
+					</div>
 	<!--			</form>  -->
 			</div>
 		</div>
@@ -227,7 +227,7 @@
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-	
+
 </body>
 
 </html>
