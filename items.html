@@ -63,7 +63,7 @@
                     <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
 					<li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add New Item</a></li>
 					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a></li>
-					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search For An Existing Item</a></li>
+					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
 				</ul>
                 </div>
                 </div>
@@ -85,7 +85,10 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="itemAddForm" onsubmit="validateItemAdd()">    
+                                    <form name="itemAddForm" onsubmit="validateItemAdd()"> 
+                                    <div class="form-group">
+ 										<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+ 									</div>    
  									<div class="form-group">
  										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  									</div>
@@ -102,7 +105,7 @@
  										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
- 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+ 									<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
                                     </form>    
  									</fieldset>
 									</div>
@@ -135,7 +138,7 @@
  										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
- 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+ 									<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
                                     </form>    
  									</fieldset>
 									</div>
@@ -168,7 +171,7 @@
  										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
  									</div>
  									<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
- 									<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
+ 									<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
                                     </form>    
  									</fieldset>
 									</div>
