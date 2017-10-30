@@ -33,26 +33,64 @@
 			var description = document.forms["itemAddForm"]["description"].value;
 			var category = document.forms["itemAddForm"]["category"].value;
 			var department = document.forms["itemAddForm"]["department"].value;
+			var itemNumber = document.forms["itemAddForm"]["itemNumber"].value;
+			var cost = document.forms["itemAddForm"]["purchaseCost"].value;
+			var retailPrice = document.forms["itemAddForm"]["retailPrice"].value;
 
 			var error = "";
 
-			error += validateItemNumber(error);
+			error += validateItemNumber(error, itemNumber);
 
 			description = toCapitalLetter(description);
 
 			if (category == "")
-			error += "Please enter a Category\n"
-			
-			if (department == "")
-			error += "Please enter a Department\n"
+				error += "Please enter a Category\n"
 
-			error += validateCost(error);
-			error += validatePrice(error);
+			if (department == "")
+				error += "Please enter a Department\n"
+
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
 
 			if (error != "") {
 				alert(error);
+				return false;
 			}
 
+			return true;
+		}
+
+		function updateItemValidation() {
+			var description = document.forms["itemUpdateForm"]["description"].value;
+			var category = document.forms["itemUpdateForm"]["category"].value;
+			var department = document.forms["itemUpdateForm"]["department"].value;
+			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
+			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
+			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+
+
+
+			var error = "";
+
+			error += validateItemNumber(error, itemNumber);
+
+			description = toCapitalLetter(description);
+
+			if (category == "")
+				error += "Please enter a Category\n"
+
+			if (department == "")
+				error += "Please enter a Department\n"
+
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
+
+			if (error != "") {
+				alert(error); 
+				return false;
+			}
+
+			return true;
 		}
 
 		function toCapitalLetter(myElement) {
@@ -63,8 +101,7 @@
 		}
 
 
-		function validateCost(error) {
-			var x = document.forms["itemAddForm"]["purchaseCost"].value;
+		function validateCost(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
@@ -78,8 +115,7 @@
 			return error;
 		}
 
-		function validatePrice(error) {
-			var x = document.forms["itemAddForm"]["retailPrice"].value;
+		function validatePrice(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
@@ -93,9 +129,8 @@
 			return error;
 		}
 
-		function validateItemNumber(error) {
-			var x = document.forms["itemAddForm"]["itemNumber"].value;
-			if (x.match(/^\d{7}/)) {
+		function validateItemNumber(error, x) {
+			if (x.match(/^\d{7}$/)) {
 				error = "";
 				return error;
 
@@ -107,6 +142,25 @@
 			}
 
 			return error;
+		}
+
+		function evaluateInput() {
+			var description = document.forms["itemSearchForm"]["description"].value;
+			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+
+			description = toCapitalLetter(description);
+
+			if (itemNumber != "") {
+
+				if (itemNumber.match(/^\d{7}$/)) {
+					return true;
+				} else {
+					alert("Item Number is invalid: should have 7 digits");
+					return false;
+				}
+			}
+
+
 		}
 
 	</script>
@@ -184,7 +238,7 @@
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemAddForm" id="itemAddForm" onsubmit="validateItemAdd();" method="POST" action="">
+										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation();" method="POST" action="app/add_item.php">
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
 											</div>
@@ -221,7 +275,7 @@
 											<div class="form-group">
 												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
 											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="addItemValidation();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
 										</form>
 									</fieldset>
@@ -238,23 +292,44 @@
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemUpdateForm" onsubmit="validateItemUpdate()" method="POST" action="app/update_item.php">
+										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation();" method="POST" action="app/update_item.php">
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+												<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
 											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
 										</form>
 									</fieldset>
@@ -271,23 +346,38 @@
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemSearchForm" onsubmit="validateItemSearch()" method="POST" action="app/search_item.php">
+										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="app/search_item.php">
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
 											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
-											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
 										</form>
 									</fieldset>
