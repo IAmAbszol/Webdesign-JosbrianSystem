@@ -29,20 +29,19 @@
 	<script>
 
 		function addItemValidation() {
-			validateCost();
-			validatePrice();
+			//validateCost();
+			//validatePrice();
 
-			var description = getElementById("description").value;
+			var description = document.forms["itemAddForm"]["description"].value;
 
 			description = toCapitalLetter(description);
 
-			alert('myElement');
+			alert(description);
 		}
 
 		function toCapitalLetter(myElement) {
 
 			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
-			alert('myElement');
 
 			return myElement;
 		}
@@ -140,12 +139,18 @@
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemAddForm" onsubmit="validateItemAdd()" method="POST" action="app/add_item.php">
+										<form name="itemAddForm" id="itemAddForm" onsubmit="validateItemAdd();" method="POST" action="">
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option>ACCESSORIES/FOOTWEAR</option>
+													<option>BASIC APPAREL</option>
+													<option>FOOD CONVENIENCE</option>
+													<option>FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
