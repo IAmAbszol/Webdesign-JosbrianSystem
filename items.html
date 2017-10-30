@@ -26,17 +26,33 @@
 			border-right: 1px solid #eee;
 		}
 	</style>
+
 	<script>
 
 		function addItemValidation() {
-			//validateCost();
-			//validatePrice();
-
 			var description = document.forms["itemAddForm"]["description"].value;
+			var category = document.forms["itemAddForm"]["category"].value;
+			var department = document.forms["itemAddForm"]["department"].value;
+
+			var error = "";
+
+			error += validateItemNumber(error);
 
 			description = toCapitalLetter(description);
 
-			alert(description);
+			if (category == "")
+			error += "Please enter a Category\n"
+			
+			if (department == "")
+			error += "Please enter a Department\n"
+
+			error += validateCost(error);
+			error += validatePrice(error);
+
+			if (error != "") {
+				alert(error);
+			}
+
 		}
 
 		function toCapitalLetter(myElement) {
@@ -47,23 +63,52 @@
 		}
 
 
-		function validateCost() {
-			var x = document.getElementById("purchaseCost").value;
+		function validateCost(error) {
+			var x = document.forms["itemAddForm"]["purchaseCost"].value;
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
-				return;
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Purchase Price\n";
+
 			} else {
-				alert("Purchase Cost is invalid");
+				error = "Purchase Cost is invalid\n";
 			}
+
+			return error;
 		}
 
-		function validatePrice() {
-			var x = document.getElementById("retailPrice").value;
+		function validatePrice(error) {
+			var x = document.forms["itemAddForm"]["retailPrice"].value;
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
-				return;
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Retail Price\n";
+
 			} else {
-				alert("Retail Price is invalid");
+				error = "Retail Price is invalid\n";
 			}
+
+			return error;
 		}
+
+		function validateItemNumber(error) {
+			var x = document.forms["itemAddForm"]["itemNumber"].value;
+			if (x.match(/^\d{7}/)) {
+				error = "";
+				return error;
+
+			} else if (x == "") {
+				error = "Please Enter an Item Number\n";
+
+			} else {
+				error = "Item Number is invalid: should have 7 digits\n";
+			}
+
+			return error;
+		}
+
 	</script>
 
 </head>
@@ -140,6 +185,9 @@
 								<div class="panel-body">
 									<fieldset>
 										<form name="itemAddForm" id="itemAddForm" onsubmit="validateItemAdd();" method="POST" action="">
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
