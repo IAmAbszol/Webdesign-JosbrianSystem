@@ -88,18 +88,18 @@
 		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
-			<nav id="left-sidebar-nav" class="sidebar-nav">
-              <div class="navbar-collapse collapse">
-              <div id="left-sidebar" class="sidebar">
-				<ul id="main-menu" class="metismenu">
-                    <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Promotions</b></li></center>
-					 <li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add Promotion</a></li>
-					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Promotion</a></li>
-					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Promotions</a></li>
-				</ul>
-                </div>
-                </div>
-			</nav>
+		<nav id="left-sidebar-nav" class="sidebar-nav">
+		  <div class="navbar-collapse collapse">
+		  <div id="left-sidebar" class="sidebar">
+			<ul id="main-menu" class="metismenu">
+				<center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Promotions</b></li></center>
+				 <li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add Promotion</a></li>
+				 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Promotion</a></li>
+				 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Promotions</a></li>
+			</ul>
+			</div>
+			</div>
+		</nav>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
@@ -107,7 +107,6 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Promotion Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-			<!--	<form accept-charset="UTF-8" role="form" action="" method="POST"> -->
 					<div class="tab-content">
 						<div id="addNewItem" class="tab-pane fade in active">
 							<!-- This is for the panel creation -->
@@ -118,26 +117,27 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionAddForm" onsubmit="validatePromotionAdd()">    
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
- 									</div>
- 									<div class="form-group">
-                                        <textarea rows="1" class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text"></textarea>
- 									</div>
- 									<div class="form-group">
- 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
-                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
-                                        </select>
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
- 									</div>
- 									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
-                                    </form>    
+										<form name="promotionAddForm" onsubmit="validatePromotionAdd()" accept-charset="UTF-8" role="form" action="php/insert_promotion.php" method="POST">    
+
+											<div class="form-group">
+												<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
+											</div>
+											<div class="form-group">
+												<textarea rows="1" class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text"></textarea>
+											</div>
+											<div class="form-group">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
+													<option value="amountOff">Dollar</option>
+													<option value="percentOff">Percent</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
+											</div>
+												<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
+												<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
+										</form>    
  									</fieldset>
 									</div>
 								</div>
@@ -152,25 +152,25 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionUpdateForm" onsubmit="validatePromotionUpdate()">    
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
- 									</div>
- 									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
-                                    </form>    
+										<form name="promotionUpdateForm" onsubmit="validatePromotionUpdate()">    
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
+											</div>
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+											</div>
+											<div class="form-group">
+												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+											</div>
+											<div class="form-group">
+												<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+											</div>
+											<div class="form-group">
+												<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+											</div>
+												<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
+												<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
+										</form>    
  									</fieldset>
 									</div>
 								</div>
@@ -185,26 +185,26 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionSearchForm" onsubmit="validatePromotionSearch()">
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
- 									</div>
- 									<div class="form-group">
-                                     <center><h4><b>OR</b></h4></center>
- 									</div>
- 									<div class="form-group">
- 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
-                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
-                                        </select>
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Amount Off" name="promotionAmountOff" id="promotionAmountOff" type="text">
- 									</div>
-                                        <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit" href="#promotionSearchResults.html">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
-                                    </form>    
+										<form name="promotionSearchForm" onsubmit="validatePromotionSearch()">
+										<div class="form-group">
+											<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
+										</div>
+										<div class="form-group">
+										 <center><h4><b>OR</b></h4></center>
+										</div>
+										<div class="form-group">
+											<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
+												<option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
+												<option value="amountOff">Dollar</option>
+												<option value="percentOff">Percent</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<input class="form-control" placeholder="Amount Off" name="promotionAmountOff" id="promotionAmountOff" type="text">
+										</div>
+											<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit" href="#promotionSearchResults.html">Submit</button>
+											<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
+										</form>    
  									</fieldset>
 									</div>
 								</div>
