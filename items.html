@@ -34,7 +34,7 @@
 
 			var description = getElementById("description").value;
 
-			toCapitalLetter(description);
+			description = toCapitalLetter(description);
 
 			alert('myElement');
 		}
@@ -43,6 +43,8 @@
 
 			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
 			alert('myElement');
+
+			return myElement;
 		}
 
 
