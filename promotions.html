@@ -37,17 +37,10 @@
 			function testPromoName(message) {
 				var promoName = document.forms["promotionAddForm"]["promotionName"].value;
 
-<<<<<<< HEAD
 				if (promoName == "" && (promoName.match(/\W/) || promoName.indexOf(' ') >= 0)) {
 					message = "Name must contain text only\n";
 				} else {
 
-=======
-				if (promoName == "" || promoName.match(/\W/)) {				
-					message = "Name must contain text only\n";
-				} else {
-				
->>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 				}
 				return message;
 			}
@@ -94,11 +87,7 @@
 				errormessage += testPromotionType(message);
 				errormessage += testPromoAmount(message);
 
-<<<<<<< HEAD
 				if (errormessage == "") {
-=======
-				if (error_message == "") {
->>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 					return true;
 				} else {
 					alert(errormessage);
@@ -109,11 +98,7 @@
 
 
 	</script>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Promotions</title>
@@ -196,11 +181,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-<<<<<<< HEAD
                                     <form name="promotionAddForm" onsubmit="return testInput();" method="POST" action="php/insert_promotion.php">
-=======
-                                    <form name="promotionAddForm" onsubmit="return testInput();" method="POST" action="app/add_promotion.php">
->>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
  									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
  									</div>
