@@ -33,7 +33,72 @@
                  }
             }
 
-    </script>
+//----------------------------------------------------Test Add Promotion-----------------------------------------------------------------
+			function testPromoName(message) {
+				var promoName = document.forms["promotionAddForm"]["promotionName"].value;
+
+				if (promoName == "" && (promoName.match(/\W/) || promoName.indexOf(' ') >= 0)) {
+					message = "Name must contain text only\n";
+				} else {
+
+				}
+				return message;
+			}
+
+			function testPomodescription(message) {
+				var promoDescription = document.forms["promotionAddForm"]["promotionDescription"].value;
+
+				if (promoDescription == "" || promoDescription.match(/\W/)) {
+					message = "Description must contain text only\n";
+				} else {
+
+				}
+				return message;
+			}
+
+			function testPromotionType(message) {
+				var promoType = document.forms["promotionAddForm"]["promotionType"].value;
+
+				if (promoType == "") {
+					message = "Please select a promotion type\n";
+				} else {
+
+				}
+				return message;
+			}
+
+			function testPromoAmount(message) {
+				var promoAmount = document.forms["promotionAddForm"]["amountOff"].value;
+
+				if (promoAmount == "" || promoAmount.match(/\D/)) {
+					message = "Amount must be numbers\n";
+				} else {
+
+				}
+				return message;
+			}
+
+			function testInput() {
+				var errormessage = "";
+				var message = "";
+
+				errormessage += testPromoName(message);
+				errormessage += testPomodescription(message);
+				errormessage += testPromotionType(message);
+				errormessage += testPromoAmount(message);
+
+				if (errormessage == "") {
+					return true;
+				} else {
+					alert(errormessage);
+					return false;
+				}
+			}
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+
+	</script>
+
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Promotions</title>
@@ -73,15 +138,13 @@
                      <span class="icon-bar"></span>
                  </button>
                 <div class="navbar-collapse collapse">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
+				</div>
 				<ul class="nav navbar-nav">
-				<li>
-					<a class="btn btn-default" href="index.html">
-						<i class="glyphicon glyphicon-home"></i>
-					</a>
-				</li>
-                    <li><a href="items.html">Items</a>
-					<li class="active"><a href="promotions.html">Promotions</a>
-					</li>
+					<li><a href="index.html">Homepage</a></li>
+					<li><a href="items.html">Items</a></li>
+                    <li class="active"><a href="promotions.html">Promotions</a></li>
 				</ul>
 			</div>
             </div>
@@ -118,7 +181,7 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionAddForm" onsubmit="validatePromotionAdd()" method="POST" action="app/add_promotion.php">
+                                    <form name="promotionAddForm" onsubmit="return testInput();" method="POST" action="php/insert_promotion.php">
  									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
  									</div>

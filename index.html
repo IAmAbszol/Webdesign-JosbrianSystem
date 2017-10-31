@@ -1,66 +1,607 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- MAIN CSS -->
-	<link rel="stylesheet" href="assets/css/main.css">
-	<title>Josbrian Interface - Home Page</title>
-	<style>
-		@media (min-width: 768px)
-   .sidebar {
-      position: fixed;
-      top: 51px;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
-      display: block;
-      padding: 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      background-color: #f5f5f5;
-      border-right: 1px solid #eee;
-   }
-	</style>
+	<head>
+		<title>Assignment 2</title>
+	
+		<script type="text/javascript">
+			function checkName() {
+			// check the firstName given by Mitra
+				// regex could be ^[A-Z][a-zA-Z-]+$
+				var firstName = document.getElementById("firstname").value;
+				if(firstName.match(/^[a-zA-Z-]+$/)) {
+					if(firstName.charAt(0) == firstName.toLowerCase().charAt(0)) {
+						alert("First Name: Should start with Uppercase Letter!");
+						throw new Error("Uppercase Error");
+					}
+					var hyphens = (firstName.match(/-/g)||[]).length;
+					if(hyphens == 1) {
+						var hyphenPosition = firstName.indexOf("-");
+						hyphenPosition++;
+						var characterCheck = firstName.charAt(hyphenPosition);	
+						if(characterCheck == characterCheck.toLowerCase()) {
+							alert("First Name: Letter after hyphen is not uppercase. Please revise usage");
+							throw new Error("Naming Convention Error");
+						}
+					} else 
+						if(hyphens > 1) {
+							alert("First Name: Too many hyphens. Please revise usage");
+							throw new Error("Too many hyphens");
+						}
+				} else {
+					alert("First Name: Please only use Alphabetical or Hyphens. Please revise usage.");
+					throw new Error("Illegal Characters");
+				}
 
-</head>
+				// check middle name
+				var middleInitial = document.getElementById("mi").value;
+				if(middleInitial.match(/[a-zA-Z]/)) {
+					if(middleInitial.length != 1) {
+						alert("Middle Initial is strictly 1 letter. Please revise usage.");
+						throw new Error("Length Error");
+					}
+				} else {
+					alert("Middle Initial: Please only use Alphabetical characters. Please revise usage.");
+					throw new Error("Illegal Character");
+				}
+				
+				var lastName = document.getElementById("lastname").value;
+				if(lastName.match(/^[a-zA-Z-]+$/)) {
+						if(lastName.charAt(0) == lastName.toLowerCase().charAt(0)) {
+							alert("Last Name: Should start with Uppercase Letter!");
+							throw new Error("Last Name Error");
+						}
+						hyphens = (lastName.match(/-/g)||[]).length;
+						if(hyphens == 1) {
+								hyphenPosition = lastName.indexOf("-");
+								hyphenPosition++;
+								characterCheck = lastName.charAt(hyphenPosition);
+								if(characterCheck == characterCheck.toLowerCase()) {
+										alert("Last Name: Letter after hyphen is not uppercase. Please revise usage");
+										throw new Error("Naming Convention Error");
+								}
+						} else
+								if(hyphens > 1) {
+										alert("Last Name: Too many hyphens. Please revise usage");
+										throw new Error("Too many hyphens");
+								}
+				} else {
+						alert("Last Name: Please only use Alphabetical or Hyphens. Please revise usage.");
+						throw new Error("Illegal Characters");
+				}
+			}
+			
+			function checkCityZip() {
+				var city = document.getElementById("city").value;
+				if(city.match(/^[A-Z][a-zA-Z-]+$/)) {
+					var hyphens = (city.match(/-/g)||[]).length;
+					if(hyphens >= 1) {
+						var hyphenArray = city.split("-");
+						for(i = 0; i < hyphenArray.length; i++) {
+							var tmp = hyphenArray[i];
+							if(tmp === "" || tmp === " ") {
+								alert("City: Hyphens should be followed by a name/location.");
+								throw new Error("Illegal Character");
+							}
+						}
+					}
+				} else {
+					alert("City: Please only use Alphabetical characters or hyphens along with an Uppercase starting character!");
+					throw new Error("Illegal Characters");
+				}
+				var zipcode = document.getElementById("zip").value;
+				if(zipcode.length == 5) {
+					if(!(/^\d+$/.test(zipcode))) {
+						alert("Zip: Only numbers are allowed");
+						throw new Error("Illegal Character");
+					}
+				} else {
+					alert("Zip: Please enter a 5 digit zip code");
+					throw new Error("Length Error");
+				}
+			}
+			
+			function checkBirthday() {
+				// birthday check
+				var month31 = ["1", "3", "5", "7", "8", "10", "12"];
+				var month30 = ["4", "6", "9", "11" ];
+				var birthdayMonth = document.getElementById("month").value;
+				var birthdayDay = document.getElementById("day").value;
+				var birthdayYear = document.getElementById("year").value;
+				if(birthdayMonth > 0 && birthdayMonth <= 12) {
+					if(month31.indexOf(birthdayMonth) > -1) {
+						if(birthdayDay < 1 || birthdayDay > 31) {
+							alert("Birthday Day: Enter a valid range");
+							throw new Error("Invalid Day");
+						}
+					} else
+						if(month30.indexOf(birthdayMonth) > -1) {
+							if(birthdayDay < 1 || birthdayDay > 30) {
+								alert("Birthday Day: Enter a valid range");
+								throw new Error("Invalid Day");
+							}
+						} else {
+							alert("Birthday Day: Enter a valid range");
+							throw new Error("Invalid Day");
+						}
+					if(!birthdayYear.match(/19[1-9][0-9]/)) {
+						alert("Birthday Year: Enter a valid range 1910 - 1999");
+						throw new Error("Invalid Year");
+					}
+							
+				 } else {
+					alert("Birthday Month: Enter a valid month.");
+					throw new Error("Invalid Month");
+				}
+			}
+			
+			function checkRoadStuff() {
+				var traffic = document.getElementById("convict").value;
+				if(traffic < 0) {
+					alert("Traffic Violations: Please enter a valid number");
+					throw new Error("Invalid Range");
+				} else
+					if(traffic > 100) {
+						alert("Due to too many traffic violations in the past year, I'm not quite sure how your still driving. Try again next year.");
+						throw new Error("Convict Error");
+					}
+		
+								
+				var makeOne = document.getElementById("make1").value;
+				var makeTwo = document.getElementById("make2").value;
+				var modelOne = document.getElementById("model1").value;
+				var modelTwo = document.getElementById("model2").value;
+				validateMakeModel(makeOne, modelOne);
+				validateMakeModel(makeTwo, modelTwo);
+			}
+			
+			function validateMakeModel(make, model) {
+				var chevy = ["Camaro", "Caprice", "Traverse", "Tahoe", "Volt"];
+				var ford = ["Edge", "Expedition", "Fiesta"];
+				var honda = ["Civic", "Accord"];
+				var toyota = ["Camry", "Corolla", "Rav4"];
+				if(make === "Chevorlet") {
+					if(chevy.indexOf(model) == -1) {
+						alert("Model of Car Information 1: Unrecognitzed model " + model +" for make " + make + ". Please revise");
+						throw new Error("Unrecognized Model to Make");
+					}
+				}
+				
+				if(make === "Ford") {
+					if(ford.indexOf(model) == -1) {
+						alert("Model of Car Information 1: Unrecognitzed model " + model +" for make " + make + ". Please revise");
+						throw new Error("Unrecognized Model to Make");
+					}
+				}
+				if(make === "Honda") {
+					if(honda.indexOf(model) == -1) {
+						alert("Model of Car Information 1: Unrecognitzed model " + model +" for make " + make + ". Please revise");
+						throw new Error("Unrecognized Model to Make");
+					}
+				}
+				if(make === "Toyota") {
+					if(toyota.indexOf(model) == -1) {
+						alert("Model of Car Information 1: Unrecognitzed model " + model +" for make " + make + ". Please revise");
+						throw new Error("Unrecognized Model to Make");
+					}
+				}	
+			}
+			
+			function checkForm() {
+				
+				checkName();
+				checkCityZip();
+				checkBirthday();
+				checkRoadStuff();
+				
+			}
+		</script>
+	
+	</head>
 
-<body>
-	<!-- WRAPPER -->
-	<div id="wrapper">
-		<!-- NAVBAR -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav">
-					<li>
-						<a class="btn btn-default" href="index.html">
-							<i class="glyphicon glyphicon-home"></i>
-						</a>
-					</li>
-					<li><a href="items.html">Items</a></li>
-                    <li><a href="promotions.html">Promotions</a></li>
-				</ul>
-			</div>
-		</nav>
-		<!-- END NAVBAR -->
-		<!-- MAIN CONTENT -->
-		<div style="padding-top: 90px" id="home-content">
-			<div class="container-fluid">
-				<!-- Screen Reader -->
-				<h1 class="sr-only">Josbrain Instructional Homepage</h1>
-				<center><h2>Josbrain Interface System Homepage</h2></center>
-			</div>
+	<body style="margin-left:10%; margin-right:10%;">
+
+
+		<h2>Welcome to Stockport College's Parking Permit Application!</h2>
+		<hr>
+		<!-- Form -->
+		<div style="font-size:16px">
+			<p>
+			Welcome to Stockport College’s Faculty/Staff Parking Permit Application.  We can only issue permits to people whose home address is in one of the following states: NY, PA, CT, MA, NJ, VT. Please fill out the information requested below correctly:
+			</p>
+			<h3>
+				Registrant Demographic Information
+			</h3>
+			<!-- Action will link to php grab -->
+			<form method="POST" action="">
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							First Name:
+						</td>
+						<td>
+							<input type="text" name="firstname" id="firstname">
+						</td>
+						<td>
+							M. I:
+						</td>
+						<td>
+							<input type="text" name="mi" id="mi" maxlength="1" size="1">
+						</td>
+						<td>
+							Last Name: 
+						</td>
+						<td>
+							<input type="text" name="lastname" id="lastname">
+						</td>
+					</tr> 
+					
+					<tr>
+						<td>
+							Address:
+						</td>
+						<td> 
+							<input type="text" name="address1" id="address1">
+						</td>
+					</tr>
+					<tr>
+						<td/>
+						<td>
+							<input type="text" name="address2" id="address2">
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							City:
+						</td>
+						<td>
+							<input type="text" name="city" id="city">
+						</td>
+						<td>
+							State:
+						</td>
+						<td>
+							<select name="states" id="states">
+								<option value="ct">CT</option>
+								<option value="nj">NJ</option>
+								<option value="ny" selected>NY</option>
+								<option value="ma">MA</option>
+								<option value="pa">PA</option>
+								<option value="vt">VT</option>
+							</select>
+						</td>
+						<td>
+							Zip (5-digit):
+						</td>
+						<td>
+							<input type="text" name="zip" id="zip" maxlength="5" size="5">
+						</td>
+					</tr>	
+				</table>
+				<hr>
+				<h3>
+					Driver Information
+				</h3>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Date of birth (mm/dd/yy):
+						</td>
+						<td size="20px">
+							<input type="text" name="month" id="month" maxlength="2" size="2"> / <input type="text" name="day" id="day" maxlength="2" size="2"> / <input type="text" name="year" id="year" maxlength="4" size="4">
+						</td>	
+					</tr>	
+					<tr>
+						<td>
+							Gender:
+							<select name="gender" id="gender">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</td>
+						<td>
+							Marital Status:
+							<select name="marital" id="marital">
+								<option value="single">Single</option>
+								<option value="married">Married</option>
+								<option value="separated">Separated</option>
+								<option value="widowed">Widowed</option>
+								<option value="divorced">Divorced</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Please indicate number of convictions for traffic violations in the past 5 years:
+						</td>
+						<td>
+							<input type="text" name="convict" id="convict" size="4" maxlength="4">
+						</td>
+					</tr>
+				</table>
+			As per a 2014 agreement with the Faculty/Staff union, an individual with three or more convictions for parking violations in the past 5 years will have a 20% premium added to the permit cost.	
+		
+				<hr>
+				<h3>
+					Car information 1
+				</h3>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Make:
+						</td>
+						<td>
+							<select name="make1" id="make1">
+								<option value="Chevorlet">Chevorlet</option>
+								<option value="Ford">Ford</option>
+								<option value="Honda">Honda</option>
+								<option value="Toyota">Toyota</option>
+							</select>
+						</td>
+						<td>
+							Model: 
+						</td>
+						<td>
+							<select name="model1" id="model1">
+								<option value="Accord">Accord</option>
+								<option value="Camaro">Camaro</option>
+								<option value="Camry">Camry</option>
+								<option value="Caprice">Caprice</option>
+								<option value="Civic">Civic</option>
+								<option value="Corolla">Corolla</option>
+								<option value="Edge">Edge</option>
+								<option value="Expedition">Expedition</option>
+								<option value="Fiesta">Fiesta</option>
+								<option value="Odyssey">Odyssey</option>
+								<option value="Rav4">Rav4</option>
+								<option value="Traverse">Traverse</option>
+								<option value="Tahoe">Tahoe</option>
+								<option value="Volt">Volt</option>
+							</select>
+						</td>
+						<td>
+							Year: 
+						</td>
+						<td>
+							<select name="year1" id="year1">
+								<option value="2003">2003</option>
+								<option value="2004">2004</option>
+								<option value="2005">2005</option>
+								<option value="2006">2006</option>
+							</select>
+						</td>
+						<td>
+							Color: 
+						</td>
+						<td>
+							<select name="color1" id="color1">
+								<option value="Red">Red</option>
+								<option value="Silver">Silver</option>
+								<option value="Black">Black</option>
+								<option value="White">White</option>
+								<option value="Cyan">Cyan</option>
+							</select>
+						</td>
+					</tr>	
+				</table>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Please indicate whether this car is to be brought to campus during the day or evening, or both: 
+						</td>
+					</tr>
+				</table>
+				<table align="center" style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Day: 
+						</td>
+						<td>
+							<label>
+								<input type="checkbox" name="day1" id="day1" value="day1"/>
+							</label>
+						</td>
+						<td>
+							Evening: 
+						</td>
+						<td>
+							<label>
+								<input type="checkbox" name="night1" id="night1" value="night1"/>
+							</label>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<h3>
+					Car information 2
+				</h3>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Make:
+						</td>
+						<td>
+							<select name="make2" id="make2">
+								<option value="Chevorlet">Chevorlet</option>
+								<option value="Ford">Ford</option>
+								<option value="Honda">Honda</option>
+								<option value="Toyota">Toyota</option>
+							</select>
+						</td>
+						<td>
+							Model: 
+						</td>
+						<td>
+							<select name="model2" id="model2">
+								<option value="Accord">Accord</option>
+								<option value="Camaro">Camaro</option>
+								<option value="Camry">Camry</option>
+								<option value="Caprice">Caprice</option>
+								<option value="Civic">Civic</option>
+								<option value="Corolla">Corolla</option>
+								<option value="Edge">Edge</option>
+								<option value="Expedition">Expedition</option>
+								<option value="Fiesta">Fiesta</option>
+								<option value="Odyssey">Odyssey</option>
+								<option value="Rav4">Rav4</option>
+								<option value="Traverse">Traverse</option>
+								<option value="Tahoe">Tahoe</option>
+								<option value="Volt">Volt</option>
+							</select>
+						</td>
+						<td>
+							Year: 
+						</td>
+						<td>
+							<select name="year2" id="year2">
+								<option value="2003">2003</option>
+								<option value="2004">2004</option>
+								<option value="2005">2005</option>
+								<option value="2006">2006</option>
+							</select>
+						</td>
+						<td>
+							Color: 
+						</td>
+						<td>
+							<select name="color2" id="color2">
+								<option value="Red">Red</option>
+								<option value="Silver">Silver</option>
+								<option value="Black">Black</option>
+								<option value="White">White</option>
+								<option value="Cyan">Cyan</option>
+							</select>
+						</td>
+					</tr>	
+				</table>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Please indicate whether this car is to be brought to campus during the day or evening, or both: 
+						</td>
+					</tr>
+				</table>
+				<table align="center" style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Day: 
+						</td>
+						<td>
+							<label>
+								<input type="checkbox" name="day2" id="day2" value="day2"/>
+							</label>
+						</td>
+						<td>
+							Evening: 
+						</td>
+						<td>
+							<label>
+								<input type="checkbox" name="night2" id="night2" value="night2"/>
+							</label>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<h3>
+					Salary Information
+				</h3>
+				<p>
+					As per the 2014 agreement with the Faculty/Staff Union, the rate you pay for your permit depends on your salary level. A combined day and evening permit for a faculty/staff member earning less than $ 20,000 costs $ 15/year, for example, whereas the same permit for a faculty/staff member earning greater than $ 80,000 is $ 45/year. 
+				<br/><br/>	
+				Please indicate your salary level: 
+				<br/>
+				</p>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							Less than $20,000
+						</td>
+						<td>
+							<input type="radio" name="salary" id="salary" value="20k"/>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							Between $20,000 and $35,000
+						</td>
+						<td>
+							<input type="radio" name="salary" id="salary" value="35k"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Between $35,000 and $60,000
+						</td>
+						<td>
+							<input type="radio" name="salary" id="salary" value="60k"/>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							Between $60,000 and $80,000
+						</td>
+						<td>
+							<input type="radio" name="salary" id="salary" value="80k"/>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							Greater than $80,000
+						</td>
+						<td>
+							<input type="radio" name="salary" id="salary" value="80k+"/>
+						</td>
+					</tr>	
+				</table>
+				<br/>
+				<table style="white-space: nowrap; font-weight:normal">
+					<tr>
+						<td>
+							<input type="submit" onclick="checkForm()" value="Submit Information">
+						</td>
+						<td>
+							<input type="reset" value="Reset">
+						</td>
+					</tr>
+				</table>
+			</form>
 		</div>
-		<!-- END MAIN CONTENT -->
-		<div class="clearfix"></div>
-	</div>
-	<!-- END WRAPPER -->
-
-</body>
+		<hr>
+		<p>
+			<i>
+				Last updated: September 8th, 2017/{Kyle Darling (kdarl1@brockport.edu)}
+			</i>
+		</p>			
+	</body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

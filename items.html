@@ -12,61 +12,121 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Items</title>
 	<style>
-		@media (min-width: 768px) .sidebar {
-			position: fixed;
-			top: 51px;
-			bottom: 0;
-			left: 0;
-			z-index: 1000;
-			display: block;
-			padding: 20px;
-			overflow-x: hidden;
-			overflow-y: auto;
-			background-color: #f5f5f5;
-			border-right: 1px solid #eee;
-		}
+		@media (min-width: 768px)
+   .sidebar {
+      position: fixed;
+      top: 51px;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      display: block;
+      padding: 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: #f5f5f5;
+      border-right: 1px solid #eee;
+   }
 	</style>
+	
 	<script>
-
 		function addItemValidation() {
-			validateCost();
-			validatePrice();
-
-			var description = getElementById("description").value;
-
+			var description = document.forms["itemAddForm"]["description"].value;
+			var category = document.forms["itemAddForm"]["category"].value;
+			var department = document.forms["itemAddForm"]["department"].value;
+			var itemNumber = document.forms["itemAddForm"]["itemNumber"].value;
+			var cost = document.forms["itemAddForm"]["purchaseCost"].value;
+			var retailPrice = document.forms["itemAddForm"]["retailPrice"].value;
+			var error = "";
+			error += validateItemNumber(error, itemNumber);
 			description = toCapitalLetter(description);
-
-			alert('myElement');
+			if (category == "")
+				error += "Please enter a Category\n"
+			if (department == "")
+				error += "Please enter a Department\n"
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
+			if (error != "") {
+				alert(error);
+				return false;
+			}
+			return true;
 		}
-
+		function updateItemValidation() {
+			var description = document.forms["itemUpdateForm"]["description"].value;
+			var category = document.forms["itemUpdateForm"]["category"].value;
+			var department = document.forms["itemUpdateForm"]["department"].value;
+			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
+			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
+			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+			var error = "";
+			error += validateItemNumber(error, itemNumber);
+			description = toCapitalLetter(description);
+			/*
+			if (category == "")
+				error += "Please enter a Category\n"
+			if (department == "")
+				error += "Please enter a Department\n"
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
+			*/
+			if (error != "") {
+				alert(error); 
+				return false;
+			}
+			return true;
+		}
 		function toCapitalLetter(myElement) {
-
 			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
-			alert('myElement');
-
 			return myElement;
 		}
-
-
-		function validateCost() {
-			var x = document.getElementById("purchaseCost").value;
+		function validateCost(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
-				return;
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Purchase Price\n";
 			} else {
-				alert("Purchase Cost is invalid");
+				error = "Purchase Cost is invalid\n";
 			}
+			return error;
 		}
-
-		function validatePrice() {
-			var x = document.getElementById("retailPrice").value;
+		function validatePrice(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
-				return;
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Retail Price\n";
 			} else {
-				alert("Retail Price is invalid");
+				error = "Retail Price is invalid\n";
+			}
+			return error;
+		}
+		function validateItemNumber(error, x) {
+			if (x.match(/^\d{7}$/)) {
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter an Item Number\n";
+			} else {
+				error = "Item Number is invalid: should have 7 digits\n";
+			}
+			return error;
+		}
+		function evaluateInput() {
+			var description = document.forms["itemSearchForm"]["description"].value;
+			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+			description = toCapitalLetter(description);
+			if (itemNumber != "") {
+				if (itemNumber.match(/^\d{7}$/)) {
+					return true;
+				} else {
+					alert("Item Number is invalid: should have 7 digits");
+					return false;
+				}
 			}
 		}
 	</script>
-
+	
 </head>
 
 <body style="background: #36465d;">
@@ -75,54 +135,38 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li>
-							<a class="btn btn-default" href="index.html">
-								<i class="glyphicon glyphicon-home"></i>
-							</a>
-						</li>
-						<li class="active">
-							<a href="items.html">Items</a>
-						</li>
-						<li>
-							<a href="promotions.html">Promotions</a>
-						</li>
-					</ul>
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                     <span class="sr-only">Toggle Navigation</span>   
+                     <span class="icon-bar"></span>      
+                     <span class="icon-bar"></span>      
+                     <span class="icon-bar"></span>             
+                 </button>  
+                <div class="navbar-collapse collapse">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
 				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Homepage</a></li>
+					<li class="active"><a href="items.html">Items</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+				</ul>
 			</div>
+            </div>
 		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
-		<nav id="left-sidebar-nav" class="sidebar-nav">
-			<div class="navbar-collapse collapse">
-				<div id="left-sidebar" class="sidebar">
-					<ul id="main-menu" class="metismenu">
-						<center>
-							<li style="padding-top: 10px; padding-bottom: 10px;">
-								<b>Items</b>
-							</li>
-						</center>
-						<li name="newItem" id="newItem" class="active">
-							<a href="#addNewItem" data-toggle="pill">Add New Item</a>
-						</li>
-						<li name="updateItem" id="updateItem">
-							<a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a>
-						</li>
-						<li name="searchItem" id="searchItem">
-							<a href="#searchExistingItem" data-toggle="pill">
-								<span class="glyphicon glyphicon-search"></span> Search For An Existing Item</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+			<nav id="left-sidebar-nav" class="sidebar-nav">
+              <div class="navbar-collapse collapse">
+              <div id="left-sidebar" class="sidebar">
+				<ul id="main-menu" class="metismenu">
+                    <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
+					<li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add New Item</a></li>
+					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a></li>
+					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
+				</ul>
+                </div>
+                </div>
+			</nav>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
@@ -130,25 +174,45 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-				<div class="tab-content">
-					<div id="addNewItem" class="tab-pane fade in active">
-						<!-- This is for the panel creation -->
-						<div class="col-md-4 col-md-offset-4">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Add New Item</h3>
-								</div>
-								<div class="panel-body">
-									<fieldset>
-										<form name="itemAddForm" onsubmit="validateItemAdd()" method="POST" action="app/add_item.php">
+					<div class="tab-content">
+						<div id="addNewItem" class="tab-pane fade in active">
+							<!-- This is for the panel creation -->
+							<div class="col-md-4 col-md-offset-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Add New Item</h3>
+									</div>
+									<div class="panel-body">
+										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation()" method="POST" action="php/insert_item.php"> 
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
 											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
@@ -156,88 +220,121 @@
 											<div class="form-group">
 												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
 											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="addItemValidation();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-										</form>
-									</fieldset>
+										</form>    
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div id="updateExistingItem" class="tab-pane fade">
-						<!-- This is for the panel creation -->
-						<div class="col-md-4 col-md-offset-4">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Update Existing Item</h3>
-								</div>
-								<div class="panel-body">
-									<fieldset>
-										<form name="itemUpdateForm" onsubmit="validateItemUpdate()" method="POST" action="app/update_item.php">
+						<div id="updateExistingItem" class="tab-pane fade">
+							<!-- This is for the panel creation -->
+							<div class="col-md-4 col-md-offset-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Update Existing Item</h3>
+									</div>
+									<div class="panel-body">
+										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation()" method="POST" action="php/update_item.php"> 
+											 <div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+												<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
 											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-										</form>
-									</fieldset>
+										</form>    
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div id="searchExistingItem" class="tab-pane fade">
-						<!-- This is for the panel creation -->
-						<div class="col-md-4 col-md-offset-4">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Search Existing Item</h3>
-								</div>
-								<div class="panel-body">
-									<fieldset>
-										<form name="itemSearchForm" onsubmit="validateItemSearch()" method="POST" action="app/search_item.php">
+						<div id="searchExistingItem" class="tab-pane fade">
+							<!-- This is for the panel creation -->
+							<div class="col-md-4 col-md-offset-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Search Existing Item</h3>
+									</div>
+									<div class="panel-body">
+								    <fieldset>
+                                    <form name="itemSearchForm" onsubmit="return evaluateInput()" action="php/search_item.php" method="POST">    
+										<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
 											</div>
 											<div class="form-group">
-												<input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
 											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
-											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" onclick="evaluateLogin();" value="Submit">
+											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-										</form>
-									</fieldset>
+                                    </form>    
+ 									</fieldset>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					</div>				
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-
+	
 </body>
 
 </html>
