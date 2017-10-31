@@ -27,7 +27,11 @@
       border-right: 1px solid #eee;
    }
 	</style>
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 	<script>
 		function addItemValidation() {
 			var description = document.forms["itemAddForm"]["description"].value;
@@ -36,6 +40,7 @@
 			var itemNumber = document.forms["itemAddForm"]["itemNumber"].value;
 			var cost = document.forms["itemAddForm"]["purchaseCost"].value;
 			var retailPrice = document.forms["itemAddForm"]["retailPrice"].value;
+<<<<<<< HEAD
 			var error = "";
 			error += validateItemNumber(error, itemNumber);
 			description = toCapitalLetter(description);
@@ -69,33 +74,108 @@
 			error += validateCost(error, cost);
 			error += validatePrice(error, retailPrice);
 			*/
+=======
+
+			var error = "";
+
+			error += validateItemNumber(error, itemNumber);
+
+			description = toCapitalLetter(description);
+
+			if (category == "")
+				error += "Please enter a Category\n"
+
+			if (department == "")
+				error += "Please enter a Department\n"
+
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
+
+			if (error != "") {
+				alert(error);
+				return false;
+			}
+
+			return true;
+		}
+
+		function updateItemValidation() {
+			var description = document.forms["itemUpdateForm"]["description"].value;
+			var category = document.forms["itemUpdateForm"]["category"].value;
+			var department = document.forms["itemUpdateForm"]["department"].value;
+			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
+			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
+			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+
+
+
+			var error = "";
+
+			error += validateItemNumber(error, itemNumber);
+
+			description = toCapitalLetter(description);
+
+			if (category == "")
+				error += "Please enter a Category\n"
+
+			if (department == "")
+				error += "Please enter a Department\n"
+
+			error += validateCost(error, cost);
+			error += validatePrice(error, retailPrice);
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 			if (error != "") {
 				alert(error); 
 				return false;
 			}
+<<<<<<< HEAD
+=======
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 			return true;
 		}
 		function toCapitalLetter(myElement) {
 			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
+<<<<<<< HEAD
 			return myElement;
 		}
+=======
+
+			return myElement;
+		}
+
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 		function validateCost(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
 			} else if (x == "") {
 				error = "Please Enter a Purchase Price\n";
+<<<<<<< HEAD
 			} else {
 				error = "Purchase Cost is invalid\n";
 			}
 			return error;
 		}
+=======
+
+			} else {
+				error = "Purchase Cost is invalid\n";
+			}
+
+			return error;
+		}
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 		function validatePrice(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
 			} else if (x == "") {
 				error = "Please Enter a Retail Price\n";
+<<<<<<< HEAD
 			} else {
 				error = "Retail Price is invalid\n";
 			}
@@ -117,6 +197,39 @@
 			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
 			description = toCapitalLetter(description);
 			if (itemNumber != "") {
+=======
+
+			} else {
+				error = "Retail Price is invalid\n";
+			}
+
+			return error;
+		}
+
+		function validateItemNumber(error, x) {
+			if (x.match(/^\d{7}$/)) {
+				error = "";
+				return error;
+
+			} else if (x == "") {
+				error = "Please Enter an Item Number\n";
+
+			} else {
+				error = "Item Number is invalid: should have 7 digits\n";
+			}
+
+			return error;
+		}
+
+		function evaluateInput() {
+			var description = document.forms["itemSearchForm"]["description"].value;
+			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+
+			description = toCapitalLetter(description);
+
+			if (itemNumber != "") {
+
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 				if (itemNumber.match(/^\d{7}$/)) {
 					return true;
 				} else {
@@ -124,7 +237,10 @@
 					return false;
 				}
 			}
+
+
 		}
+
 	</script>
 	
 </head>
@@ -174,6 +290,7 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
+<<<<<<< HEAD
 					<div class="tab-content">
 						<div id="addNewItem" class="tab-pane fade in active">
 							<!-- This is for the panel creation -->
@@ -184,6 +301,19 @@
 									</div>
 									<div class="panel-body">
 										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation()" method="POST" action="php/insert_item.php"> 
+=======
+				<div class="tab-content">
+					<div id="addNewItem" class="tab-pane fade in active">
+						<!-- This is for the panel creation -->
+						<div class="col-md-4 col-md-offset-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Add New Item</h3>
+								</div>
+								<div class="panel-body">
+									<fieldset>
+										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation();" method="POST" action="app/add_item.php">
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 											<div class="form-group">
 												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
 											</div>
@@ -227,6 +357,7 @@
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
 						<div id="updateExistingItem" class="tab-pane fade">
 							<!-- This is for the panel creation -->
 							<div class="col-md-4 col-md-offset-4">
@@ -237,6 +368,20 @@
 									<div class="panel-body">
 										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation()" method="POST" action="php/update_item.php"> 
 											 <div class="form-group">
+=======
+					</div>
+					<div id="updateExistingItem" class="tab-pane fade">
+						<!-- This is for the panel creation -->
+						<div class="col-md-4 col-md-offset-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Update Existing Item</h3>
+								</div>
+								<div class="panel-body">
+									<fieldset>
+										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation();" method="POST" action="app/update_item.php">
+											<div class="form-group">
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
 											</div>
 											<div class="form-group">
@@ -279,6 +424,7 @@
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
 						<div id="searchExistingItem" class="tab-pane fade">
 							<!-- This is for the panel creation -->
 							<div class="col-md-4 col-md-offset-4">
@@ -293,6 +439,23 @@
 												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
 											</div>
 											<div class="form-group">
+=======
+					</div>
+					<div id="searchExistingItem" class="tab-pane fade">
+						<!-- This is for the panel creation -->
+						<div class="col-md-4 col-md-offset-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Search Existing Item</h3>
+								</div>
+								<div class="panel-body">
+									<fieldset>
+										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="app/search_item.php">
+											<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+											</div>
+											<div class="form-group">
+>>>>>>> d0fa501d2222d3136fd0ae4d34eca63aebbc02d2
 												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
 											</div>
 											<div class="form-group">
