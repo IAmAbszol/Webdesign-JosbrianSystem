@@ -1,7 +1,7 @@
 <?php
 echo"<html>";
 echo"   <head>";
-echo"      <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css' rel='stylesheet'>";
+echo"      <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";
 echo"   </head>";
 echo"   <body>";
 echo"      <div class='container-fluid'>";

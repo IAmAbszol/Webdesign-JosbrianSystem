@@ -30,15 +30,15 @@
 
    textarea:focus {
     height: 10em;
-   }      
+   }
 
     tr:hover td {background:#36465d; cursor: pointer;}
-    tr:hover p  {color:#ffffff;}   
+    tr:hover p  {color:#ffffff;}
     p{
-           font-size: 100%; 
-    }    
+           font-size: 100%;
+    }
 	</style>
-	
+
 </head>
 
 <body style="background: #36465d;">
@@ -48,11 +48,11 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="sr-only">Toggle Navigation</span>   
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>             
-                 </button>  
+                     <span class="sr-only">Toggle Navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
                 <div class="navbar-collapse collapse">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
@@ -73,8 +73,6 @@
               <div id="left-sidebar" class="sidebar">
 				<ul id="main-menu" class="metismenu">
                     <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
-					<li name="newItem" id="newItem"><a href="#addNewItem" data-toggle="pill">Item Promotion</a></li>
-					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a></li>
 					 <li name="searchItem" id="searchItem" class="active"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
 				</ul>
                 </div>
@@ -87,7 +85,6 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-			<!--	<form accept-charset="UTF-8" role="form" action="" method="POST"> -->
 					<div class="tab-content">
 						<div id="updateExistingItem" class="tab-pane fade">
 							<!-- This is for the panel creation -->
@@ -96,7 +93,9 @@
 									<div class="panel-heading">
 										<h3 class="panel-title"><b>Edit Item:</b></h3>
 									</div>
+
 									<div class="panel-body">
+									<form accept-charset="UTF-8" role="form" action="php/update_item" method="POST">
 								   <fieldset>
  									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
@@ -121,9 +120,9 @@
 								</div>
 							</div>
 						</div>
-    <!--                    
+    <!--
 						<div id="searchExistingItem" class="tab-pane fade">
-							
+
 							<div class="col-md-4 col-md-offset-4">
 								<div class="panel panel-default">
 									<div class="panel-heading">
@@ -150,21 +149,21 @@
  									</div>
                                         <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
-                                    </form>    
+                                    </form>
  									</fieldset>
 									</div>
 								</div>
 							</div>
 						</div>
--->                
-        <!--  TABLE TO RETURN DATA TO  -->            
+-->
+        <!--  TABLE TO RETURN DATA TO  -->
                         <div id="searchResults" class="container">
-                         <div class="jumbotron">    
-                            <h2 style="padding-bottom: 20px;"><b>Item Search Results:</b></h2> 
-                            <center>    
+                         <div class="jumbotron">
+                            <h2 style="padding-bottom: 20px;"><b>Item Search Results:</b></h2>
+                            <center>
                             <table class="table" id="table">
                                 <thead>
-                                  <tr>    
+                                  <tr>
                                     <th>Example 1</th>
                                     <th>Example 2</th>
                                     <th>Example 3</th>
@@ -183,13 +182,13 @@
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
-                                  </tr>      
+                                  </tr>
                                 </tbody>
                             </table>
-                            </center>               
+                            </center>
                         </div>
                         </div>
-					</div>				
+					</div>
 	<!--			</form>  -->
 			</div>
 		</div>
@@ -197,10 +196,10 @@
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-    
+
     <!-- START OF MODAL PROMOTION PROMPTS -->
-    
-      
+
+
     <!-- Button trigger details modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemDetailModal">
   Row to click on.
@@ -225,29 +224,29 @@
                 <th>Detail 3</th>
                 <th>Detail 4</th>
                 <th>Detail 5</th>
-              </tr>          
+              </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Data</td>
-                <td>Data</td>      
-                <td>Data</td>      
-                <td>Data</td>      
-                <td>Data</td>        
+                <td>Data</td>
+                <td>Data</td>
+                <td>Data</td>
+                <td>Data</td>
               </tr>
             </tbody>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>   
+        <button style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>
       </div>
     </div>
   </div>
 </div>
-    
-    
-    
+
+
+
 <!-- Promotion Edit Modal -->
 <div class="modal fade" id="itemEditModal" tabindex="-1" role="dialog" aria-labelledby="itemEditModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -261,41 +260,41 @@
       <div class="modal-body">
         <form name="itemUpdateForm" onsubmit="validateItemUpdate()">
              <div class="form-group">
-               <h5>Item Number:</h5>     
+               <h5>Item Number:</h5>
  			   <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
- 			 </div> 
+ 			 </div>
  			<div class="form-group">
-              <h5>Item Description:</h5>    
+              <h5>Item Description:</h5>
  			  <input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
  			</div>
  			<div class="form-group">
-                <h5>Item Category:</h5> 
+                <h5>Item Category:</h5>
                 <input class="form-control" placeholder="Item Category" name="category" id="category" type="text" value="">
  			</div>
  			<div class="form-group">
-              <h5>Department Name:</h5>     
+              <h5>Department Name:</h5>
  			  <input class="form-control" placeholder="Department Name" name="department" id="department" type="text" value="">
  			</div>
  			<div class="form-group">
-              <h5>Purchase Cost:</h5>     
+              <h5>Purchase Cost:</h5>
  			  <input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
  			</div>
  			<div class="form-group">
-              <h5>Full Retail Price:</h5>     
+              <h5>Full Retail Price:</h5>
  			  <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
- 			</div>        
+ 			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" type="submit" value="Submit"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save changes</button>
       </div>
-      </form>      
+      </form>
     </div>
   </div>
-</div>    
-    
-<!-- END OF MODAL PROMOTION PROMPTS -->    
-	
+</div>
+
+<!-- END OF MODAL PROMOTION PROMPTS -->
+
 </body>
 
 </html>
