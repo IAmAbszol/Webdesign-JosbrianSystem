@@ -30,21 +30,21 @@
 
    textarea:focus {
     height: 10em;
-   }    
-        
+   }
+
    .glyphicon:empty{
       width: 100%;
-   }           
+   }
 
     tr:hover td {background:#36465d; cursor: pointer;}
-    tr:hover p  {color:#ffffff;}   
+    tr:hover p  {color:#ffffff;}
     p{
-           font-size: 100%; 
-    }    
+           font-size: 100%;
+    }
 	</style>
 
 <script>
-/*START OF JQUERY*/        
+/*START OF JQUERY*/
 $(document).ready(function(){
 
 $("select[title='category']").change(function() {
@@ -61,38 +61,38 @@ var categoryValue = $("select[title='category']").val();
 
 if(categoryValue == "ACCESSORIES/FOOTWEAR"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='ACCESSORIES'>ACCESSORIES</option>");
 $("select[title='department']").append("<option value='FOOTWEAR'>FOOTWEAR</option>");
 }
 
 if(categoryValue == "BASIC APPAREL"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='CHILDRENS BASICS'>CHILDRENS BASICS</option>");
 $("select[title='department']").append("<option value='LADIES BASICS'>LADIES BASICS</option>");
-$("select[title='department']").append("<option value='MENS BASICS'>MENS BASIC</option>");    
-}    
+$("select[title='department']").append("<option value='MENS BASICS'>MENS BASIC</option>");
+}
 
 if(categoryValue == "FOOD CONVENIENCE"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
-$("select[title='department']").append("<option value='CANDY'>CANDY</option>");     
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='department']").append("<option value='CANDY'>CANDY</option>");
 $("select[title='department']").append("<option value='REFRIGERATED'>REFRIGERATED</option>");
-}        
+}
 
 if(categoryValue == "FOOD GROCERY"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");   
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='COOKIES/CRACKERS'>COOKIES/CRACKERS</option>");
-$("select[title='department']").append("<option value='GROCERY'>GROCERY</option>"); 
-$("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");     
-} 
+$("select[title='department']").append("<option value='GROCERY'>GROCERY</option>");
+$("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");
+}
 
 }
 /*END OF JQUERY*/
-</script>    
-    
+</script>
+
 </head>
 
 <body style="background: #36465d;">
@@ -126,65 +126,33 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
-			<nav id="left-sidebar-nav" class="sidebar-nav">
-              <div class="navbar-collapse collapse">
-              <div id="left-sidebar" class="sidebar">
-				<ul id="main-menu" class="metismenu">
-                    <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
-					<li name="newItem" id="newItem"><a href="#addNewItem" data-toggle="pill">Add Item</a></li>
-					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Item</a></li>
-					 <li name="searchItem" id="searchItem" class="active"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
-				</ul>
-                </div>
-                </div>
-			</nav>
+		<nav id="left-sidebar-nav" class="sidebar-nav">
+            <div class="navbar-collapse collapse">
+            <div id="left-sidebar" class="sidebar">
+			<ul id="main-menu" class="metismenu">
+                  <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
+				<li name="newItem" id="newItem"><a href="#addNewItem" data-toggle="pill">Add Item</a></li>
+				 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Item</a></li>
+				 <li name="searchItem" id="searchItem" class="active"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
+			</ul>
+              </div>
+              </div>
+		</nav>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
 			<div class="container-fluid">
 				<!-- Screen Reader -->
-				<h1 class="sr-only">Item Manipulation</h1>
+				<h1 class="sr-only">Item Search</h1>
 				<!-- Item Manipulation Panel -->
 			<!--	<form accept-charset="UTF-8" role="form" action="" method="POST"> -->
-					<div class="tab-content">
-						<div id="updateExistingItem" class="tab-pane fade">
-							<!-- This is for the panel creation -->
-							<div class="col-md-4 col-md-offset-4">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title"><b>Edit Item:</b></h3>
-									</div>
-									<div class="panel-body">
-								   <fieldset>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
- 									</div>
- 									<div class="form-group">
-                                        <textarea rows="1" class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text"></textarea>
- 									</div>
- 									<div class="form-group">
- 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
-                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
-                                        </select>
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
- 									</div>
- 									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-                                        <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
- 									</fieldset>
-									</div>
-								</div>
-							</div>
-						</div>
-     <!--  TABLE TO RETURN DATA TO  -->    
-                        
+
+     <!--  TABLE TO RETURN DATA TO  -->
+
                         <div id="searchResults" class="container">
-                         <div class="jumbotron">    
-                            <h2 style="padding-bottom: 20px;"><b>Item Search Results:</b></h2> 
-                            <center>    
+                         <div class="jumbotron">
+                            <h2 style="padding-bottom: 20px;"><b>Item Search Results:</b></h2>
+                            <center>
                             <table class="table" id="table">
                                 <thead>
                                   <tr>
@@ -194,8 +162,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                                     <th>Example 3</th>
                                     <th>Example 4</th>
                                     <th>Edit Item</th>
-                                    <th>Add Promotion</th>    
-                                    </center>      
+                                    <th>Add Promotion</th>
+                                    </center>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -205,7 +173,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span></button></td>
-                                    <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-plus"></span></button></td>  
+                                    <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-plus"></span></button></td>
                                   </tr>
                                   <tr data-toggle="modal" data-target="#itemDetailModal">
                                     <td><p>Result 1</p></td>
@@ -213,14 +181,14 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                                     <td><p>Result 1</p></td>
                                     <td><p>Result 1</p></td>
                                     <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span></button></td>
-                                    <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-plus"></span></button></td>  
-                                  </tr>      
+                                    <td><button style="padding: 10px 10px;" type="button" class="btn btn-primary" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-plus"></span></button></td>
+                                  </tr>
                                 </tbody>
                             </table>
-                            </center>               
+                            </center>
                         </div>
                         </div>
-					</div>				
+					</div>
 	<!--			</form>  -->
 			</div>
 		</div>
@@ -228,10 +196,10 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-    
+
     <!-- START OF MODAL PROMOTION PROMPTS -->
-    
-      
+
+
     <!-- Button trigger details modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemDetailModal">
   Row to click on.
@@ -256,29 +224,29 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                 <th>Detail 3</th>
                 <th>Detail 4</th>
                 <th>Detail 5</th>
-              </tr>          
+              </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Data</td>
-                <td>Data</td>      
-                <td>Data</td>      
-                <td>Data</td>      
-                <td>Data</td>        
+                <td>Data</td>
+                <td>Data</td>
+                <td>Data</td>
+                <td>Data</td>
               </tr>
             </tbody>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>   
+        <button style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>
       </div>
     </div>
   </div>
 </div>
-    
-    
-    
+
+
+
 <!-- Promotion Edit Modal -->
 <div class="modal fade" id="itemEditModal" tabindex="-1" role="dialog" aria-labelledby="itemEditModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -292,12 +260,12 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
       <div class="modal-body">
         <form name="itemUpdateForm" onsubmit="validateItemUpdate()">
              <div class="form-group">
-               <h5>Item Number:</h5>     
+               <h5>Item Number:</h5>
  			   <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
- 			 </div> 
+ 			 </div>
  			<div class="form-group">
-              <h5>Item Description:</h5>    
-            <textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea>    
+              <h5>Item Description:</h5>
+            <textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea>
  			</div>
  			<div class="form-group">
               <h5>Item Category:</h5>
@@ -326,23 +294,23 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
               </select>
  			</div>
  			<div class="form-group">
-              <h5>Purchase Cost:</h5>     
+              <h5>Purchase Cost:</h5>
  			  <input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
  			</div>
  			<div class="form-group">
-              <h5>Full Retail Price:</h5>     
+              <h5>Full Retail Price:</h5>
  			  <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
- 			</div>        
+ 			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" type="submit" value="Submit"><!--<span class="glyphicon glyphicon-floppy-disk"></span>-->Save changes</button>
       </div>
-      </form>      
+      </form>
     </div>
   </div>
-</div>    
-    
+</div>
+
 <!-- END OF MODAL PROMOTION PROMPTS -->
 </body>
 
