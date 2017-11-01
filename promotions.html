@@ -91,8 +91,9 @@
 				if (errormessage == "") {
 					return true;
 				} else {
-					alert(errormessage);
-					return false;
+						alertvalue.style.display = "block";
+						alertvalue.innerHTML = "Error detected!\n" + error;
+						return false;
 				}
 			}
 //-------------------------------------------------------------------------------------------------------------------------------------
@@ -129,27 +130,32 @@
 <body style="background: #36465d;">
 	<!-- WRAPPER -->
 	<div id="wrapper">
-		<!-- NAVBAR -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="sr-only">Toggle Navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                 </button>
-                <div class="navbar-collapse collapse">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
-				</div>
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.html">Homepage</a></li>
-					<li><a href="items.html">Items</a></li>
-                    <li class="active"><a href="promotions.html">Promotions</a></li>
+					<li>
+						<a class="btn btn-default" href="index.html">
+							<i class="glyphicon glyphicon-home"></i>
+						</a>
+					</li>
+					<li>
+						<a href="items.html">Items</a>
+					</li>
+					<li class="active">
+						<a href="promotions.html">Promotions</a>
+					</li>
 				</ul>
 			</div>
-            </div>
-		</nav>
+		</div>
+	</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 			<nav id="left-sidebar-nav" class="sidebar-nav">
@@ -176,6 +182,10 @@
 						<div id="addNewItem" class="tab-pane fade in active">
 							<!-- This is for the panel creation -->
 							<div class="col-md-4 col-md-offset-4">
+							<!-- Used to display the alerts -->
+							<div id="alertbox" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+							</div>
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h3 class="panel-title"><b>Add Promotion:</b></h3>
@@ -210,6 +220,10 @@
 						<div id="updateExistingItem" class="tab-pane fade">
 							<!-- This is for the panel creation -->
 							<div class="col-md-4 col-md-offset-4">
+							<!-- Used to display the alerts -->
+							<div id="alertbox" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+							</div>
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h3 class="panel-title"><b>Edit Promotion:</b></h3>
@@ -243,6 +257,10 @@
 						<div id="searchExistingItem" class="tab-pane fade">
 							<!-- This is for the panel creation -->
 							<div class="col-md-4 col-md-offset-4">
+							<!-- Used to display the alerts -->
+							<div id="alertbox" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+							</div>
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h3 class="panel-title"><b>Search Promotions:</b></h3>

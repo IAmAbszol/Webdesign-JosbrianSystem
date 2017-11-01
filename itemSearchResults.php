@@ -131,9 +131,9 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
             <div id="left-sidebar" class="sidebar">
 			<ul id="main-menu" class="metismenu">
                   <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
-				<li name="newItem" id="newItem"><a href="#addNewItem" data-toggle="pill">Add Item</a></li>
-				 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Item</a></li>
-				 <li name="searchItem" id="searchItem" class="active"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
+				<li name="newItem" id="newItem"><a href="items.html" data-toggle="pill">Add Item</a></li>
+				 <li name="updateItem" id="updateItem"><a href="items.html" data-toggle="pill">Update Item</a></li>
+				 <li name="searchItem" id="searchItem" class="active"><a href="items.html" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
 			</ul>
               </div>
               </div>
@@ -148,6 +148,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			<!--	<form accept-charset="UTF-8" role="form" action="" method="POST"> -->
 
      <!--  TABLE TO RETURN DATA TO  -->
+
+
 
                         <div id="searchResults" class="container">
                          <div class="jumbotron">
@@ -187,9 +189,9 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                             </table>
                             </center>
                         </div>
-                        </div>
+                    	</div>
+
 					</div>
-	<!--			</form>  -->
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->

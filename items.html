@@ -25,12 +25,12 @@
 			background-color: #f5f5f5;
 			border-right: 1px solid #eee;
 		}
-        tr.spaceUnder>td {
-            padding-bottom: 1em;
-        }
-        textarea:focus {
-            height: 4em;
-        }
+    tr.spaceUnder>td {
+        padding-bottom: 1em;
+    }
+    textarea:focus {
+        height: 4em;
+    }
 	</style>
 
 	<script>
@@ -89,6 +89,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			var itemNumber = document.forms["itemAddForm"]["itemNumber"].value;
 			var cost = document.forms["itemAddForm"]["purchaseCost"].value;
 			var retailPrice = document.forms["itemAddForm"]["retailPrice"].value;
+			var alertvalue = document.getElementById('alertboxitemadd');
 
 			var error = "";
 
@@ -106,7 +107,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			error += validatePrice(error, retailPrice);
 
 			if (error != "") {
-				alert(error);
+				alertvalue.style.display = "block";
+				alertvalue.innerHTML = "Error detected!\n" + error;
 				return false;
 			}
 
@@ -120,6 +122,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
 			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
 			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+			var alertvalue = document.getElementById('alertboxitemupdate');
 
 
 
@@ -139,7 +142,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			error += validatePrice(error, retailPrice);
 
 			if (error != "") {
-				alert(error);
+				alertvalue.style.display = "block";
+				alertvalue.innerHTML = "Error detected!\n" + error;
 				return false;
 			}
 
@@ -200,6 +204,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		function evaluateInput() {
 			var description = document.forms["itemSearchForm"]["description"].value;
 			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+			var alertvalue = document.getElementById('alertboxitemsearch');
 
 			description = toCapitalLetter(description);
 
@@ -208,7 +213,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 				if (itemNumber.match(/^\d{7}$/)) {
 					return true;
 				} else {
-					alert("Item Number is invalid: should have 7 digits");
+					alertvalue.style.display = "block";
+					alertvalue.innerHTML = "Error detected!\n" + error;
 					return false;
 				}
 			}
@@ -285,6 +291,10 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 					<div id="addNewItem" class="tab-pane fade in active">
 						<!-- This is for the panel creation -->
 						<div class="col-md-4 col-md-offset-4">
+						<!-- Used to display the alerts -->
+						<div id="alertboxitemadd" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+						</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title"><b>Add New Item:</b></h3>
@@ -347,6 +357,10 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 					<div id="updateExistingItem" class="tab-pane fade">
 						<!-- This is for the panel creation -->
 						<div class="col-md-4 col-md-offset-4">
+						<!-- Used to display the alerts -->
+						<div id="alertboxitemupdate" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+						</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title"><b>Update Item:</b></h3>
@@ -406,16 +420,23 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 							</div>
 						</div>
 					</div>
+
+					<!-- Item Search -->
+
 					<div id="searchExistingItem" class="tab-pane fade">
 						<!-- This is for the panel creation -->
 						<div class="col-md-4 col-md-offset-4">
+						<!-- Used to display the alerts -->
+						<div id="alertboxitemsearch" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+						</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title"><b>Search Items:</b></h3>
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="php/search_item.php">
+										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="testingPhp.php">
 											 <table>
                                             <tr class="spaceUnder">
                                                <td><h5>Item Number:</h5></td>
