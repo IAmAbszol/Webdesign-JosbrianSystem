@@ -37,18 +37,19 @@
 			function testPromoName(message) {
 				var promoName = document.forms["promotionAddForm"]["promotionName"].value;
 
-				if (promoName == "" && (promoName.match(/\W/) || promoName.indexOf(' ') >= 0)) {
+				if (promoName == "") {
 					message = "Name must contain text only\n";
-				} else {
+				} //else if(promoName.match(/\W/) || promoName.indexOf(' ') >= 0) {
 
-				}
+				//}
 				return message;
 			}
 
 			function testPomodescription(message) {
 				var promoDescription = document.forms["promotionAddForm"]["promotionDescription"].value;
 
-				if (promoDescription == "" || promoDescription.match(/\W/)) {
+				if (promoDescription == "") {
+				//|| promoDescription.match(/\W/) || promoName.indexOf(' ') >= 0) {
 					message = "Description must contain text only\n";
 				} else {
 

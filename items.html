@@ -34,7 +34,7 @@
 	</style>
 
 	<script>
-/*START OF JQUERY*/        
+/*START OF JQUERY*/
 $(document).ready(function(){
 
 $("select[title='category']").change(function() {
@@ -51,37 +51,37 @@ var categoryValue = $("select[title='category']").val();
 
 if(categoryValue == "ACCESSORIES/FOOTWEAR"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='ACCESSORIES'>ACCESSORIES</option>");
 $("select[title='department']").append("<option value='FOOTWEAR'>FOOTWEAR</option>");
 }
 
 if(categoryValue == "BASIC APPAREL"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='CHILDRENS BASICS'>CHILDRENS BASICS</option>");
 $("select[title='department']").append("<option value='LADIES BASICS'>LADIES BASICS</option>");
-$("select[title='department']").append("<option value='MENS BASICS'>MENS BASIC</option>");    
-}    
+$("select[title='department']").append("<option value='MENS BASICS'>MENS BASIC</option>");
+}
 
 if(categoryValue == "FOOD CONVENIENCE"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");    
-$("select[title='department']").append("<option value='CANDY'>CANDY</option>");     
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='department']").append("<option value='CANDY'>CANDY</option>");
 $("select[title='department']").append("<option value='REFRIGERATED'>REFRIGERATED</option>");
-}        
+}
 
 if(categoryValue == "FOOD GROCERY"){
 
-$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");   
+$("select[title='department']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
 $("select[title='department']").append("<option value='COOKIES/CRACKERS'>COOKIES/CRACKERS</option>");
-$("select[title='department']").append("<option value='GROCERY'>GROCERY</option>"); 
-$("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");     
-} 
+$("select[title='department']").append("<option value='GROCERY'>GROCERY</option>");
+$("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");
+}
 
 }
 /*END OF JQUERY*/
-        
+
 		function addItemValidation() {
 			var description = document.forms["itemAddForm"]["description"].value;
 			var category = document.forms["itemAddForm"]["category"].value;
@@ -139,7 +139,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			error += validatePrice(error, retailPrice);
 
 			if (error != "") {
-				alert(error); 
+				alert(error);
 				return false;
 			}
 
@@ -148,7 +148,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 
 		function toCapitalLetter(myElement) {
 
-			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
+			myElement = myElement.toUpperCase(); //Upper case to the entered parameters
 
 			return myElement;
 		}
@@ -291,12 +291,12 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation();" method="POST" action="app/add_item.php">
+										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation();" method="POST" action="php/insert_item.php">
                                             <table>
                                             <tr class="spaceUnder">
                                                <td><h5>Item Number:</h5></td>
-                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>     
-                                            </tr>        
+                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>
+                                            </tr>
 											<tr class="spaceUnder">
                                                 <td><h5>Item Description:</h5></td>
 												<td><textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea></td>
@@ -335,9 +335,9 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                                                 <td><h5>Full Retail Price:</h5></td>
 												<td><input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value=""></td>
 											</tr>
-                                            </table>    
+                                            </table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">   
+											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
 										</form>
 									</fieldset>
 								</div>
@@ -353,12 +353,12 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation();" method="POST" action="app/update_item.php">
+										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation();" method="POST" action="php/update_item.php">
 											 <table>
                                             <tr class="spaceUnder">
                                                <td><h5>Item Number:</h5></td>
-                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>     
-                                            </tr>        
+                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>
+                                            </tr>
 											<tr class="spaceUnder">
                                                 <td><h5>Item Description:</h5></td>
 												<td><textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea></td>
@@ -397,7 +397,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
                                                 <td><h5>Full Retail Price:</h5></td>
 												<td><input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value=""></td>
 											</tr>
-                                            </table>    
+                                            </table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
 										</form>
@@ -415,12 +415,12 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 								</div>
 								<div class="panel-body">
 									<fieldset>
-										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="app/search_item.php">
+										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="php/search_item.php">
 											 <table>
                                             <tr class="spaceUnder">
                                                <td><h5>Item Number:</h5></td>
-                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>     
-                                            </tr>        
+                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>
+                                            </tr>
 											<tr class="spaceUnder">
                                                 <td><h5>Item Description:</h5></td>
 												<td><textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea></td>
@@ -451,7 +451,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 													<option value="SALTY SNACKS">SALTY SNACKS</option>
 												</select></td>
 											</tr>
-                                            </table>    
+                                            </table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
 										</form>
