@@ -36,12 +36,14 @@
 //----------------------------------------------------Test Add Promotion-----------------------------------------------------------------
 			function testPromoName(message) {
 				var promoName = document.forms["promotionAddForm"]["promotionName"].value;
-
+		
 				if (promoName == "") {
-					message = "Name must contain text only\n";
-				} //else if(promoName.match(/\W/) || promoName.indexOf(' ') >= 0) {
-
-				//}
+					message = "Please enter a name\n";
+				} else {
+					if (promoName.match(/[^A-Za-z-'  ]/)) {
+						message = "Name must contain text only\n";
+					}
+				}
 				return message;
 			}
 
@@ -49,11 +51,8 @@
 				var promoDescription = document.forms["promotionAddForm"]["promotionDescription"].value;
 
 				if (promoDescription == "") {
-				//|| promoDescription.match(/\W/) || promoName.indexOf(' ') >= 0) {
-					message = "Description must contain text only\n";
-				} else {
-
-				}
+					message = "Please enter a description\n";
+				} else { }
 				return message;
 			}
 
@@ -62,19 +61,17 @@
 
 				if (promoType == "") {
 					message = "Please select a promotion type\n";
-				} else {
-
-				}
+				} else { }
 				return message;
 			}
 
 			function testPromoAmount(message) {
 				var promoAmount = document.forms["promotionAddForm"]["amountOff"].value;
 
-				if (promoAmount == "" || promoAmount.match(/\D/)) {
-					message = "Amount must be numbers\n";
-				} else {
-
+				if (promoAmount == "") {
+					message = "Please enter amount\n";
+				} else { if (promoAmount.match(/[^0-9.$  ]/)) { message = "Amount must be decimal\n" } 
+					
 				}
 				return message;
 			}
@@ -91,8 +88,10 @@
 				if (errormessage == "") {
 					return true;
 				} else {
-						alertvalue.style.display = "block";
-						alertvalue.innerHTML = "Error detected!\n" + error;
+
+						//alertvalue.style.display = "block";
+						//alertvalue.innerHTML = "Error detected!\n" + error;
+						alert(errormessage);
 						return false;
 				}
 			}
