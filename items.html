@@ -154,8 +154,8 @@
 			if (error != "") {
 				alertvalue.style.display = "block";
 				alertvalue.style.visibility = "visible";
-				alertvalue.innerHTML = "Error detected!\n" + error;
-				setTimeout("hideAlertItemAdd()", 3000);
+				alertvalue.innerHTML = error;
+				/*setTimeout("hideAlertItemAdd()", 3000);*/
 				return false;
 			}
 
@@ -195,8 +195,9 @@
 
 			if (error != "") {
 				alertvalue.style.display = "block";
-				alertvalue.innerHTML = "Error detected!\n" + error;
-				setTimeout("hideAlertItemUpdate()", 3000);
+				alertvalue.style.visibility = "visible";
+				alertvalue.innerHTML = error;
+				/*setTimeout("hideAlertItemUpdate()", 3000);*/
 
 				return false;
 			}
@@ -208,6 +209,44 @@
 			document.getElementById("alertboxitemupdate").style.display = "none";
 			document.getElementById("alertboxitemupdate").style.visibility = "hidden";
 		}
+
+		function evaluateInput() {
+			var description = document.forms["itemSearchForm"]["description"].value;
+			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+			var category = document.forms["itemSearchForm"]["category"].value;
+			var department = document.forms["itemSearchForm"]["department"].value;
+			var alertvalue = document.getElementById('alertboxitemsearch');
+
+			description = toCapitalLetter(description);
+
+			if (itemNumber != "" || description != "" || category != "" || department != "") {
+
+				if (itemNumber != "") {
+
+					if (itemNumber.match(/^\d{7}$/)) {
+						return true;
+					} else {
+						alertvalue.style.display = "block";
+						alertvalue.style.visibility = "visible";
+						alertvalue.innerHTML = "Item Number is invalid: should have 7 digits\n";
+						return false;
+					}
+				}
+				return true;
+
+			} else {
+				alertvalue.style.display = "block";
+				alertvalue.style.visibility = "visible";
+				alertvalue.innerHTML = "Please fill at list one field for the search\n";
+				return false;
+			}
+		}
+
+		function hideAlertItemSearch() {
+			document.getElementById("alertboxitemsearch").style.display = "none";
+			document.getElementById("alertboxitemsearch").style.visibility = "hidden";
+		}
+
 
 		function toCapitalLetter(myElement) {
 
@@ -260,35 +299,6 @@
 			return error;
 		}
 
-		function evaluateInput() {
-			var description = document.forms["itemSearchForm"]["description"].value;
-			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
-			var category = document.forms["itemSearchForm"]["category"].value;
-			var department = document.forms["itemSearchForm"]["department"].value;
-			var alertvalue = document.getElementById('alertboxitemsearch');
-
-			description = toCapitalLetter(description);
-
-			if (itemNumber != "" || description != "" || category != "" || department != "") {
-
-				if (itemNumber != "") {
-
-					if (itemNumber.match(/^\d{7}$/)) {
-						return true;
-					} else {
-						alertvalue.style.display = "block";
-						alertvalue.innerHTML = "Item Number is invalid: should have 7 digits\n";
-						return false;
-					}
-				}
-				return true;
-
-			} else {
-				alertvalue.style.display = "block";
-				alertvalue.innerHTML = "Please fill at list one field for the search\n";
-				return false;
-			}
-		}
 
 
 	</script>
@@ -325,7 +335,9 @@
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
+
 		<!-- LEFT SIDEBAR -->
+
 		<nav id="left-sidebar-nav" class="sidebar-nav">
 			<div class="navbar-collapse collapse">
 				<div id="left-sidebar" class="sidebar">
@@ -346,7 +358,9 @@
 				</div>
 			</div>
 		</nav>
+
 		<!-- END LEFT SIDEBAR -->
+
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
 			<div class="container-fluid">
@@ -439,7 +453,7 @@
 												</tr>
 											</table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
+											<input class="btn btn-lg btn-danger btn-block" type="reset" onclick="hideAlertItemAdd()" value="Reset">
 										</form>
 									</fieldset>
 								</div>
@@ -518,7 +532,7 @@
 												</tr>
 											</table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
+											<input class="btn btn-lg btn-danger btn-block" type="reset" onclick="hideAlertItemSearch()" value="Reset">
 										</form>
 									</fieldset>
 								</div>
