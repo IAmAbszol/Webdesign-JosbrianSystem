@@ -176,8 +176,6 @@
 			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
 			var alertvalue = document.getElementById('alertboxitemupdate');
 
-
-
 			var error = "";
 
 			error += validateItemNumber(error, itemNumber);
@@ -257,7 +255,12 @@
 
 
 		function validateCost(error, x) {
-			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
+			if (x.match(/^\${0,1}\d+(?:\.{0,1}\d{0,2})$/)) {
+
+				//Erase the dollar sign
+				var res = x.replace("$", "");
+				x = res;
+
 				error = "";
 				return error;
 			} else if (x == "") {
@@ -271,7 +274,12 @@
 		}
 
 		function validatePrice(error, x) {
-			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
+			if (x.match(/^\${0,1}\d+(?:\.{0,1}\d{0,2})$/)) {
+
+				//Erase the dollar sign
+				var res = x.replace("$", "");
+				x = res;
+
 				error = "";
 				return error;
 			} else if (x == "") {
