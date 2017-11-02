@@ -108,11 +108,18 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 
 			if (error != "") {
 				alertvalue.style.display = "block";
+				alertvalue.style.visibility = "visible";
 				alertvalue.innerHTML = "Error detected!\n" + error;
+				setTimeout("hideAlertItemAdd()", 3000);
 				return false;
 			}
 
 			return true;
+		}
+
+		function hideAlertItemAdd() {
+			document.getElementById("alertboxitemadd").style.display = "none";
+			document.getElementById("alertboxitemadd").style.visibility = "hidden";
 		}
 
 		function updateItemValidation() {
@@ -144,10 +151,17 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			if (error != "") {
 				alertvalue.style.display = "block";
 				alertvalue.innerHTML = "Error detected!\n" + error;
+				setTimeout("hideAlertItemUpdate()", 3000);
+
 				return false;
 			}
 
 			return true;
+		}
+
+		function hideAlertItemUpdate() {
+			document.getElementById("alertboxitemupdate").style.display = "none";
+			document.getElementById("alertboxitemupdate").style.visibility = "hidden";
 		}
 
 		function toCapitalLetter(myElement) {
@@ -241,7 +255,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a class="btn btn-default" href="index.html">
+							<a class="btn btn-inverse" href="index.html">
 								<i class="glyphicon glyphicon-home"></i>
 							</a>
 						</li>

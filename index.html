@@ -10,7 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
-	<title>Josbrian Interface - Home Page</title>
+	<title>Home Page</title>
 	<style>
 		@media (min-width: 768px)
    .sidebar {
@@ -27,39 +27,54 @@
       border-right: 1px solid #eee;
    }
 	</style>
-	
+
 </head>
 
 <body>
 	<!-- WRAPPER -->
 	<div id="wrapper">
-		<!-- NAVBAR -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
-				</div>
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">Homepage</a></li>
-					<li><a href="items.html">Items</a></li>
-                    <li><a href="promotions.html">Promotions</a></li>
+					<li class="active">
+						<a class="btn btn-inverse" href="index.html">
+							<i class="glyphicon glyphicon-home"></i>
+						</a>
+					</li>
+					<li>
+						<a href="items.html">Items</a>
+					</li>
+					<li>
+						<a href="promotions.html">Promotions</a>
+					</li>
 				</ul>
 			</div>
-		</nav>
+		</div>
+	</nav>
 		<!-- END NAVBAR -->
 		<!-- MAIN CONTENT -->
 		<div style="padding-top: 90px" id="home-content">
 			<div class="container-fluid">
 				<!-- Screen Reader -->
-				<h1 class="sr-only">Josbrain Instructional Homepage</h1>
-				<center><h2>Josbrain Interface System Homepage</h2></center>	
+				<h1 class="sr-only">Homepage</h1>
+				<div class="fade in">
+					<center><a href="https://goaptaris.com/"><img src="imgs/aptaris.png" alt="aptaris"></a></center>
+				</div>
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-	
+
 </body>
 
 </html>
