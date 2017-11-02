@@ -65,8 +65,11 @@
 			<div class="container-fluid">
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Homepage</h1>
-				<div class="fade in">
-					<center><a href="https://goaptaris.com/"><img src="imgs/aptaris.png" alt="aptaris"></a></center>
+				<div>
+					<?php
+					 	include 'php/testingDisplay.php';
+						echo display();
+					 ?>
 				</div>
 			</div>
 		</div>

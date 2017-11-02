@@ -12,23 +12,119 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Items</title>
 	<style>
-		@media (min-width: 768px)
-   .sidebar {
-      position: fixed;
-      top: 51px;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
-      display: block;
-      padding: 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      background-color: #f5f5f5;
-      border-right: 1px solid #eee;
-   }
+		@media (min-width: 768px) .sidebar {
+			position: fixed;
+			top: 51px;
+			bottom: 0;
+			left: 0;
+			z-index: 1000;
+			display: block;
+			padding: 20px;
+			overflow-x: hidden;
+			overflow-y: auto;
+			background-color: #f5f5f5;
+			border-right: 1px solid #eee;
+		}
+    tr.spaceUnder>td {
+        padding-bottom: 1em;
+    }
+    textarea:focus {
+        height: 4em;
+    }
 	</style>
-	
+
 	<script>
+/*START OF JQUERY*/
+$(document).ready(function(){
+
+$("select[title='categoryAdd']").change(function() {
+        var val = $(this).find("option:selected").text();
+	ReadCategoryAdd();
+        });
+
+$("select[title='categorySearch']").change(function() {
+        var val = $(this).find("option:selected").text();
+	ReadCategorySearch();
+        });    
+});
+
+function ReadCategoryAdd() {
+
+$("select[title='departmentAdd']").empty();
+   
+var categoryValueAdd = $("select[title='categoryAdd']").val();  
+    
+if(categoryValueAdd == "ACCESSORIES/FOOTWEAR"){
+
+$("select[title='departmentAdd']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentAdd']").append("<option value='ACCESSORIES'>ACCESSORIES</option>");
+$("select[title='departmentAdd']").append("<option value='FOOTWEAR'>FOOTWEAR</option>");
+}
+
+if(categoryValueAdd == "BASIC APPAREL"){
+
+$("select[title='departmentAdd']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentAdd']").append("<option value='CHILDRENS BASICS'>CHILDRENS BASICS</option>");
+$("select[title='departmentAdd']").append("<option value='LADIES BASICS'>LADIES BASICS</option>");
+$("select[title='departmentAdd']").append("<option value='MENS BASICS'>MENS BASIC</option>");
+}
+
+if(categoryValueAdd == "FOOD CONVENIENCE"){
+
+$("select[title='departmentAdd']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentAdd']").append("<option value='CANDY'>CANDY</option>");
+$("select[title='departmentAdd']").append("<option value='REFRIGERATED'>REFRIGERATED</option>");
+}
+
+if(categoryValueAdd == "FOOD GROCERY"){
+
+$("select[title='departmentAdd']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentAdd']").append("<option value='COOKIES/CRACKERS'>COOKIES/CRACKERS</option>");
+$("select[title='departmentAdd']").append("<option value='GROCERY'>GROCERY</option>");
+$("select[title='departmentAdd']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");
+}
+
+}
+        
+function ReadCategorySearch() {
+
+$("select[title='departmentSearch']").empty();
+   
+var categoryValueSearch = $("select[title='categorySearch']").val();    
+    
+if(categoryValueSearch == "ACCESSORIES/FOOTWEAR"){
+
+$("select[title='departmentSearch']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentSearch']").append("<option value='ACCESSORIES'>ACCESSORIES</option>");
+$("select[title='departmentSearch']").append("<option value='FOOTWEAR'>FOOTWEAR</option>");
+}
+
+if(categoryValueSearch == "BASIC APPAREL"){
+
+$("select[title='departmentSearch']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentSearch']").append("<option value='CHILDRENS BASICS'>CHILDRENS BASICS</option>");
+$("select[title='departmentSearch']").append("<option value='LADIES BASICS'>LADIES BASICS</option>");
+$("select[title='departmentSearch']").append("<option value='MENS BASICS'>MENS BASIC</option>");
+}
+
+if(categoryValueSearch == "FOOD CONVENIENCE"){
+
+$("select[title='departmentSearch']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentSearch']").append("<option value='CANDY'>CANDY</option>");
+$("select[title='departmentSearch']").append("<option value='REFRIGERATED'>REFRIGERATED</option>");
+}
+
+if(categoryValueSearch == "FOOD GROCERY"){
+
+$("select[title='departmentSearch']").append("<option style='color: rgba(0,0,0,0);' value='' disabled selected>Department Name</option>");
+$("select[title='departmentSearch']").append("<option value='COOKIES/CRACKERS'>COOKIES/CRACKERS</option>");
+$("select[title='departmentSearch']").append("<option value='GROCERY'>GROCERY</option>");
+$("select[title='departmentSearch']").append("<option value='SALTY SNACKS'>SALTY SNACKS</option>");
+}
+
+}        
+/*END OF JQUERY*/
+
 		function addItemValidation() {
 			var description = document.forms["itemAddForm"]["description"].value;
 			var category = document.forms["itemAddForm"]["category"].value;
@@ -36,21 +132,39 @@
 			var itemNumber = document.forms["itemAddForm"]["itemNumber"].value;
 			var cost = document.forms["itemAddForm"]["purchaseCost"].value;
 			var retailPrice = document.forms["itemAddForm"]["retailPrice"].value;
+			var alertvalue = document.getElementById('alertboxitemadd');
+
 			var error = "";
+
 			error += validateItemNumber(error, itemNumber);
+
 			description = toCapitalLetter(description);
+
 			if (category == "")
 				error += "Please enter a Category\n"
+
 			if (department == "")
 				error += "Please enter a Department\n"
+
 			error += validateCost(error, cost);
 			error += validatePrice(error, retailPrice);
+
 			if (error != "") {
-				alert(error);
+				alertvalue.style.display = "block";
+				alertvalue.style.visibility = "visible";
+				alertvalue.innerHTML = "Error detected!\n" + error;
+				setTimeout("hideAlertItemAdd()", 3000);
 				return false;
 			}
+
 			return true;
 		}
+
+		function hideAlertItemAdd() {
+			document.getElementById("alertboxitemadd").style.display = "none";
+			document.getElementById("alertboxitemadd").style.visibility = "hidden";
+		}
+
 		function updateItemValidation() {
 			var description = document.forms["itemUpdateForm"]["description"].value;
 			var category = document.forms["itemUpdateForm"]["category"].value;
@@ -58,75 +172,115 @@
 			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
 			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
 			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+			var alertvalue = document.getElementById('alertboxitemupdate');
+
+
+
 			var error = "";
+
 			error += validateItemNumber(error, itemNumber);
+
 			description = toCapitalLetter(description);
-			/*
+
 			if (category == "")
 				error += "Please enter a Category\n"
+
 			if (department == "")
 				error += "Please enter a Department\n"
+
 			error += validateCost(error, cost);
 			error += validatePrice(error, retailPrice);
-			*/
+
 			if (error != "") {
-				alert(error); 
+				alertvalue.style.display = "block";
+				alertvalue.innerHTML = "Error detected!\n" + error;
+				setTimeout("hideAlertItemUpdate()", 3000);
+
 				return false;
 			}
+
 			return true;
 		}
+
+		function hideAlertItemUpdate() {
+			document.getElementById("alertboxitemupdate").style.display = "none";
+			document.getElementById("alertboxitemupdate").style.visibility = "hidden";
+		}
+
 		function toCapitalLetter(myElement) {
-			myElement = myElement.toUpperCase(); //Upper case to the entered parameters 
+
+			myElement = myElement.toUpperCase(); //Upper case to the entered parameters
+
 			return myElement;
 		}
+
+
 		function validateCost(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
 			} else if (x == "") {
 				error = "Please Enter a Purchase Price\n";
+
 			} else {
 				error = "Purchase Cost is invalid\n";
 			}
+
 			return error;
 		}
+
 		function validatePrice(error, x) {
 			if (x.match(/^\d+(?:\.\d{0,2})$/)) {
 				error = "";
 				return error;
 			} else if (x == "") {
 				error = "Please Enter a Retail Price\n";
+
 			} else {
 				error = "Retail Price is invalid\n";
 			}
+
 			return error;
 		}
+
 		function validateItemNumber(error, x) {
 			if (x.match(/^\d{7}$/)) {
 				error = "";
 				return error;
+
 			} else if (x == "") {
 				error = "Please Enter an Item Number\n";
+
 			} else {
 				error = "Item Number is invalid: should have 7 digits\n";
 			}
+
 			return error;
 		}
+
 		function evaluateInput() {
 			var description = document.forms["itemSearchForm"]["description"].value;
 			var itemNumber = document.forms["itemSearchForm"]["itemNumber"].value;
+			var alertvalue = document.getElementById('alertboxitemsearch');
+
 			description = toCapitalLetter(description);
+
 			if (itemNumber != "") {
+
 				if (itemNumber.match(/^\d{7}$/)) {
 					return true;
 				} else {
-					alert("Item Number is invalid: should have 7 digits");
+					alertvalue.style.display = "block";
+					alertvalue.innerHTML = "Error detected!\n" + error;
 					return false;
 				}
 			}
+
+
 		}
+
 	</script>
-	
+
 </head>
 
 <body style="background: #36465d;">
@@ -135,38 +289,51 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="sr-only">Toggle Navigation</span>   
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>      
-                     <span class="icon-bar"></span>             
-                 </button>  
-                <div class="navbar-collapse collapse">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="index.html">Josbrian Interface</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a class="btn btn-inverse" href="index.html">
+								<i class="glyphicon glyphicon-home"></i>
+							</a>
+						</li>
+						<li class="active">
+							<a href="items.html">Items</a>
+						</li>
+						<li>
+							<a href="promotions.html">Promotions</a>
+						</li>
+					</ul>
 				</div>
-				<ul class="nav navbar-nav">
-					<li><a href="index.html">Homepage</a></li>
-					<li class="active"><a href="items.html">Items</a></li>
-                    <li><a href="promotions.html">Promotions</a></li>
-				</ul>
 			</div>
-            </div>
 		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
-			<nav id="left-sidebar-nav" class="sidebar-nav">
-              <div class="navbar-collapse collapse">
-              <div id="left-sidebar" class="sidebar">
-				<ul id="main-menu" class="metismenu">
-                    <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
-					<li name="newItem" id="newItem" class="active"><a href="#addNewItem" data-toggle="pill">Add New Item</a></li>
-					 <li name="updateItem" id="updateItem"><a href="#updateExistingItem" data-toggle="pill">Update Existing Item</a></li>
-					 <li name="searchItem" id="searchItem"><a href="#searchExistingItem" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
-				</ul>
-                </div>
-                </div>
-			</nav>
+		<nav id="left-sidebar-nav" class="sidebar-nav">
+			<div class="navbar-collapse collapse">
+				<div id="left-sidebar" class="sidebar">
+					<ul id="main-menu" class="metismenu">
+						<center>
+							<li style="padding-top: 10px; padding-bottom: 10px;">
+								<b>Items</b>
+							</li>
+						</center>
+						<li name="newItem" id="newItem" class="active">
+							<a href="#addNewItem" data-toggle="pill">Add New Item</a>
+						</li>
+						<li name="searchItem" id="searchItem">
+							<a href="#searchExistingItem" data-toggle="pill">
+								<span class="glyphicon glyphicon-search"></span>&nbsp;Search Items</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN CONTENT -->
 		<div id="main-content">
@@ -174,33 +341,43 @@
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Manipulation</h1>
 				<!-- Item Manipulation Panel -->
-					<div class="tab-content">
-						<div id="addNewItem" class="tab-pane fade in active">
-							<!-- This is for the panel creation -->
-							<div class="col-md-4 col-md-offset-4">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title">Add New Item</h3>
-									</div>
-									<div class="panel-body">
-										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation()" method="POST" action="php/insert_item.php"> 
-											<div class="form-group">
-												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+				<div class="tab-content">
+					<div id="addNewItem" class="tab-pane fade in active">
+						<!-- This is for the panel creation -->
+						<div class="col-md-4 col-md-offset-4">
+						<!-- Used to display the alerts -->
+						<div id="alertboxitemadd" class="alert alert-danger alert-dismissable fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+						</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title"><b>Add New Item:</b></h3>
+								</div>
+								<div class="panel-body">
+									<fieldset>
+										<form name="itemAddForm" id="itemAddForm" onsubmit="return addItemValidation();" method="POST" action="php/insert_item.php">
+                                            <table>
+                                            <tr class="spaceUnder">
+                                               <td><h5>Item Number:</h5></td>
+                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>
+                                            </tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Item Description:</h5></td>
+												<td><textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Item Category:</h5></td>
+												<td><select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" title="categoryAdd" name="category">
 													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
 													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
 													<option value="BASIC APPAREL">BASIC APPAREL</option>
 													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
 													<option value="FOOD GROCERY">FOOD GROCERY</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+												</select></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Department Name:&nbsp;&nbsp;</h5></td>
+												<td><select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" title="departmentAdd" name="department">
 													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
 													<option value="ACCESSORIES">ACCESSORIES</option>
 													<option value="FOOTWEAR">FOOTWEAR</option>
@@ -212,47 +389,64 @@
 													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
 													<option value="GROCERY">GROCERY</option>
 													<option value="SALTY SNACKS">SALTY SNACKS</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
-											</div>
+												</select></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Purchase Cost:</h5></td>
+												<td><input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value=""></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Full Retail Price:</h5></td>
+												<td><input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value=""></td>
+											</tr>
+                                            </table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-										</form>    
-									</div>
+											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
+										</form>
+									</fieldset>
 								</div>
 							</div>
 						</div>
-						<div id="updateExistingItem" class="tab-pane fade">
-							<!-- This is for the panel creation -->
-							<div class="col-md-4 col-md-offset-4">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title">Update Existing Item</h3>
-									</div>
-									<div class="panel-body">
-										<form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return updateItemValidation()" method="POST" action="php/update_item.php"> 
-											 <div class="form-group">
-												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
+					</div>
+
+					<!-- Item Search -->
+
+					<div id="searchExistingItem" class="tab-pane fade">
+						<!-- This is for the panel creation -->
+						<div class="col-md-4 col-md-offset-4">
+						<!-- Used to display the alerts -->
+						<div id="alertboxitemsearch" class="alert alert-danger fade in" style ="display: none; color: black; white-space: pre-wrap;">
+
+						</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title"><b>Search Items:</b></h3>
+								</div>
+								<div class="panel-body">
+									<fieldset>
+										<form name="itemSearchForm" onsubmit="return evaluateInput();" method="POST" action="testingPhp.php">
+											 <table>
+                                            <tr class="spaceUnder">
+                                               <td><h5>Item Number:</h5></td>
+                                               <td><input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text"></td>
+                                            </tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Item Description:</h5></td>
+												<td><textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Item Category:</h5></td>
+												<td><select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" title="categorySearch" name="category">
 													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
 													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
 													<option value="BASIC APPAREL">BASIC APPAREL</option>
 													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
 													<option value="FOOD GROCERY">FOOD GROCERY</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
+												</select></td>
+											</tr>
+											<tr class="spaceUnder">
+                                                <td><h5>Department Name:&nbsp;&nbsp;</h5></td>
+												<td><select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" title="departmentSearch" name="department">
 													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
 													<option value="ACCESSORIES">ACCESSORIES</option>
 													<option value="FOOTWEAR">FOOTWEAR</option>
@@ -264,77 +458,24 @@
 													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
 													<option value="GROCERY">GROCERY</option>
 													<option value="SALTY SNACKS">SALTY SNACKS</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Purchase Cost" name="purchaseCost" id="cost" type="text" value="">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Full Retail Price" name="retailPrice" id="price" type="text" value="">
-											</div>
+												</select></td>
+											</tr>
+                                            </table>
 											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-										</form>    
-									</div>
+											<input class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">
+										</form>
+									</fieldset>
 								</div>
 							</div>
 						</div>
-						<div id="searchExistingItem" class="tab-pane fade">
-							<!-- This is for the panel creation -->
-							<div class="col-md-4 col-md-offset-4">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title">Search Existing Item</h3>
-									</div>
-									<div class="panel-body">
-								    <fieldset>
-                                    <form name="itemSearchForm" onsubmit="return evaluateInput()" action="php/search_item.php" method="POST">    
-										<div class="form-group">
-												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Item Description" name="description" id="description" type="text">
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" name="category">
-													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
-													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
-													<option value="BASIC APPAREL">BASIC APPAREL</option>
-													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
-													<option value="FOOD GROCERY">FOOD GROCERY</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" name="department">
-													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
-													<option value="ACCESSORIES">ACCESSORIES</option>
-													<option value="FOOTWEAR">FOOTWEAR</option>
-													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
-													<option value="LADIES BASICS">LADIES BASICS</option>
-													<option value="MENS BASIC">MENS BASIC</option>
-													<option value="CANDY">CANDY</option>
-													<option value="REFRIGERATED">REFRIGERATED</option>
-													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
-													<option value="GROCERY">GROCERY</option>
-													<option value="SALTY SNACKS">SALTY SNACKS</option>
-												</select>
-											</div>
-											<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
-											<input class="btn btn-lg btn-danger btn-block" type="clear" value="Clear">
-                                    </form>    
- 									</fieldset>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>				
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- END MAIN CONTENT -->
 		<div class="clearfix"></div>
 	</div>
 	<!-- END WRAPPER -->
-	
 </body>
 
 </html>

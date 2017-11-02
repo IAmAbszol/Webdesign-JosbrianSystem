@@ -1160,9 +1160,9 @@ textarea.parsley-error {
   border-color: #d59805; }
 
 .alert-danger {
-  color: #fff;
-  background-color: #de4848;
-  border-color: #dc3b3b; }
+  color:#a94442;
+  background-color:#fc5f5f;
+  border-color:#af3838; }
 
 .alert-info {
   color: #fff;
