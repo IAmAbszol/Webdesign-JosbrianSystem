@@ -1,0 +1,9 @@
+To do list
+
+Kyle - 	Prevent SQL injection by realcharacter wrap
+		Write PHP for itemSearchResults.php, use notes for button identification
+		
+PHP file for Edit Modal functionality
+Modal add to promotion, items to promotion.
+Update all NAV bars to the newer functionality
+Update promotion panel to the newer layout
