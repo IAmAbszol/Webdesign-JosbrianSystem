@@ -125,6 +125,9 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 						<li>
 							<a href="promotions.html">Promotions</a>
 						</li>
+                        <li>
+							<a href="adEvent.html">Ad Events</a>
+						</li>
 					</ul>
 				</div>
 			</div>
