@@ -112,7 +112,6 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 	}
 
 	function addItemValidation() {
-		alert("here");
 		var description = document.forms["itemUpdateForm"]["description"].value;
 		var category = document.forms["itemUpdateForm"]["category"].value;
 		var department = document.forms["itemUpdateForm"]["department"].value;
@@ -268,8 +267,6 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 				<!-- Screen Reader -->
 				<h1 class="sr-only">Item Search</h1>
 				<!-- Item Manipulation Panel -->
-			<!--	<form accept-charset="UTF-8" role="form" action="" method="POST"> -->
-
      <!--  TABLE TO RETURN DATA TO  -->
 
                         <div id="searchResults" class="container">
@@ -281,13 +278,13 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 																<?php
 																	include('php/new_search_item.php');
 																	$data = grab_sql($_POST['itemNumber'], $_POST['description'], $_POST['category'], $_POST['department']);
-																	echo "<thead><tr><center>";
+																	echo "<thead><tr>";
 																	for($i = 0; $i < mysql_num_fields($data); $i++) {
 																		$field_info = mysql_fetch_field($data, $i);
 																		echo "<th>{$field_info->name}</th>";
 																	}
 																	echo "<th>Edit Item</th><th>Add Promotion</th>
-																	</center></tr></thead>";
+																	</tr></thead>";
 
 																	echo "<tbody>";
 
@@ -341,60 +338,61 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
       <div class="modal-body">
 			<!-- Update Item Form -->
 				<!-- Used to display the alerts -->
-				<div id="alertboxitemadd" class="alert alert-danger alert-dismissable fade in" style="display: none; color: black; white-space: pre-wrap;">
+					<div id="alertboxitemadd" class="alert alert-danger alert-dismissable fade in" style="display: none; color: black; white-space: pre-wrap;">
 
-				</div>
-        <form name="itemUpdateForm" onsubmit="return addItemValidation();" method="POST" action="">
-             <div class="form-group">
-                <h5>Item Number:</h5>
-	 			   			<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
-	 			 		</div>
-			 			<div class="form-group">
-			              <h5>Item Description:</h5>
-			            <textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea>
-			 			</div>
-			 			<div class="form-group">
-			              <h5>Item Category:</h5>
-			              <select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" title="category" name="category">
-							<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
-							<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
-							<option value="BASIC APPAREL">BASIC APPAREL</option>
-							<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
-							<option value="FOOD GROCERY">FOOD GROCERY</option>
-			              </select>
-			 			</div>
-			 			<div class="form-group">
-			              <h5>Department Name:&nbsp;&nbsp;</h5>
-			              <select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" title="department" name="department">
-							<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
-							<option value="ACCESSORIES">ACCESSORIES</option>
-							<option value="FOOTWEAR">FOOTWEAR</option>
-							<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
-							<option value="LADIES BASICS">LADIES BASICS</option>
-							<option value="MENS BASIC">MENS BASIC</option>
-							<option value="CANDY">CANDY</option>
-							<option value="REFRIGERATED">REFRIGERATED</option>
-							<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
-							<option value="GROCERY">GROCERY</option>
-							<option value="SALTY SNACKS">SALTY SNACKS</option>
-			              </select>
-			 			</div>
-			 			<div class="form-group">
-			              <h5>Purchase Cost:</h5>
-			 			  <input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
-			 			</div>
-			 			<div class="form-group">
-			              <h5>Full Retail Price:</h5>
-			 			  <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
-			 			</div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary" type="submit" value="Submit"><span class="glyphicon glyphicon-floppy-disk"> Save changes</span></button>
-		      </div>
-      </form>
-    </div>
-  </div>
+					</div>
+	        <form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return addItemValidation();" method="POST" action="">
+							<div class="form-group">
+							 <h5>Item Number:</h5>
+							 <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+					 </div>
+					 <div class="form-group">
+									 <h5>Item Description:</h5>
+								 <textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea>
+					 </div>
+					 <div class="form-group">
+									 <h5>Item Category:</h5>
+									 <select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" title="category" name="category">
+						 <option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+						 <option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+						 <option value="BASIC APPAREL">BASIC APPAREL</option>
+						 <option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+						 <option value="FOOD GROCERY">FOOD GROCERY</option>
+									 </select>
+					 </div>
+					 <div class="form-group">
+									 <h5>Department Name:&nbsp;&nbsp;</h5>
+									 <select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" title="department" name="department">
+						 <option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+						 <option value="ACCESSORIES">ACCESSORIES</option>
+						 <option value="FOOTWEAR">FOOTWEAR</option>
+						 <option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+						 <option value="LADIES BASICS">LADIES BASICS</option>
+						 <option value="MENS BASIC">MENS BASIC</option>
+						 <option value="CANDY">CANDY</option>
+						 <option value="REFRIGERATED">REFRIGERATED</option>
+						 <option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+						 <option value="GROCERY">GROCERY</option>
+						 <option value="SALTY SNACKS">SALTY SNACKS</option>
+									 </select>
+					 </div>
+					 <div class="form-group">
+									 <h5>Purchase Cost:</h5>
+						 <input class="form-control" placeholder="Purchase Cost" name="cost" id="cost" type="text" value="">
+					 </div>
+					 <div class="form-group">
+									 <h5>Full Retail Price:</h5>
+						 <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
+					 </div>
+				 </div>
+				 <div class="modal-footer">
+				 		<input class="btn btn-secondary" data-dismiss="modal"value="Close">
+				 		<input class="btn class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
+				 </div>
+	      	</form>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <!-- END OF MODAL PROMOTION PROMPTS -->
