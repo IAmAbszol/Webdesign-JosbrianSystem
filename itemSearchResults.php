@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="assets/scripts/validatePromotionForms.js" type="text/javascript"></script>
+  <script src="assets/scripts/validatePromotionForms.js" type="text/javascript"></script>
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Item Search Results</title>
@@ -251,8 +251,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
             <div id="left-sidebar" class="sidebar">
 			<ul id="main-menu" class="metismenu">
                   <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
-				<li name="newItem" id="newItem"><a href="items.html" data-toggle="pill">Add Item</a></li>
-				 <li name="searchItem" id="searchItem" class="active"><a href="items.html" data-toggle="pill"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
+				 <li name="newItem" id="newItem"><a href="items.html">Add Item</a></li>
+				 <li name="searchItem" id="searchItem" class="active"><a href="items.html"><span class="glyphicon glyphicon-search"></span> Search Items</a></li>
 			</ul>
               </div>
               </div>
