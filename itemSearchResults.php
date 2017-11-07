@@ -341,7 +341,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 	        <form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return addItemValidation();" method="POST" action="php/new_update_item.php">
 							<div class="form-group">
 							 <h5>Item Number:</h5>
-							 <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text" disabled>
+							 <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text" readonly>
 					 </div>
 					 <div class="form-group">
 									 <h5>Item Description:</h5>
