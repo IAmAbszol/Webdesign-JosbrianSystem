@@ -116,13 +116,10 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		var category = document.forms["itemUpdateForm"]["category"].value;
 		var department = document.forms["itemUpdateForm"]["department"].value;
 		var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
-		var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
-		var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
+		var cost = document.forms["itemUpdateForm"]["cost"].value;
+		var retailPrice = document.forms["itemUpdateForm"]["price"].value;
 		var alertvalue = document.getElementById('alertboxitemadd');
-		alert("here2");
 		var error = "";
-
-		error += validateItemNumber(error, itemNumber);
 
 		description = toCapitalLetter(description);
 
@@ -341,10 +338,10 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 					<div id="alertboxitemadd" class="alert alert-danger alert-dismissable fade in" style="display: none; color: black; white-space: pre-wrap;">
 
 					</div>
-	        <form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return addItemValidation();" method="POST" action="">
+	        <form name="itemUpdateForm" id="itemUpdateForm" onsubmit="return addItemValidation();" method="POST" action="php/new_update_item.php">
 							<div class="form-group">
 							 <h5>Item Number:</h5>
-							 <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+							 <input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text" disabled>
 					 </div>
 					 <div class="form-group">
 									 <h5>Item Description:</h5>
