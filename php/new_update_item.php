@@ -18,8 +18,8 @@ function update_item() {
 	$item_description = $_POST['description'];
 	$item_category = $_POST['category'];
 	$department_name = $_POST['department'];
-	$purchase_cost = $_POST['purchaseCost'];
-	$retail_price = $_POST['retailPrice'];
+	$purchase_cost = $_POST['cost'];
+	$retail_price = $_POST['price'];
 
 	// append string
 	$appendString="";
