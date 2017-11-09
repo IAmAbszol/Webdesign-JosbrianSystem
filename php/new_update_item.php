@@ -45,7 +45,7 @@ function update_item() {
 	} else {
 		$message = "Item Successfully Updated for ItemNumber: $item_number.";
 	}
-	display_result($message);
+	display_result_item($message);
 }
 
 function str_lreplace($search, $replace, $subject)
@@ -63,12 +63,12 @@ function str_lreplace($search, $replace, $subject)
 function connect_to_db($server, $username, $pwd, $dbname) {
 	$conn = mysql_connect($server, $username, $pwd);
 	if(!$conn) {
-		echo "Unable to connect to DB: " . mysql_error();
+			display_result_item("Unable to connect to DB: " . mysql_error());
 			exit;
 	}
 	$dbh = mysql_select_db($dbname);
 	if(!$dbh) {
-		echo "Unable to select " .$dbname. ": " . mysql_error();
+		display_result_item("Unable to select " .$dbname. ": " . mysql_error());
 		exit;
 	}
 }

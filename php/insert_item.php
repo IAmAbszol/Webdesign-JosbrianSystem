@@ -1,5 +1,5 @@
 <!-- insert item
-	Script that allows the item to be inserted into the database based on 
+	Script that allows the item to be inserted into the database based on
 	requirements provided
 -->
 
@@ -12,9 +12,9 @@ insert_item();
 
 function insert_item() {
 
-	// connect to the main database where the items are stored	
+	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$item_number = $_POST['itemNumber'];	
+	$item_number = $_POST['itemNumber'];
 	$item_description = $_POST['description'];
 	$item_category = $_POST['category'];
 	$department_name = $_POST['department'];
@@ -33,20 +33,20 @@ function insert_item() {
 	} else {
 		$message = "Item Successfully Added to Database: $item_description.";
 	}
-	display_result($message);
+	display_result_item($message);
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {
 	$conn = mysql_connect($server, $username, $pwd);
 	if(!$conn) {
-		echo "Unable to connect to DB: " . mysql_error();
+			display_result_item("Unable to connect to DB: " . mysql_error());
 			exit;
 	}
 	$dbh = mysql_select_db($dbname);
 	if(!$dbh) {
-		echo "Unable to select " .$dbname. ": " . mysql_error();
-		exit; 
+		display_result_item("Unable to select " .$dbname. ": " . mysql_error());
+		exit;
 	}
 }
 
-?> 
+?>
