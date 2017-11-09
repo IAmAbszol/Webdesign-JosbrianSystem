@@ -36,7 +36,7 @@
 //----------------------------------------------------Test Add Promotion-----------------------------------------------------------------
 			function testPromoName(message) {
 				var promoName = document.forms["promotionAddForm"]["promotionName"].value;
-		
+
 				if (promoName == "") {
 					message = "Please enter a name\n";
 				} else {
@@ -70,8 +70,8 @@
 
 				if (promoAmount == "") {
 					message = "Please enter amount\n";
-				} else { if (promoAmount.match(/[^0-9.$  ]/)) { message = "Amount must be decimal\n" } 
-					
+				} else { if (promoAmount.match(/[^0-9.$  ]/)) { message = "Amount must be decimal\n" }
+
 				}
 				return message;
 			}
@@ -204,8 +204,8 @@
  									<div class="form-group">
  										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
                                             <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
+                                            <option value="Dollar">Dollar</option>
+                                            <option value="Percent">Percent</option>
                                         </select>
  									</div>
  									<div class="form-group">

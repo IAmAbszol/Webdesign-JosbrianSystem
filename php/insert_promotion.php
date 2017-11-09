@@ -1,5 +1,5 @@
 <!-- insert item
-	Script that allows the item to be inserted into the database based on 
+	Script that allows the item to be inserted into the database based on
 	requirements provided
 -->
 
@@ -12,7 +12,7 @@ insert_promotion();
 
 function insert_promotion() {
 
-	// connect to the main database where the items are stored	
+	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
 	$promo_name = $_POST['promotionName'];
 	$promo_desc = $_POST['promotionDescription'];
@@ -42,8 +42,8 @@ function connect_to_db($server, $username, $pwd, $dbname) {
 	$dbh = mysql_select_db($dbname);
 	if(!$dbh) {
 		echo "Unable to select " .$dbname. ": " . mysql_error();
-		exit; 
+		exit;
 	}
 }
 
-?> 
+?>
