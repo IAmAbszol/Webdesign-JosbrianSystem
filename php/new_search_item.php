@@ -1,7 +1,7 @@
 <?php
   require('server_connection.inc');
 
-  function grab_sql($promo_name, $promo_type, $promo_off) {
+  function grab_sql_promo($promo_name, $promo_type, $promo_off) {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
 
     $appendString="";
@@ -12,7 +12,7 @@
 
     $appendString = str_lreplace("AND","",$appendString);
     // create the statement
-    $searchStatement = "select * from Item where $appendString";
+    $searchStatement = "select * from Promotion where $appendString";
 
     $result = mysql_query($searchStatement);
     $message = "";
@@ -24,7 +24,7 @@
     }
 
     return $result;
-    
+
   }
 
   function grab_sql($item_number, $item_description, $item_category, $department_name) {
