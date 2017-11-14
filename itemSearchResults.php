@@ -381,10 +381,13 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 									 <h5>Full Retail Price:</h5>
 						 <input class="form-control" placeholder="Full Retail Price" name="price" id="price" type="text" value="">
 					 </div>
+                     <div>
+                       <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#selectPromotionModal">Select Promotion</button>    
+                     </div>     
 				 </div>
 				 <div class="modal-footer">
 				 		<input class="btn btn-secondary" data-dismiss="modal"value="Close">
-				 		<input class="btn class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
+				 		<input class="btn" class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
 				 </div>
 	      	</form>
 	    </div>
@@ -393,6 +396,45 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 </div>
 
 <!-- END OF MODAL PROMOTION PROMPTS -->
+
+        <!--  RETURN ALL PROMOTIONS MODAL START -->
+                        
+<div class="modal fade" id="selectPromotionModal" tabindex="-1" role="dialog" aria-labelledby="selectPromotionModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="selectPromotionModal" style="bottom-padding: 10px;"><b>Select Promotion:</b></h3>
+        <button type="button" class="close" data-dismiss="modal" style="bottom-padding: 10px;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tr>
+            <th>Promo Header</th>
+            <th>Promo Header</th>
+            <th>Promo Header</th>
+          </tr>
+          <tr>
+            <td>Data</td>
+            <td>Data</td>
+            <td>Data</td>
+          </tr>
+          <tr>
+            <td>Data</td>
+            <td>Data</td>
+            <td>Data</td>
+          </tr>  
+        </table>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" type="submit" value="Submit"><!--<span class="glyphicon glyphicon-floppy-disk"></span>-->Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--  RETURN ALL PROMOTIONS MODAL END -->    
 </body>
 
 </html>
