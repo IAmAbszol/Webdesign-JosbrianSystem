@@ -106,22 +106,22 @@
 									</div>
 									<div class="panel-body">
 								    <fieldset>
-                                    <form name="promotionAddForm" onsubmit="return testInput();" method="POST" action="php/insert_promotion.php">
+                                    <form name="adEventAddForm" onsubmit="return testInput();">
  									<div class="form-group">
- 										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
+ 										<input class="form-control" placeholder="Ad Event Name" name="adEventName" id="adEventName" type="text">
  									</div>
  									<div class="form-group">
-                                        <textarea rows="1" class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text"></textarea>
+                                        <textarea rows="1" class="form-control" placeholder="Ad Event Description" name="adEventDescription" id="promotionDescription" type="text"></textarea>
  									</div>
  									<div class="form-group">
- 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
-                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
+ 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="adEventType" name="adEventType">
+                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Ad Event Type</option>
+                                            <option value="amountOff">Type 1</option>
+                                            <option value="percentOff">Type 2</option>
                                         </select>
  									</div>
  									<div class="form-group">
- 										<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
+                                          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#selectPromotionModal">Select Promotions</button>
  									</div>
  									    <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
@@ -168,25 +168,50 @@
 								</div>
 							</div>
 						</div>
-        <!--  TABLE TO RETURN DATA TO
-                        <div id="searchResults">
-                            <table>
-                                <thead></thead>
-                                <tbody>
-                                    <th>TEST</th>
-                                </tbody>
-                            </table>
-                        </div>
-     -->
-					</div>
-	<!--			</form>  -->
-			</div>
-		</div>
-		<!-- END MAIN CONTENT -->
-		<div class="clearfix"></div>
-	</div>
-	<!-- END WRAPPER -->
-
+        <!--  RETURN ALL PROMOTIONS MODAL START -->
+                        
+<div class="modal fade" id="selectPromotionModal" tabindex="-1" role="dialog" aria-labelledby="selectPromotionModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="selectPromotionModal" style="bottom-padding: 10px;"><b>Select Promotion(s):</b></h3>
+        <button type="button" class="close" data-dismiss="modal" style="bottom-padding: 10px;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tr>
+            <th>Promo Header</th>
+            <th>Promo Header</th>
+            <th>Promo Header</th>
+          </tr>
+          <tr>
+            <td>Data</td>
+            <td>Data</td>
+            <td>Data</td>
+          </tr>
+          <tr>
+            <td>Data</td>
+            <td>Data</td>
+            <td>Data</td>
+          </tr>  
+        </table>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" type="submit" value="Submit"><!--<span class="glyphicon glyphicon-floppy-disk"></span>-->Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--  RETURN ALL PROMOTIONS MODAL END -->                        
+</div>
+</div>
+<!-- END MAIN CONTENT -->
+<div class="clearfix"></div>
+</div>
+<!-- END WRAPPER -->
+        
 </body>
-
 </html>
