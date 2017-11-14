@@ -1,6 +1,32 @@
 <?php
   require('server_connection.inc');
 
+  function grab_sql($promo_name, $promo_type, $promo_off) {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+
+    $appendString="";
+
+    if($promo_name != '')     $appendString .= "Name='$promo_name' AND ";
+    if($promo_type != '')     $appendString .= "PromoType='$promo_type' AND ";
+    if($promo_off != '')      $appendString .= "AmountOff='$promo_off' AND ";
+
+    $appendString = str_lreplace("AND","",$appendString);
+    // create the statement
+    $searchStatement = "select * from Item where $appendString";
+
+    $result = mysql_query($searchStatement);
+    $message = "";
+
+    if(!$result) {
+      $message = "Error in updating Item: $item_number: ". mysql_error();
+    } else {
+      $message = "Data for Item: $item_number.";
+    }
+
+    return $result;
+    
+  }
+
   function grab_sql($item_number, $item_description, $item_category, $department_name) {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     // append string
