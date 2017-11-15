@@ -151,11 +151,12 @@
 			error += validateCost(error, cost);
 			error += validatePrice(error, retailPrice);
 
+
+alert(error);
 			if (error != "") {
 				alertvalue.style.display = "block";
 				alertvalue.style.visibility = "visible";
 				alertvalue.innerHTML = error;
-				/*setTimeout("hideAlertItemAdd()", 3000);*/
 				return false;
 			}
 
@@ -165,42 +166,6 @@
 		function hideAlertItemAdd() {
 			document.getElementById("alertboxitemadd").style.display = "none";
 			document.getElementById("alertboxitemadd").style.visibility = "hidden";
-		}
-
-		function updateItemValidation() {
-			var description = document.forms["itemUpdateForm"]["description"].value;
-			var category = document.forms["itemUpdateForm"]["category"].value;
-			var department = document.forms["itemUpdateForm"]["department"].value;
-			var itemNumber = document.forms["itemUpdateForm"]["itemNumber"].value;
-			var cost = document.forms["itemUpdateForm"]["purchaseCost"].value;
-			var retailPrice = document.forms["itemUpdateForm"]["retailPrice"].value;
-			var alertvalue = document.getElementById('alertboxitemupdate');
-
-			var error = "";
-
-			error += validateItemNumber(error, itemNumber);
-
-			description = toCapitalLetter(description);
-
-			if (category == "")
-				error += "Please enter a Category\n"
-
-			if (department == "")
-				error += "Please enter a Department\n"
-
-			error += validateCost(error, cost);
-			error += validatePrice(error, retailPrice);
-
-			if (error != "") {
-				alertvalue.style.display = "block";
-				alertvalue.style.visibility = "visible";
-				alertvalue.innerHTML = error;
-				/*setTimeout("hideAlertItemUpdate()", 3000);*/
-
-				return false;
-			}
-
-			return true;
 		}
 
 		function hideAlertItemUpdate() {
@@ -221,12 +186,12 @@
 
 				if (itemNumber != "") {
 
-					if (itemNumber.match(/^\d{7}$/)) {
+					if (itemNumber.match(/^\d{6,7}$/)) {
 						return true;
 					} else {
 						alertvalue.style.display = "block";
 						alertvalue.style.visibility = "visible";
-						alertvalue.innerHTML = "Item Number is invalid: should have 7 digits\n";
+						alertvalue.innerHTML = "Item Number is invalid: should have 6 or 7 digits\n";
 						return false;
 					}
 				}
@@ -293,7 +258,7 @@
 		}
 
 		function validateItemNumber(error, x) {
-			if (x.match(/^\d{7}$/)) {
+			if (x.match(/^\d{6,7}$/)) {
 				error = "";
 				return error;
 
@@ -301,7 +266,7 @@
 				error = "Please Enter an Item Number\n";
 
 			} else {
-				error = "Item Number is invalid: should have 7 digits\n";
+				error = "Item Number is invalid: should have 6 or 7 digits\n";
 			}
 
 			return error;
