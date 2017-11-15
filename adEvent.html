@@ -10,7 +10,46 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/scripts/validatePromotionForms.js" type="text/javascript"></script>
     <script>
-// JAVASCRIPT GOES HERE
+        
+    $(document).ready(function () {
+			hideSign();
+        
+         $('tr').click(function () {
+        if(this.style.background == "" || this.style.background =="white") {
+            $(this).css('background', 'Blue');
+        }
+        else {
+            $(this).css('background', 'white');
+        }
+    });
+        
+   });
+
+function hideSign(){
+    var minus = document.getElementById('minusSign');
+      minus.style.display = minus.style.display == 'none' ? 'block' : 'none';
+}        
+        
+function changeSign() {
+    var plus = document.getElementById('plusSign');
+    var minus = document.getElementById('minusSign');
+             
+    if(minus.style.display != 'none'){
+      minus.style.display = minus.style.display == 'inline'  ? 'block' : 'none';    
+      plus.style.display = plus.style.display == 'none' ? 'block' : 'none';        
+    }
+    else if(plus.style.display != 'none'){   
+      plus.style.display = plus.style.display == 'inline' ? 'block' : 'none';
+      minus.style.display = minus.style.display == 'none' ? 'block' : 'none';    
+    }
+    
+    return false;
+    
+    //Then wpork on changing the row color based on display
+    //Discuss the variable ids with kyle
+    //TEst on multiple rows
+    
+}
 	</script>
 
 	<!-- MAIN CSS -->
@@ -185,16 +224,20 @@
             <th>Promo Header</th>
             <th>Promo Header</th>
             <th>Promo Header</th>
+            <th>Promo Header</th>  
           </tr>
           <tr>
             <td>Data</td>
             <td>Data</td>
             <td>Data</td>
+              <td><button style='padding: 10px 10px;' onclick='changeSign()' type='button' class='btn btn-primary' data-toggle='modal' data-target='#itemEditModal'><span id="plusSign" class='glyphicon glyphicon-plus'></span><span id="minusSign" class='glyphicon glyphicon-minus'></span></button>
+              </td>
           </tr>
           <tr>
             <td>Data</td>
             <td>Data</td>
             <td>Data</td>
+            <td></td>  
           </tr>  
         </table>
       <div class="modal-footer">

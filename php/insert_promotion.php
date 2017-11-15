@@ -28,7 +28,7 @@ function insert_promotion() {
 	if(!$result) {
 		$message = "Error in inserting Promotion: $promo_name: ". mysql_error();
 	} else {
-		$message = "Promotion Successfully Added to Database: $promo_name.";
+		$message = "Promotion Successfully Added to Database: " . $promo_name;
 	}
 	display_result($message);
 }
