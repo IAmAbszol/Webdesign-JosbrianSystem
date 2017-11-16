@@ -114,31 +114,32 @@
 			var promoCode = document.forms["promotionSearchForm"]["promotionCode"].value;
 			var promoName = document.forms["promotionSearchForm"]["promotionName"].value;
 			var promoDescription = document.forms["promotionSearchForm"]["promotionDescription"].value;
-			var alertvalue = document.getElementById('alertboxadd');
+			var alertvalue = document.getElementById('alertboxsearch');
 
 			if (promoCode == "" && promoName == "" && promoDescription == "") {
-				message += "Please enter a code, a name or a description\n";
+				message = "Please enter a code, a name or a description\n";
 			}
 			if (promoCode != "" && promoCode.match(/\D/)) {
 				message += "The promotion code must be numbers\n";
 			}
 
-			else if (promoName.match(/[^A-Za-z-'  ]/)) {
+			if (promoName.match(/[^A-Za-z-'  ]/)) {
 				message += "The Name must contain text only\n";
 			}
 
 			if (message == "") {
 				return true;
 			} else {
-				alert(message);
-				//alertvalue.style.display = "block";
-				//alertvalue.innerHTML = "Error detected!\n" + message;
+				//alert(message);
+				alertvalue.style.display = "block";
+				alertvalue.style.visibility = "visible";
+				alertvalue.innerHTML = "Error detected!\n" + message;
 				return false;
 			}
 		}
 //---------------------------------------------------------------------------------------
 	</script>
-	
+
 
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
