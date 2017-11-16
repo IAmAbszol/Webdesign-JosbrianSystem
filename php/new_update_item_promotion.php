@@ -1,5 +1,5 @@
 <!--
-  Adds the item to the specified promotion
+  Adds the item to the specified promotionitem table
 -->
 <?php
 require('server_connection.inc');
@@ -12,38 +12,13 @@ function update_item_promotion() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$item_number = $_POST['itemNumber'];
-	$item_description = $_POST['description'];
-	$item_category = $_POST['category'];
-	$department_name = $_POST['department'];
-	$purchase_cost = $_POST['cost'];
-	$retail_price = $_POST['price'];
+  display_result_item("hello");
 
-	// append string
-	$appendString="";
+  // grab item retail price via query
+  // grab promo discount via query, calculate
+  // insert into promoitem
 
-	// setup string
-	if($item_number != '')			$appendString .= "ItemNumber='$item_number', ";
-	if($item_description != '') $appendString .= "ItemDescription='$item_description', ";
-	if($item_category != '') $appendString .= "Category='$item_category', ";
-	if($department_name != '') $appendString .= "DepartmentName='$department_name', ";
-	if($purchase_cost != '') $appendString .= "PurchaseCost='$purchase_cost', ";
-	if($retail_price != '') $appendString .= "FullRetailPrice='$retail_price', ";
 
-	$appendString = str_lreplace(",","",$appendString);
-	// create the statement
-	$insertStatement = "update Item set $appendString where ItemNumber='$item_number'";
-
-	$result = mysql_query($insertStatement);
-
-	$message = "";
-
-	if(!$result) {
-		$message = "Error in updating Item: $item_number: ". mysql_error();
-	} else {
-		$message = "Item Successfully Updated for ItemNumber: $item_number.";
-	}
-	display_result_item($message);
 }
 
 function str_lreplace($search, $replace, $subject)

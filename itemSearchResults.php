@@ -36,7 +36,7 @@
       width: 100%;
    }
 
-    tr:hover td {background:#36465d; cursor: pointer;}
+    tr:hover td {background:#36465d; cursor: pointer; color: #ffffff }
     tr:hover p  {color:#ffffff;}
     p{
            font-size: 100%;
@@ -374,7 +374,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
         </button>
       </div>
       <div class='modal-body'>
-			<form name='itemAddPromotionForm' id='itemAddPromotionForm' method='POST' action='php/new_update_item.php'>
+			<form name='itemAddPromotionForm' id='itemAddPromotionForm' method='POST' action='php/new_update_item_promotion.php'>
+			<!-- Hidden but links to what itemcode/row was clicked -->
 				<input class='form-control' placeholder='' name='itemCodeForPromo' id='itemCodeForPromo' type='hidden' readonly>
 				<center>
 				<table class='table' id='selectPromoTable'>
@@ -406,7 +407,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 																		// should readjust back to itemNumber designated index value
 																		// then simply iterate 5 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
-																		echo "<td><input type='radio' name='promoAddCheckbox$link_code' id='promoAddCheckbox$link_code' value='$link_code'></td>
+																		echo "<td><input type='radio' name='promoAddCheckbox' id='promoAddCheckbox' value='$link_code'></td>
 
 																		</tr>";
 																	}

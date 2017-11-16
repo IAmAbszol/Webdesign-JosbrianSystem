@@ -30,10 +30,11 @@ function update_promo() {
 	// this is then recalculated after the edit has been made.
 	// should've resulted in a 1 output query, any more then the schema must broken. Any less, we skip this step
 	if(mysql_num_rows($returnResult) > 0) {
+		// run loop evaluating prices
 		$the_row = mysql_fetch_array($returnResult);
 		$myAmount = $the_row['AmountOff'];
 		$myType 	= $the_row['PromoType'];
-		
+
 		$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_number'";
 		$returnResultItem = mysql_query($statement_getSalePrice);
 
@@ -72,7 +73,7 @@ function update_promo() {
 
 	}
 
-	display_result($price);
+	display_result($message);
 }
 
 function str_lreplace($search, $replace, $subject)

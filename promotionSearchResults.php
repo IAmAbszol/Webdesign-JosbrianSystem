@@ -32,7 +32,7 @@
     height: 10em;
    }
 
-    tr:hover td {background:#36465d; cursor: pointer;}
+    tr:hover td {background:#36465d; cursor: pointer; color: #ffffff; }
     tr:hover p  {color:#ffffff;}
     p{
            font-size: 100%;
