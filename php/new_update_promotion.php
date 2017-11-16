@@ -26,14 +26,14 @@ function update_promo() {
 	$statement_getAmount = "select AmountOff, PromoType from Promotion where PromoCode='$promo_number'";
 	$returnResult = mysql_query($statement_getAmount);
 
-	$the_row = mysql_fetch_array($returnResult);
-	$myAmount = $the_row['AmountOff'];
-	$myType 	= $the_row['PromoType'];
-
 	// next we grab the PromotionItem table and reapply the sale price.
 	// this is then recalculated after the edit has been made.
 	// should've resulted in a 1 output query, any more then the schema must broken. Any less, we skip this step
 	if(mysql_num_rows($returnResult) > 0) {
+		$the_row = mysql_fetch_array($returnResult);
+		$myAmount = $the_row['AmountOff'];
+		$myType 	= $the_row['PromoType'];
+		
 		$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_number'";
 		$returnResultItem = mysql_query($statement_getSalePrice);
 
