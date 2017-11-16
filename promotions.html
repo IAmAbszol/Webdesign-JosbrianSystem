@@ -41,7 +41,7 @@
 			if (promoName == "") {
 				message = "Please enter a name\n";
 			} else {
-				if (promoName.match(/[^A-Za-z-'  ]/)) {
+				if (promoName.match(/[^A-Za-z-'  ]/) || promoName.match(/^-[A-Za-z]/) ) {
 					message = "Name must contain text only\n";
 				}
 			}
@@ -123,7 +123,7 @@
 				message += "The promotion code must be numbers\n";
 			}
 
-			if (promoName.match(/[^A-Za-z-'  ]/)) {
+			if (promoName.match(/[^A-Za-z-'  ]/) || promoName.match(/^-[A-Za-z]/)) {
 				message += "The Name must contain text only\n";
 			}
 
