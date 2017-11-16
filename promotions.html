@@ -69,12 +69,23 @@
 
 			function testPromoAmount(message) {
 				var promoAmount = document.forms["promotionAddForm"]["amountOff"].value;
+				var promoType = document.forms["promotionAddForm"]["promotionType"].value;
 
-				if (promoAmount == "") {
+				if(promoAmount != "") {
+					if(promoType == "Dollar") {
+						if(!promoAmount.match(/^[0-9]+[.][0-9]{2}$/) && !promoAmount.match(/^[0-9]+$/)) {
+							message = "Please enter amount\n";
+						}
+					} else if(promoType == "Percent"){
+							if(!promoAmount.match(/^[.][0-9]$/) && !promoAmount.match(/^[.][0-9]{2}$/)) {
+								message = "Please enter valid percent {0.9}\n";
+							}
+					} else {
+						message = "Unknown promo type\n";
+					}
+				} else
 					message = "Please enter amount\n";
-				} else { if (promoAmount.match(/[^0-9.$  ]/)) { message = "Amount must be decimal\n" }
 
-				}
 				return message;
 			}
 
@@ -233,20 +244,13 @@
 									<div class="panel-body">
                 <form name="promotionSearchForm" onsubmit="return validatePromotionSearch()" method="POST" action="promotionSearchResults.php">
  									<div class="form-group">
+ 										<input class="form-control" placeholder="Promotion Code" name="promotionCode" id="promotionCode" type="text">
+ 									</div>
+									<div class="form-group">
  										<input class="form-control" placeholder="Promotion Name" name="promotionName" id="promotionName" type="text">
  									</div>
- 									<div class="form-group">
-                                     <center><h4><b>OR</b></h4></center>
- 									</div>
- 									<div class="form-group">
- 										<select style="color: rgba(0,0,0,0.5);" class="form-control" id="promotionType" name="promotionType">
-                                            <option style="color: rgba(0,0,0,0);" value="" disabled selected>Promotion Type</option>
-                                            <option value="amountOff">Dollar</option>
-                                            <option value="percentOff">Percent</option>
-                                        </select>
- 									</div>
- 									<div class="form-group">
- 										<input class="form-control" placeholder="Amount Off" name="promotionAmountOff" id="promotionAmountOff" type="text">
+									<div class="form-group">
+ 										<input class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text">
  									</div>
                                         <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
                                         <button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
