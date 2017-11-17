@@ -125,6 +125,11 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 			return false;
 	}
 
+	function test() {
+		alert("hello");
+		return true;
+	}
+
 	function evaluateSelection(i) {
 		var insertCode = document.getElementById("item" + i).innerHTML;
 		// assign code to hidden field
@@ -395,7 +400,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 
 																	// Print the data
 																	$increment = 0;
-																	while($row = mysql_fetch_row($promo_data)) {
+																	while($row = mysql_fetch_assoc($promo_data)) {
 																		$bounce_back = 0;
 																		$link_code = $row['PromoCode'];
 																		echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
