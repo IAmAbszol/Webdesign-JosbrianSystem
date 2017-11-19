@@ -130,6 +130,20 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		return true;
 	}
 
+	function evaluatePromoAddition() {
+		var selection = document.getElementById('promoAddCheckbox');
+		var len = [].slice.call(document.querySelectorAll("[name='promoAddCheckbox']"))
+    .filter(function(e) { return e.checked; }).length;
+		if(len == 0) {
+			var alertbox = document.getElementById("alertboxsearchpromos");
+			alertbox.style.display = "block";
+			alertbox.style.visibility = "visible";
+			alertbox.innerHTML = "Select a promotion.";
+			return false;
+		}
+		return true;
+	}
+
 	function evaluateSelection(i) {
 		var insertCode = document.getElementById("item" + i).innerHTML;
 		// assign code to hidden field
@@ -373,13 +387,16 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
   <div class='modal-dialog' role='document'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h3 class='modal-title' id='selectPromotionModal' style='bottom-padding: 10px;'><b>Select Promotions:</b></h3>
+        <h3 class='modal-title' id='selectPromotionModal' style='bottom-padding: 10px;'><b>Select Promotion:</b></h3>
         <button type='button' class='close' data-dismiss='modal' style='bottom-padding: 10px;' aria-label='Close'>
           <span aria-hidden='true'>&times;</span>
         </button>
       </div>
       <div class='modal-body'>
-			<form name='itemAddPromotionForm' id='itemAddPromotionForm' method='POST' action='php/new_update_item_promotion.php'>
+			<div id='alertboxsearchpromos' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
+
+			</div>
+			<form name='itemAddPromotionForm' id='itemAddPromotionForm' onsubmit='return evaluatePromoAddition()' method='POST' action='php/new_update_item_promotion.php'>
 			<!-- Hidden but links to what itemcode/row was clicked -->
 				<input class='form-control' placeholder='' name='itemCodeForPromo' id='itemCodeForPromo' type='hidden' readonly>
 				<center>
@@ -387,7 +404,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 				<!-- Listing Search -->";
 
 
-																	$promo_data = grab_sql_promo_all($_POST['itemNumber'], $_POST['description'], $_POST['category'], $_POST['department']);
+																	$promo_data = grab_sql_promo_all();
 																	echo "<thead><tr>";
 																	for($i = 0; $i < mysql_num_fields($promo_data); $i++) {
 																		$field_infos = mysql_fetch_field($promo_data, $i);

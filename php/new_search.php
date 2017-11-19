@@ -1,6 +1,14 @@
 <?php
   require('server_connection.inc');
 
+  function grab_sql_adevent_all() {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    $searchStatement = "select * from AdEvent";
+    $result = mysql_query($searchStatement);
+
+    return $result;
+  }
+
   function grab_sql_promo_all() {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     $searchStatement = "select * from Promotion";

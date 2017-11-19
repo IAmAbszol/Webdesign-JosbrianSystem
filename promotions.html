@@ -15,12 +15,12 @@
 							 var promoName = document.forms["promotionSearchForm"]["promotionName"].value;
 							 var promoType = document.forms["promotionSearchForm"]["promotionType"].value;
 							 var promoAmountOff = document.forms["promotionSearchForm"]["promotionAmountOff"].value;
-			
+
 							 if(promoName == "" && promoType == "" && promoAmountOff == ""){
 								 alert("Nothing entered.");
 								 return false;
 							 }
-			
+
 							 if((promoType == "" && promoAmountOff != "") || (promoType != "" && promoAmountOff == "")){
 								 alert("Promotion Type and Amount Off must be entered together");
 								 return false;
@@ -254,7 +254,7 @@
 												<input class="form-control" placeholder="Amount Off" name="amountOff" id="amountOff" type="text">
 											</div>
 											<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-											<button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
+											<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
 										</form>
 									</fieldset>
 								</div>
@@ -284,7 +284,7 @@
 											<input class="form-control" placeholder="Promotion Description" name="promotionDescription" id="promotionDescription" type="text">
 										</div>
 										<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-										<button class="btn btn-lg btn-danger btn-block" type="rest" value="Rest">Clear</button>
+										<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
 									</form>
 								</div>
 							</div>

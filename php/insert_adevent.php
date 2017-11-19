@@ -9,10 +9,10 @@ function insert_adevent() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$event_code = $_POST['adEventCode'];
+	$event_code = $_POST['adEventcode'];
 	$event_name = $_POST['adEventName'];
-	$event_start = $_POST['adEventStartDate'];
-	$event_end = $_POST['adEventEndDate'];
+	$event_start = $_POST['adEventstart'];
+	$event_end = $_POST['adEventend'];
 	$event_description = $_POST['adEventDescription'];
 	$event_type = $_POST['adEventType'];
 
@@ -26,7 +26,7 @@ function insert_adevent() {
 	if(!$result) {
 		$message = "Error in inserting Ad: $event_name: ". mysql_error();
 	} else {
-		$message = "Item Successfully Added to Database: $event_name.";
+		$message = "Ad Event Successfully Added to Database: $event_name.";
 	}
 	display_result($message);
 }

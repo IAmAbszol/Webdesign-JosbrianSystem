@@ -1,0 +1,18 @@
+What to demo
+
+First open up CSDB to access the db to demonstrate later of promotion editing values
+Setup things to edit, just so we don't mess with the database
+
+Item Number 1234569 
+Promotion Code 165
+
+What to test
+Editing the item
+Adding a promotion to that item number (Promo Code 165 [very bottom])
+
+Search Promotions
+Edit a promotion, demonstrate percentage change and value
+Edit a promotion, demonstrate dollar change and value
+
+Adding a new ad event
+Go to promotions

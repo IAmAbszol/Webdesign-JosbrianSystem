@@ -57,6 +57,97 @@
 			document.getElementById("promoType").value = promoType;
 
 		}
+		f		unction evaluateAdEventAddition() {
+			var selection = document.getElementById("adEventAddCheckbox");
+			var len = [].slice.call(document.querySelectorAll("[name='promoAddCheckbox']"))
+    			.filter(function(e) { return e.checked; }).length;
+			if(len == 0) {
+				var alertbox = document.getElementById("alertboxsearchads");
+				alertbox.style.display = "block";
+				alertbox.style.visibility = "visible";
+				alertbox.innerHTML = "Select an ad event
+				return false;
+			}
+			return true;
+		}
+
+		function evaluateSelection(i) {
+			var insertCode = document.getElementById("promo" + i).innerHTML;
+			// assign code to hidden field
+			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
+		}
+		
+		function testPromoName(message) {
+			var promoName = document.forms["promotionUpdateForm"]["promoName"].value;
+
+			if (promoName == "") {
+				message = "Please enter a name\n";
+			} else {
+				if (promoName.match(/[^A-Za-z-'  ]/) || promoName.match(/^-[A-Za-z]/) ) {
+					message = "Name must contain text only\n";
+				}
+			}
+			return message;
+		}
+
+		function testPromodescription(message) {
+			var promoDescription = document.forms["promotionUpdateForm"]["promoDesc"].value;
+
+			if (promoDescription == "") {
+				message = "Please enter a description\n";
+			} else { }
+			return message;
+		}
+
+		function testPromotionType(message) {
+			var promoType = document.forms["promotionUpdateForm"]["promoType"].value;
+
+			if (promoType == "") {
+				message = "Please select a promotion type\n";
+			} else { }
+			return message;
+		}
+
+		function testPromoAmount(message) {
+			var promoAmount = document.forms["promotionUpdateForm"]["promoAmount"].value;
+			var promoType = document.forms["promotionUpdateForm"]["promoType"].value;
+
+			if (promoAmount != "") {
+				if (promoType == "Dollar") {
+					if (!promoAmount.match(/^[0-9]+[.][0-9]{2}$/) && !promoAmount.match(/^[0-9]+$/)) {
+						message = "Please enter amount\n";
+					}
+				} else if (promoType == "Percent") {
+					if (!promoAmount.match(/^[.][0-9]$/) && !promoAmount.match(/^[.][0-9]{2}$/)) {
+						message = "Please enter valid percent {0.9}\n";
+					}
+				} else {
+					message = "Unknown promo type\n";
+				}
+			} else
+				message = "Please enter amount\n";
+
+			return message;
+		}
+
+		function testInput() {
+			var errormessage = "";
+			var message = "";
+			var alertvalue = document.getElementById('alertboxpromoadd');
+
+			errormessage += testPromoName(message);
+			errormessage += testPromodescription(message);
+			errormessage += testPromotionType(message);
+			errormessage += testPromoAmount(message);
+
+			if (errormessage == "") {
+				return true;
+			} else {
+				alertvalue.style.display = "block";
+				alertvalue.innerHTML = "Error detected!\n" + errormessage;
+				return false;
+			}
+		}
 	</script>
 
 </head>
@@ -130,7 +221,7 @@
 																		$field_info = mysql_fetch_field($data, $i);
 																		echo "<th>{$field_info->name}</th>";
 																	}
-																	echo "<th>Edit Item</th><th>Add To Ad Event</th>
+																	echo "<th>Edit Promotion</th><th>Add To Ad Event</th>
 																	</tr></thead>";
 
 																	echo "<tbody>";
@@ -149,28 +240,98 @@
 																		// then simply iterate 6 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
 																		echo "<td><button style='padding: 10px 10px;' onclick='evaluateData($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#promotionEditModal'><span class='glyphicon glyphicon-pencil'></span></button></td>
-                                    			<td><button style='padding: 10px 10px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectPromotionModal'><span class='glyphicon glyphicon-plus'></span></button></td>
+                                    			<td><button style='padding: 10px 10px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>
 
 																		</tr>";
 																	}
 
-																	echo "</tbody>";
-																 ?>
+																	echo "</tbody>
 
-                            </table>
-                            </center>
-                        </div>
-                    	</div>
 
-					<!-- END TABLE CONTENT -->
+
+		                             </table>
+		                             </center>
+		                         </div>
+		                     	</div>
+
+		 					<!-- END TABLE CONTENT -->
+
+		 					</div>
+		 			</div>
+		 		</div>
+		 		<!-- END MAIN CONTENT -->
+		 		<div class='clearfix'></div>
+		 	</div>
+		 	<!-- END WRAPPER -->
+
+			<!--  RETURN ALL PROMOTIONS MODAL START -->
+
+		<div class='modal fade' id='selectAdEventModal' tabindex='-1' role='dialog' aria-labelledby='selectAdEventModal' aria-hidden='true'>
+		  <div class='modal-dialog' role='document'>
+		    <div class='modal-content'>
+		      <div class='modal-header'>
+		        <h3 class='modal-title' id='selectAdEventModal' style='bottom-padding: 10px;'><b>Select Ad Event:</b></h3>
+		        <button type='button' class='close' data-dismiss='modal' style='bottom-padding: 10px;' aria-label='Close'>
+		          <span aria-hidden='true'>&times;</span>
+		        </button>
+		      </div>
+		      <div class='modal-body'>
+					<div id='alertboxsearchads' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
 
 					</div>
-			</div>
+					<form name='promotionAddAdEvent' id='promotionAddAdEvent' onsubmit='return evaluateAdEventAddition()' method='POST' action=''>
+					<!-- Hidden but links to what itemcode/row was clicked -->
+						<input class='form-control' placeholder='' name='promoCodeForAdEvent' id='promoCodeForAdEvent' type='hidden' readonly>
+						<center>
+						<table class='table' id='selectPromoTable'>
+						<!-- Listing Search -->";
+
+
+																			$promo_data = grab_sql_adevent_all($_POST['itemNumber'], $_POST['description'], $_POST['category'], $_POST['department']);
+																			echo "<thead><tr>";
+																			for($i = 0; $i < mysql_num_fields($promo_data); $i++) {
+																				$field_infos = mysql_fetch_field($promo_data, $i);
+																				echo "<th>{$field_infos->name}</th>";
+																			}
+																			echo "<th>Add Promotion</th>
+																			</tr></thead>";
+
+																			echo "<tbody>";
+
+																			// Print the data
+																			$increment = 0;
+																			while($row = mysql_fetch_assoc($promo_data)) {
+																				$bounce_back = 0;
+																				$link_code = $row['PromoCode'];
+																				echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
+																				foreach($row as $_column) {
+																					echo "<td><p><div name='promo$increment' id='promo$increment'>{$_column}</div></p></td>";
+																					$bounce_back++;
+																					$increment++;
+																				}
+																				// should readjust back to itemNumber designated index value
+																				// then simply iterate 5 times in evaluateData to grab all fields
+																				$adjust=$increment - $bounce_back;
+																				echo "<td><input type='radio' name='adEventAddCheckbox' id='adEventAddCheckbox' value='$link_code'></td>
+
+																				</tr>";
+																			}
+
+																			echo "</tbody>
+
+						</table>
+						</center>
+		      <div class='modal-footer'>
+						 <input class='btn btn-secondary' data-dismiss='modal' value='Close'>
+						 <input class='btn' class='btn btn-lg btn-success btn-block' type='submit' value='Submit'>
+		      </div>
+					</form>
+		    </div>
+		  </div>
 		</div>
-		<!-- END MAIN CONTENT -->
-		<div class="clearfix"></div>
-	</div>
-	<!-- END WRAPPER -->
+		</div>";
+					?>
+		<!--  RETURN ALL PROMOTIONS MODAL END -->
 
     <!-- START OF MODAL PROMOTION PROMPTS -->
 
@@ -187,10 +348,10 @@
       <div class="modal-body">
 			<!-- Update Item Form -->
 				<!-- Used to display the alerts -->
-					<div id="alertboxitemadd" class="alert alert-danger alert-dismissable fade in" style="display: none; color: black; white-space: pre-wrap;">
+					<div id="alertboxpromoadd" class="alert alert-danger alert-dismissable fade in" style="display: none; color: black; white-space: pre-wrap;">
 
 					</div>
-	        <form name="promotionUpdateForm" id="promotionUpdateForm" onsubmit="return addItemValidation();" method="POST" action="php/new_update_promotion.php">
+	        <form name="promotionUpdateForm" id="promotionUpdateForm" onsubmit="return testInput();" method="POST" action="php/new_update_promotion.php">
 							<div class="form-group">
 							 <h5>Promotion Code:</h5>
 							 <input class="form-control" placeholder="Promotion Code" name="promoCode" id="promoCode" type="text" readonly>
@@ -226,8 +387,6 @@
 	  </div>
 	</div>
 </div>
-
-<!-- END OF MODAL PROMOTION PROMPTS -->
 </body>
 
 </html>

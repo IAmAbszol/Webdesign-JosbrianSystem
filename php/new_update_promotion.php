@@ -16,61 +16,63 @@ function update_promo() {
 
 	$price = 0;
 
-	$promo_number = $_POST['promoCode'];
-	$promo_description = $_POST['promoName'];
-	$promo_category = $_POST['promoDesc'];
-	$purchase_cost = $_POST['promoType'];
-	$retail_price = $_POST['promoAmount'];
+	$promo_code = $_POST['promoCode'];
+	$promo_name = $_POST['promoName'];
+	$promo_description = $_POST['promoDesc'];
+	$promo_type = $_POST['promoType'];
+	$promo_amount = $_POST['promoAmount'];
 
 	// first we grab the pre-existing entry and reapply amounts to the stored item values
-	$statement_getAmount = "select AmountOff, PromoType from Promotion where PromoCode='$promo_number'";
+	$statement_getAmount = "select AmountOff, PromoType from Promotion where PromoCode='$promo_code'";
 	$returnResult = mysql_query($statement_getAmount);
 
 	// next we grab the PromotionItem table and reapply the sale price.
 	// this is then recalculated after the edit has been made.
 	// should've resulted in a 1 output query, any more then the schema must broken. Any less, we skip this step
 	if(mysql_num_rows($returnResult) > 0) {
-		// run loop evaluating prices
-		$the_row = mysql_fetch_array($returnResult);
-		$myAmount = $the_row['AmountOff'];
-		$myType 	= $the_row['PromoType'];
+		while($the_row = mysql_fetch_assoc($returnResult)) {
+			// run loop evaluating prices
+			$myAmount = $the_row['AmountOff'];
+			$myType 	= $the_row['PromoType'];
 
-		$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_number'";
-		$returnResultItem = mysql_query($statement_getSalePrice);
+			$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_code'";
+			$returnResultItem = mysql_query($statement_getSalePrice);
 
-		$the_row_item = mysql_fetch_array($returnResultItem);
-		$myPrice	= $the_row_item['SalePrice'];
+			$the_row_item = mysql_fetch_array($returnResultItem);
+			$myPrice	= $the_row_item['SalePrice'];
 
-		$price = recalculatePrice($myAmount, $myType, $myPrice);
+			$price = recalculatePrice($myAmount, $myType, $myPrice);
+
+			// calculate new price
+			$new_price = calculatePrice($promo_amount, $promo_type, $price);
+
+			// new price achieved, now add it back into the Promotion Item database
+			$update_statement = "update PromotionItem set SalePrice='$new_price' where PromoCode='$promo_code'";
+			$update_result = mysql_query($update_statement);
+		}
 	}
 
 	// append string
 	$appendString="";
 
 	// setup string
-	if($promo_number != '')			$appendString .= "PromoCode='$promo_number', ";
-	if($promo_description != '') $appendString .= "Name='$promo_description', ";
-	if($promo_category != '') $appendString .= "Description='$promo_category', ";
-	if($purchase_cost != '') $appendString .= "PromoType='$purchase_cost', ";
-	if($retail_price != '') $appendString .= "AmountOff='$retail_price', ";
+	if($promo_code != '')			$appendString .= "PromoCode='$promo_code', ";
+	if($promo_name != '') $appendString .= "Name='$promo_name', ";
+	if($promo_description != '') $appendString .= "Description='$promo_description', ";
+	if($promo_type != '') $appendString .= "PromoType='$promo_type', ";
+	if($promo_amount != '') $appendString .= "AmountOff='$promo_amount', ";
 
 	$appendString = str_lreplace(",","",$appendString);
 	// create the statement
-	$insertStatement = "update Promotion set $appendString where PromoCode='$promo_number';";
+	$insertStatement = "update Promotion set $appendString where PromoCode='$promo_code';";
 	$result = mysql_query($insertStatement);
 
 	$message = "";
 
 	if(!$result) {
-		$message = "Error in updating promo: $promo_number: ". mysql_error();
+		$message = "Error in updating promo: $promo_code: ". mysql_error();
 	} else {
-		$message = "Promotion Successfully Updated for PromoCode: $promo_description.";
-	}
-
-	// now we grab the PromotionItem table, check if the update
-	// if price doesn't equal 0, were in the clear for processing the item associated
-	if(price != 0) {
-
+		$message = "Promotion Successfully Updated for PromoCode: $promo_name.";
 	}
 
 	display_result($message);
@@ -92,9 +94,18 @@ function recalculatePrice($amount, $type, $price) {
 	if($type == "Dollar") {
 		$price += $amount;
 	} else {
-		$price = ($price/$amount);	// reapply percentage of original
+		$price = ($price/(1-$amount));	// reapply percentage of original
 	}
 	return $price;
+}
+
+function calculatePrice($amount, $type, $p) {
+	if($type == "Dollar") {
+		$p -= $amount;
+	} else {
+		$p = ($p*(1-$amount));	// apply percentage of original
+	}
+	return $p;
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {

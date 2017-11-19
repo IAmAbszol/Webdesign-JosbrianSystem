@@ -16,7 +16,7 @@ function update_item_promotion() {
 	$promo_code	= $_POST["promoAddCheckbox"];
 
 	// first grab promoitem to see if it exists prior into the table
-	$question_there = "select PromoCode, ItemNumber from PromotionItem where PromoCode='$promo_code' AND ItemNumber='$item_code'";
+	$question_there = "select PromoCode, ItemNumber from PromotionItem where ItemNumber='$item_code'";
 	$question_result = mysql_query($question_there);
 
 	if(mysql_num_rows($question_result) == 0) {
@@ -37,7 +37,6 @@ function update_item_promotion() {
 
 		// apply discount, return value
 		$grabbed_price = calculatePrice($myAmount, $myType, $myPrice);
-		echo "<script type='text/javascript'>alert($grabbed_price);</script>";
 
 	  // insert into promoitem
 		$insertStatement = "insert PromotionItem (PromoCode, ItemNumber, SalePrice) values ( '$promo_code', '$item_code', '$grabbed_price')";
@@ -52,7 +51,7 @@ function update_item_promotion() {
 		}
 		display_result_item($message);
 	} else
-		display_reuslt_item("Error in inserting PromotionItem: $promo_code. Item has been already linked into table.");
+		display_result_item("Error in inserting PromotionItem: $promo_code. Item has been already linked into table.");
 
 }
 
@@ -72,7 +71,7 @@ function calculatePrice($amount, $type, $price) {
 	if($type == "Dollar") {
 		$price -= $amount;
 	} else {
-		$price = ($price*$amount);	// apply percentage of original
+		$price = ($price*(1-$amount));	// apply percentage of original
 	}
 	return $price;
 }

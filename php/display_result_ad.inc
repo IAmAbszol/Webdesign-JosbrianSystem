@@ -83,7 +83,7 @@ function display_result($message)
 					<ul id='main-menu' class='metismenu'>
 						<center>
 							<li style='padding-top: 10px; padding-bottom: 10px;'>
-								<b>Items</b>
+								<b>Ad Events</b>
 							</li>
 						</center>
 						<li name='adItem' id='adItem'>
