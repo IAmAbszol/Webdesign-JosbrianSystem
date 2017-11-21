@@ -57,25 +57,7 @@
 			document.getElementById("promoType").value = promoType;
 
 		}
-		f		unction evaluateAdEventAddition() {
-			var selection = document.getElementById("adEventAddCheckbox");
-			var len = [].slice.call(document.querySelectorAll("[name='promoAddCheckbox']"))
-    			.filter(function(e) { return e.checked; }).length;
-			if(len == 0) {
-				var alertbox = document.getElementById("alertboxsearchads");
-				alertbox.style.display = "block";
-				alertbox.style.visibility = "visible";
-				alertbox.innerHTML = "Select an ad event
-				return false;
-			}
-			return true;
-		}
 
-		function evaluateSelection(i) {
-			var insertCode = document.getElementById("promo" + i).innerHTML;
-			// assign code to hidden field
-			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
-		}
 
 		function testPromoName(message) {
 			var promoName = document.forms["promotionUpdateForm"]["promoName"].value;
@@ -114,9 +96,16 @@
 
 			if (promoAmount != "") {
 				if (promoType == "Dollar") {
-					if (!promoAmount.match(/^[0-9]+[.][0-9]{2}$/) && !promoAmount.match(/^[0-9]+$/)) {
-						message = "Please enter amount\n";
-					}
+					if (promoAmount.match(/^[0-9]*[.][0-9]{2}$/)) {
+						//message = "Please enter amount\n";
+					} else if(promoAmount.match(/^[0-9]+$/)) {
+
+					} else if(promoAmount.match(/^[.][0-9]$/)) {
+
+					} else if(promoAmount.match(/^[.][0-9]{2}$/)) {
+
+					} else message = "Please enter valid amount\n";
+
 				} else if (promoType == "Percent") {
 					if (!promoAmount.match(/^[.][0-9]$/) && !promoAmount.match(/^[.][0-9]{2}$/)) {
 						message = "Please enter valid percent {0.9}\n";
@@ -190,7 +179,7 @@
             <div class="navbar-collapse collapse">
             <div id="left-sidebar" class="sidebar">
 			<ul id="main-menu" class="metismenu">
-                  <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Items</b></li></center>
+                  <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Promotions</b></li></center>
 				 <li name="newPromotion" id="newPromotion"><a href="promotions.html">Add Promotion</a></li>
 				 <li name="searchPromotion" id="searchPromotion" class="active"><a href="promotions.html"><span class="glyphicon glyphicon-search"></span> Search Promotions</a></li>
 			</ul>

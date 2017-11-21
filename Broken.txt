@@ -1,0 +1,20 @@
+		broken piece
+		function evaluateAdEventAddition() {
+			var selection = document.getElementById("adEventAddCheckbox");
+			var len = [].slice.call(document.querySelectorAll("[name='adEventAddCheckbox']"))
+    			.filter(function(e) { return e.checked; }).length;
+			if(len == 0) {
+				var alertbox = document.getElementById("alertboxsearchads");
+				alertbox.style.display = "block";
+				alertbox.style.visibility = "visible";
+				alertbox.innerHTML = "Select an ad event
+				return false;
+			}
+			return true;
+		}
+		may be good
+		function evaluateSelection(i) {
+			var insertCode = document.getElementById("promo" + i).innerHTML;
+			// assign code to hidden field
+			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
+		}
