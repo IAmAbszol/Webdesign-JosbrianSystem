@@ -76,7 +76,7 @@
 			// assign code to hidden field
 			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
 		}
-		
+
 		function testPromoName(message) {
 			var promoName = document.forms["promotionUpdateForm"]["promoName"].value;
 
@@ -287,10 +287,10 @@
 						<!-- Listing Search -->";
 
 
-																			$promo_data = grab_sql_adevent_all($_POST['itemNumber'], $_POST['description'], $_POST['category'], $_POST['department']);
+																			$ad_data = grab_sql_adevent_all();
 																			echo "<thead><tr>";
-																			for($i = 0; $i < mysql_num_fields($promo_data); $i++) {
-																				$field_infos = mysql_fetch_field($promo_data, $i);
+																			for($i = 0; $i < mysql_num_fields($ad_data); $i++) {
+																				$field_infos = mysql_fetch_field($ad_data, $i);
 																				echo "<th>{$field_infos->name}</th>";
 																			}
 																			echo "<th>Add Promotion</th>
@@ -300,9 +300,9 @@
 
 																			// Print the data
 																			$increment = 0;
-																			while($row = mysql_fetch_assoc($promo_data)) {
+																			while($row = mysql_fetch_assoc($ad_data)) {
 																				$bounce_back = 0;
-																				$link_code = $row['PromoCode'];
+																				$link_code = $row['EventCode'];
 																				echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
 																				foreach($row as $_column) {
 																					echo "<td><p><div name='promo$increment' id='promo$increment'>{$_column}</div></p></td>";

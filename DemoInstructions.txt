@@ -15,4 +15,4 @@ Edit a promotion, demonstrate percentage change and value
 Edit a promotion, demonstrate dollar change and value
 
 Adding a new ad event
-Go to promotions
+Go to promotions 
