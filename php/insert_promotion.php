@@ -14,10 +14,10 @@ function insert_promotion() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$promo_name = $_POST['promotionName'];
-	$promo_desc = $_POST['promotionDescription'];
-	$promo_type = $_POST['promotionType'];
-	$amount     = $_POST['amountOff'];
+	$promo_name =  mysql_real_escape_string($_POST['promotionName']);
+	$promo_desc =  mysql_real_escape_string($_POST['promotionDescription']);
+	$promo_type =  mysql_real_escape_string($_POST['promotionType']);
+	$amount     =  mysql_real_escape_string($_POST['amountOff']);
 	// create the statement
 	$insertStatement = "insert Promotion (Name, Description, AmountOff, PromoType) values ( '$promo_name', '$promo_desc', '$amount', '$promo_type')";
 
@@ -26,9 +26,9 @@ function insert_promotion() {
 	$message = "";
 
 	if(!$result) {
-		$message = "Error in inserting Promotion: $promo_name: ". mysql_error();
+		$message = "Error in inserting Promotion: $_POST['promotionName']: ". mysql_error();
 	} else {
-		$message = "Promotion Successfully Added to Database: " . $promo_name;
+		$message = "Promotion Successfully Added to Database: " . $_POST['promotionName'];
 	}
 	display_result($message);
 }

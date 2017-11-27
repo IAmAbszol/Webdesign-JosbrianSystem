@@ -1,14 +1,34 @@
 <?php
   require('server_connection.inc');
 
-  function grab_sql_promo($promo_name, $promo_type, $promo_off) {
+  function grab_sql_adevent_all() {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    $searchStatement = "select * from AdEvent";
+    $result = mysql_query($searchStatement);
+
+    return $result;
+  }
+
+  function grab_sql_promo_all() {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    $searchStatement = "select * from Promotion";
+    $result = mysql_query($searchStatement);
+
+    return $result;
+  }
+
+  function grab_sql_promo($promo_code, $promo_name, $promo_desc) {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+
+    $promo_code =  mysql_real_escape_string($promo_code);
+    $promo_name =  mysql_real_escape_string($promo_name);
+    $promo_desc =  mysql_real_escape_string($promo_desc);
 
     $appendString="";
 
     if($promo_name != '')     $appendString .= "Name='$promo_name' AND ";
-    if($promo_type != '')     $appendString .= "PromoType='$promo_type' AND ";
-    if($promo_off != '')      $appendString .= "AmountOff='$promo_off' AND ";
+    if($promo_code != '')     $appendString .= "PromoCode='$promo_code' AND ";
+    if($promo_desc != '')     $appendString .= "Description='$promo_desc' AND ";
 
     $appendString = str_lreplace("AND","",$appendString);
     // create the statement

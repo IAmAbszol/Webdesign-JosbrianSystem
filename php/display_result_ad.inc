@@ -63,10 +63,10 @@ function display_result($message)
 						<li>
 							<a href='../items.html'>Items</a>
 						</li>
-						<li class='active'>
+						<li>
 							<a href='../promotions.html'>Promotions</a>
 						</li>
-            <li>
+            <li class='active'>
 							<a href='../adEvent.html'>Ad Events</a>
 						</li>
 					</ul>
@@ -83,15 +83,14 @@ function display_result($message)
 					<ul id='main-menu' class='metismenu'>
 						<center>
 							<li style='padding-top: 10px; padding-bottom: 10px;'>
-								<b>Items</b>
+								<b>Ad Events</b>
 							</li>
 						</center>
-						<li name='newItem' id='newItem'>
-							<a href='../promotions.html'>Add Promotion</a>
+						<li name='adItem' id='adItem'>
+							<a href='../adEvent.html'>Add Ad Event</a>
 						</li>
-						<li name='searchItem' id='searchItem'>
-							<a href='../promotions.html'>
-								<span class='glyphicon glyphicon-search'></span>&nbsp;Search Promotions</a>
+						<li name='updateAd' id='updateAd'>
+							<a href='../adEvent.html'>Update Ad Event</a>
 						</li>
 					</ul>
 				</div>
@@ -104,7 +103,7 @@ function display_result($message)
 		<div id='main-content'>
 			<div class='container-fluid'>
 				<!-- Screen Reader -->
-				<h1 class='sr-only'>Promotion Manipulation</h1>
+				<h1 class='sr-only'>Ad Event Manipulation</h1>
 				<!-- Item Manipulation Panel -->
 				<div class='tab-content'>
 						<!-- This is for the panel creation -->

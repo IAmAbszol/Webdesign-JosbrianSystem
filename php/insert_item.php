@@ -14,12 +14,12 @@ function insert_item() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$item_number = $_POST['itemNumber'];
-	$item_description = $_POST['description'];
-	$item_category = $_POST['category'];
-	$department_name = $_POST['department'];
-	$purchase_cost = $_POST['purchaseCost'];
-	$retail_price = $_POST['retailPrice'];
+	$item_number = mysql_real_escape_string($_POST['itemNumber']);
+	$item_description =  mysql_real_escape_string($_POST['description']);
+	$item_category =  mysql_real_escape_string($_POST['category']);
+	$department_name =  mysql_real_escape_string($_POST['department']);
+	$purchase_cost =  mysql_real_escape_string($_POST['purchaseCost']);
+	$retail_price =  mysql_real_escape_string($_POST['retailPrice']);
 
 	// create the statement
 	$insertStatement = "insert Item (ItemNumber, ItemDescription, Category, DepartmentName, PurchaseCost, FullRetailPrice) values ( '$item_number', '$item_description', '$item_category', '$department_name', '$purchase_cost', '$retail_price' )";
@@ -29,9 +29,9 @@ function insert_item() {
 	$message = "";
 
 	if(!$result) {
-		$message = "Error in inserting Item: $item_description: ". mysql_error();
+		$message = "Error in inserting Item: $_POST['description']: ". mysql_error();
 	} else {
-		$message = "Item Successfully Added to Database: $item_description.";
+		$message = "Item Successfully Added to Database: $_POST['description'].";
 	}
 	display_result_item($message);
 }
