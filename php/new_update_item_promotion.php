@@ -12,13 +12,8 @@ function update_item_promotion() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-<<<<<<< HEAD
 	$item_code 	=  mysql_real_escape_string($_POST["itemCodeForPromo"]);
 	$promo_code	=  mysql_real_escape_string($_POST["promoAddCheckbox"]);
-=======
-	$item_code 	= $_POST["itemCodeForPromo"];
-	$promo_code	= $_POST["promoAddCheckbox"];
->>>>>>> ee638205f3fd4c8798a4476f79b5643a2cb999c0
 
 	// first grab promoitem to see if it exists prior into the table
 	$question_there = "select PromoCode, ItemNumber from PromotionItem where ItemNumber='$item_code'";

@@ -16,19 +16,11 @@ function update_promo() {
 
 	$price = 0;
 
-<<<<<<< HEAD
 	$promo_code = mysql_real_escape_string($_POST['promoCode']);
 	$promo_name = mysql_real_escape_string($_POST['promoName']);
 	$promo_description = mysql_real_escape_string($_POST['promoDesc']);
 	$promo_type = mysql_real_escape_string($_POST['promoType']);
 	$promo_amount = mysql_real_escape_string($_POST['promoAmount']);
-=======
-	$promo_code = $_POST['promoCode'];
-	$promo_name = $_POST['promoName'];
-	$promo_description = $_POST['promoDesc'];
-	$promo_type = $_POST['promoType'];
-	$promo_amount = $_POST['promoAmount'];
->>>>>>> ee638205f3fd4c8798a4476f79b5643a2cb999c0
 
 	// first we grab the pre-existing entry and reapply amounts to the stored item values
 	$statement_getAmount = "select AmountOff, PromoType from Promotion where PromoCode='$promo_code'";

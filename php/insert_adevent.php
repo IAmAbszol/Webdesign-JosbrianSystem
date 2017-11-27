@@ -24,15 +24,9 @@ function insert_adevent() {
 	$message = "";
 
 	if(!$result) {
-<<<<<<< HEAD
 		$message = "Error in inserting Ad: $_POST['adEventName']: ". mysql_error();
 	} else {
 		$message = "Ad Event Successfully Added to Database: $_POST['adEventName'].";
-=======
-		$message = "Error in inserting Ad: $event_name: ". mysql_error();
-	} else {
-		$message = "Ad Event Successfully Added to Database: $event_name.";
->>>>>>> ee638205f3fd4c8798a4476f79b5643a2cb999c0
 	}
 	display_result($message);
 }

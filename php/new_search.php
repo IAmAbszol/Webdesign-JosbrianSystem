@@ -2,25 +2,6 @@
   require('server_connection.inc');
 
   function grab_sql_adevent_all() {
-<<<<<<< HEAD
-=======
-    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-    $searchStatement = "select * from AdEvent";
-    $result = mysql_query($searchStatement);
-
-    return $result;
-  }
-
-  function grab_sql_promo_all() {
-    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-    $searchStatement = "select * from Promotion";
-    $result = mysql_query($searchStatement);
-
-    return $result;
-  }
-
-  function grab_sql_promo($promo_code, $promo_name, $promo_desc) {
->>>>>>> ee638205f3fd4c8798a4476f79b5643a2cb999c0
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     $searchStatement = "select * from AdEvent";
     $result = mysql_query($searchStatement);
@@ -47,11 +28,7 @@
 
     if($promo_name != '')     $appendString .= "Name='$promo_name' AND ";
     if($promo_code != '')     $appendString .= "PromoCode='$promo_code' AND ";
-<<<<<<< HEAD
     if($promo_desc != '')     $appendString .= "Description='$promo_desc' AND ";
-=======
-    if($promo_desc != '')      $appendString .= "Description='$promo_desc' AND ";
->>>>>>> ee638205f3fd4c8798a4476f79b5643a2cb999c0
 
     $appendString = str_lreplace("AND","",$appendString);
     // create the statement
