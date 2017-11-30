@@ -73,7 +73,8 @@ function calculatePrice($amount, $type, $price) {
 	} else {
 		$price = ($price*(1-$amount));	// apply percentage of original
 	}
-	return $price;
+	if($p < 0) $p = 0;
+	return number_format((float)$price, 2, '.', '');
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {

@@ -57,99 +57,6 @@
 			document.getElementById("promoType").value = promoType;
 
 		}
-
-		function evaluateAdEventAddition() {
-			var selection = document.getElementById('adEventAddCheckbox');
-			var len = [].slice.call(document.querySelectorAll("[name='adEventAddCheckbox']"))
-	    .filter(function(e) { return e.checked; }).length;
-			if(len == 0) {
-				var alertbox = document.getElementById("alertboxsearchads");
-				alertbox.style.display = "block";
-				alertbox.style.visibility = "visible";
-				alertbox.innerHTML = "Select Ad Events.";
-				return false;
-			}
-			return true;
-		}
-
-		function testPromoName(message) {
-			var promoName = document.forms["promotionUpdateForm"]["promoName"].value;
-
-			if (promoName == "") {
-				message = "Please enter a name\n";
-			} else {
-				if (promoName.match(/[^A-Za-z-'  ]/) || promoName.match(/^-[A-Za-z]/) ) {
-					message = "Name must contain text only\n";
-				}
-			}
-			return message;
-		}
-
-		function testPromodescription(message) {
-			var promoDescription = document.forms["promotionUpdateForm"]["promoDesc"].value;
-
-			if (promoDescription == "") {
-				message = "Please enter a description\n";
-			} else { }
-			return message;
-		}
-
-		function testPromotionType(message) {
-			var promoType = document.forms["promotionUpdateForm"]["promoType"].value;
-
-			if (promoType == "") {
-				message = "Please select a promotion type\n";
-			} else { }
-			return message;
-		}
-
-		function testPromoAmount(message) {
-			var promoAmount = document.forms["promotionUpdateForm"]["promoAmount"].value;
-			var promoType = document.forms["promotionUpdateForm"]["promoType"].value;
-
-			if (promoAmount != "") {
-				if (promoType == "Dollar") {
-					if (promoAmount.match(/^[0-9]*[.][0-9]{2}$/)) {
-						//message = "Please enter amount\n";
-					} else if(promoAmount.match(/^[0-9]+$/)) {
-
-					} else if(promoAmount.match(/^[.][0-9]$/)) {
-
-					} else if(promoAmount.match(/^[.][0-9]{2}$/)) {
-
-					} else message = "Please enter valid amount\n";
-
-				} else if (promoType == "Percent") {
-					if (!promoAmount.match(/^[.][0-9]$/) && !promoAmount.match(/^[.][0-9]{2}$/)) {
-						message = "Please enter valid percent {0.9}\n";
-					}
-				} else {
-					message = "Unknown promo type\n";
-				}
-			} else
-				message = "Please enter amount\n";
-
-			return message;
-		}
-
-		function testInput() {
-			var errormessage = "";
-			var message = "";
-			var alertvalue = document.getElementById('alertboxpromoadd');
-
-			errormessage += testPromoName(message);
-			errormessage += testPromodescription(message);
-			errormessage += testPromotionType(message);
-			errormessage += testPromoAmount(message);
-
-			if (errormessage == "") {
-				return true;
-			} else {
-				alertvalue.style.display = "block";
-				alertvalue.innerHTML = "Error detected!\n" + errormessage;
-				return false;
-			}
-		}
 	</script>
 
 </head>
@@ -176,10 +83,10 @@
 						<li>
 							<a href="items.html">Items</a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="promotions.html">Promotions</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="adEvent.html">Ad Events</a>
 						</li>
 					</ul>
@@ -193,8 +100,8 @@
             <div id="left-sidebar" class="sidebar">
 			<ul id="main-menu" class="metismenu">
                   <center><li style="padding-top: 10px; padding-bottom: 10px;"><b>Promotions</b></li></center>
-				 <li name="newPromotion" id="newPromotion"><a href="promotions.html">Add Promotion</a></li>
-				 <li name="searchPromotion" id="searchPromotion" class="active"><a href="promotions.html"><span class="glyphicon glyphicon-search"></span> Search Promotions</a></li>
+				 <li name="newAdEvent" id="newAdEvent"><a href="adEvent.html">Add Ad Event</a></li>
+				 <li name="searchAdEvent" id="searchAdEvent" class="active"><a href="adEvent.html"><span class="glyphicon glyphicon-search"></span> Search Ad Events</a></li>
 			</ul>
               </div>
               </div>
@@ -204,7 +111,7 @@
 		<div id="main-content">
 			<div class="container-fluid">
 				<!-- Screen Reader -->
-				<h1 class="sr-only">Promotion Search</h1>
+				<h1 class="sr-only">Ad Event Search</h1>
 				<!-- Item Manipulation Panel -->
      <!--  TABLE TO RETURN DATA TO  -->
 
@@ -216,13 +123,13 @@
 														<!-- Listing Search -->
 																<?php
 																	include('php/new_search.php');
-																	$data = grab_sql_promo($_POST['promotionCode'], $_POST['promotionName'], $_POST['promotionDescription']);
+																	$data = grab_sql_adevent_all();
 																	echo "<thead><tr>";
 																	for($i = 0; $i < mysql_num_fields($data); $i++) {
 																		$field_info = mysql_fetch_field($data, $i);
 																		echo "<th>{$field_info->name}</th>";
 																	}
-																	echo "<th>Edit Promotion</th><th>Add To Ad Event</th>
+																	echo "<th>Edit Ad Event</th>
 																	</tr></thead>";
 
 																	echo "<tbody>";
@@ -241,7 +148,6 @@
 																		// then simply iterate 6 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
 																		echo "<td><button style='padding: 10px 10px;' onclick='evaluateData($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#promotionEditModal'><span class='glyphicon glyphicon-pencil'></span></button></td>
-                                    			<td><button style='padding: 10px 10px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>
 
 																		</tr>";
 																	}
@@ -280,7 +186,7 @@
 					<div id='alertboxsearchads' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
 
 					</div>
-					<form name='promotionAddAdEvent' id='promotionAddAdEvent' onsubmit='return evaluateAdEventAddition()' method='POST' action='new_update_ad_event.php'>
+					<form name='promotionAddAdEvent' id='promotionAddAdEvent' onsubmit='return evaluateAdEventAddition()' method='POST' action=''>
 					<!-- Hidden but links to what itemcode/row was clicked -->
 						<input class='form-control' placeholder='' name='promoCodeForAdEvent' id='promoCodeForAdEvent' type='hidden' readonly>
 						<center>
@@ -313,7 +219,7 @@
 																				// should readjust back to itemNumber designated index value
 																				// then simply iterate 5 times in evaluateData to grab all fields
 																				$adjust=$increment - $bounce_back;
-																				echo "<td><input type='checkbox' name='adEventAddCheckbox' id='adEventAddCheckbox' value='$link_code'></td>
+																				echo "<td><input type='radio' name='adEventAddCheckbox' id='adEventAddCheckbox' value='$link_code'></td>
 
 																				</tr>";
 																			}
@@ -322,10 +228,6 @@
 
 						</table>
 						</center>
-						<div class='form-group'>
-							<textarea rows='1' class='form-control' placeholder='Add Some Notes' name='adEventNotes' id='adEventNotes'
-							 type='text'></textarea>
-						</div>
 		      <div class='modal-footer'>
 						 <input class='btn btn-secondary' data-dismiss='modal' value='Close'>
 						 <input class='btn' class='btn btn-lg btn-success btn-block' type='submit' value='Submit'>

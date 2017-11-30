@@ -14,6 +14,20 @@
     return "no";
   }
 
+  // returns the linked promotion to that item if it exists
+  function grab_linked_promotions($id) {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    $new_id = mysql_real_escape_string($id);
+    $searchStatement = "select SalePrice from PromotionItem where ItemNumber='$new_id'";
+    //echo "$id";
+    $result = mysql_query($searchStatement);
+    if(mysql_num_rows($result) > 0) {
+      $the_row = mysql_fetch_array($result);
+      return $the_row['PromoCode'];
+    }
+    return "no";
+  }
+
   function grab_sql_adevent_all() {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     $searchStatement = "select * from AdEvent";

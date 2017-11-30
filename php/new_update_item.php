@@ -24,6 +24,8 @@ function update_item() {
 	// append string
 	$appendString="";
 
+	$purchase_cost = applyDecimal($purchase_cost);
+	$retail_price = applyDecimal($retail_price);
 	// setup string
 	if($item_number != '')			$appendString .= "ItemNumber='$item_number', ";
 	if($item_description != '') $appendString .= "ItemDescription='$item_description', ";
@@ -41,7 +43,7 @@ function update_item() {
 	// now to update promoitem if linked
 
 	// first we grab the pre-existing entry and reapply amounts to the stored item values
-	$statement_grabPromoCode = "select PromoCode from PromotionItem where ItemNumber='1234569'";
+	$statement_grabPromoCode = "select PromoCode from PromotionItem where ItemNumber='$item_number'";
 	$return_promoResult = mysql_query($statement_grabPromoCode);
 
 	// first grab the promocodes
@@ -99,13 +101,17 @@ function str_lreplace($search, $replace, $subject)
     return $subject;
 }
 
+function applyDecimal($value) {
+	return number_format((float)$value, 2, '.', '');
+}
+
 function recalculatePrice($amount, $type, $price) {
 	if($type == "Dollar") {
 		$price += $amount;
 	} else {
 		$price = ($price/(1-$amount));	// reapply percentage of original
 	}
-	return $price;
+	return number_format((float)$price, 2, '.', '');
 }
 
 function calculatePrice($amount, $type, $p) {
@@ -114,7 +120,8 @@ function calculatePrice($amount, $type, $p) {
 	} else {
 		$p = ($p*(1-$amount));	// apply percentage of original
 	}
-	return $p;
+	if($p < 0) $p = 0;
+	return number_format((float)$p, 2, '.', '');
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {
