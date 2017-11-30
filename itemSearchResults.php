@@ -348,9 +348,25 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 																	$increment = 0;
 																	while($row = mysql_fetch_row($data)) {
 																		$bounce_back = 0;
+																		$item_number = 0;
 																		echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
 																		foreach($row as $_column) {
-																			echo "<td><p><div name='item$increment' id='item$increment'>{$_column}</div></p></td>";
+																			if($bounce_back == 0) {
+																				$item_number = $_column;
+																			}
+																			if(($bounce_back + 1) == count($row)) {
+																				// first we need to check if a promotion is linked, if not we can stop this approach
+																				$sale_price = grab_possible_promotion($item_number);
+
+																				if($sale_price != "no") {
+																					// promotion was attached, grabbing sale price
+																					echo "<td><p><div><span style='text-decoration: line-through; color: #ff7272; white-space: nowrap;'>{$_column}</span></div> <div name='item$increment' id='item$increment'>$sale_price</div></p></td>";
+																				} else
+																					echo "<td><p><div name='item$increment' id='item$increment'>{$_column}</div></p></td>";
+
+																			} else
+																				echo "<td><p><div name='item$increment' id='item$increment'>{$_column}</div></p></td>";
+
 																			$bounce_back++;
 																			$increment++;
 																		}
