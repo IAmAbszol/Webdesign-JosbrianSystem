@@ -28,10 +28,11 @@ function insert_item() {
 
 	$message = "";
 
+	$tmp_Desc = $_POST['description'];
 	if(!$result) {
-		$message = "Error in inserting Item: $_POST['description']: ". mysql_error();
+		$message = "Error in inserting Item: $tmp_Desc: ". mysql_error();
 	} else {
-		$message = "Item Successfully Added to Database: $_POST['description'].";
+		$message = "Item Successfully Added to Database: $tmp_Desc.";
 	}
 	display_result_item($message);
 }
