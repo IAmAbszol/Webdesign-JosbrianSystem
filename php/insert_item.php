@@ -18,8 +18,8 @@ function insert_item() {
 	$item_description =  mysql_real_escape_string($_POST['description']);
 	$item_category =  mysql_real_escape_string($_POST['category']);
 	$department_name =  mysql_real_escape_string($_POST['department']);
-	$purchase_cost =  mysql_real_escape_string($_POST['purchaseCost']);
-	$retail_price =  mysql_real_escape_string($_POST['retailPrice']);
+	$purchase_cost =  applyDecimal(mysql_real_escape_string($_POST['purchaseCost']));
+	$retail_price =  applyDecimal(mysql_real_escape_string($_POST['retailPrice']));
 
 	// create the statement
 	$insertStatement = "insert Item (ItemNumber, ItemDescription, Category, DepartmentName, PurchaseCost, FullRetailPrice) values ( '$item_number', '$item_description', '$item_category', '$department_name', '$purchase_cost', '$retail_price' )";
@@ -35,6 +35,10 @@ function insert_item() {
 		$message = "Item Successfully Added to Database: $tmp_Desc.";
 	}
 	display_result_item($message);
+}
+
+function applyDecimal($value) {
+	return number_format((float)$value, 2, '.', '');
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {
