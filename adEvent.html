@@ -81,6 +81,7 @@
 				var date = document.forms["adEventAddForm"][dateEval].value;
 				// splice date to mm/dd/yyyy format
 				var spliced = date.split("-");
+				if(spliced.length != 3) return (message += "Enter valid date");
 				var month = spliced[1];
 				var day = spliced[2];
 				var year = spliced[0];

@@ -28,9 +28,23 @@
       border-right: 1px solid #eee;
    }
 
+	 .jumbotron .container {
+		  position: relative;
+		  left: auto;
+		  right: auto;
+		  height:100vh;
+		  width: 100vw;
+		  padding:100px 0;
+		  text-align: center;
+		}
+
    textarea:focus {
     height: 10em;
    }
+
+	 table {
+		 font-size: 85%;
+	 }
 
    .glyphicon:empty{
       width: 100%;

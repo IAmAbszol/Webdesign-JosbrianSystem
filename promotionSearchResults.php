@@ -28,9 +28,23 @@
       border-right: 1px solid #eee;
    }
 
+	 .jumbotron .container {
+		  position: relative;
+		  left: auto;
+		  right: auto;
+		  height:100vh;
+		  width: 100vw;
+		  padding:100px 0;
+		  text-align: center;
+		}
+
    textarea:focus {
     height: 10em;
    }
+
+	 table {
+		 font-size: 85%;
+	 }
 
     tr:hover td {background:#36465d; cursor: pointer; color: #ffffff; }
     tr:hover p  {color:#ffffff;}
@@ -350,7 +364,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="itemEditModal" style="bottom-padding: 10px;"><b>Edit Item:</b></h3>
+        <h3 class="modal-title" id="itemEditModal" style="bottom-padding: 10px;"><b>Edit Promotion:</b></h3>
         <button type="button" class="close" data-dismiss="modal" style="bottom-padding: 10px;" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

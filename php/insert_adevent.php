@@ -9,12 +9,12 @@ function insert_adevent() {
 
 	// connect to the main database where the items are stored
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
-	$event_code = $_POST['adEventcode'];
-	$event_name = $_POST['adEventName'];
-	$event_start = $_POST['adEventstart'];
-	$event_end = $_POST['adEventend'];
-	$event_description = $_POST['adEventDescription'];
-	$event_type = $_POST['adEventType'];
+	$event_code = mysql_real_escape_string($_POST['adEventcode']);
+	$event_name =  mysql_real_escape_string($_POST['adEventName']);
+	$event_start =  mysql_real_escape_string($_POST['adEventstart']);
+	$event_end =  mysql_real_escape_string($_POST['adEventend']);
+	$event_description =  mysql_real_escape_string($_POST['adEventDescription']);
+	$event_type =  mysql_real_escape_string($_POST['adEventType']);
 
 	// create the statement
 	$insertStatement = "insert AdEvent (EventCode, Name, StartDate, EndDate, Description, AdType) values ( '$event_code', '$event_name', '$event_start', '$event_end', '$event_description', '$event_type' )";

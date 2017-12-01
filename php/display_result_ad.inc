@@ -89,8 +89,8 @@ function display_result($message)
 						<li name='adItem' id='adItem'>
 							<a href='../adEvent.html'>Add Ad Event</a>
 						</li>
-						<li name='updateAd' id='updateAd'>
-							<a href='../adEvent.html'>Update Ad Event</a>
+						<li name='searchAd' id='searchAd'>
+   				 <li name='searchAdEvent' id='searchAdEvent' class='active'><a href='adEvent.html'><span class='glyphicon glyphicon-search'></span> Search Ad Events</a></li>
 						</li>
 					</ul>
 				</div>
