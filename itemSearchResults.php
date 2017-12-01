@@ -130,6 +130,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 		return true;
 	}
 
+	// change promoAddCheckbox by appending []
 	function evaluatePromoAddition() {
 		var selection = document.getElementById('promoAddCheckbox');
 		var len = [].slice.call(document.querySelectorAll("[name='promoAddCheckbox']"))
@@ -445,6 +446,7 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 																		// should readjust back to itemNumber designated index value
 																		// then simply iterate 5 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
+																		// change to [] if type='checkbox'
 																		echo "<td><input type='radio' name='promoAddCheckbox' id='promoAddCheckbox' value='$link_code'></td>
 
 																		</tr>";

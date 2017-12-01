@@ -59,8 +59,8 @@
 		}
 
 		function evaluateAdEventAddition() {
-			var selection = document.getElementById('adEventAddCheckbox');
-			var len = [].slice.call(document.querySelectorAll("[name='adEventAddCheckbox']"))
+			var selection = document.getElementById('adEventAddCheckbox[]');
+			var len = [].slice.call(document.querySelectorAll("[name='adEventAddCheckbox[]']"))
 	    .filter(function(e) { return e.checked; }).length;
 			if(len == 0) {
 				var alertbox = document.getElementById("alertboxsearchads");
@@ -70,6 +70,11 @@
 				return false;
 			}
 			return true;
+		}
+		function evaluateSelection(i) {
+			var insertCode = document.getElementById("promo" + i).innerHTML;
+			// assign code to hidden field
+			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
 		}
 
 		function testPromoName(message) {
@@ -241,7 +246,7 @@
 																		// then simply iterate 6 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
 																		echo "<td><button style='padding: 10px 10px;' onclick='evaluateData($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#promotionEditModal'><span class='glyphicon glyphicon-pencil'></span></button></td>
-                                    			<td><button style='padding: 10px 10px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>
+                                    			<td><button style='padding: 10px 10px;' onclick='evaluateSelection($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>
 
 																		</tr>";
 																	}
@@ -280,7 +285,7 @@
 					<div id='alertboxsearchads' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
 
 					</div>
-					<form name='promotionAddAdEvent' id='promotionAddAdEvent' onsubmit='return evaluateAdEventAddition()' method='POST' action='new_update_ad_event.php'>
+					<form name='promotionAddAdEvent' id='promotionAddAdEvent' onsubmit='return evaluateAdEventAddition()' method='POST' action='php/new_update_ad_event.php'>
 					<!-- Hidden but links to what itemcode/row was clicked -->
 						<input class='form-control' placeholder='' name='promoCodeForAdEvent' id='promoCodeForAdEvent' type='hidden' readonly>
 						<center>
@@ -313,7 +318,7 @@
 																				// should readjust back to itemNumber designated index value
 																				// then simply iterate 5 times in evaluateData to grab all fields
 																				$adjust=$increment - $bounce_back;
-																				echo "<td><input type='checkbox' name='adEventAddCheckbox' id='adEventAddCheckbox' value='$link_code'></td>
+																				echo "<td><input type='checkbox' name='adEventAddCheckbox[]' id='adEventAddCheckbox[]' value='$link_code'></td>
 
 																				</tr>";
 																			}
