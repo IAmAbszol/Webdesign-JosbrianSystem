@@ -85,10 +85,29 @@
 			}
 			return true;
 		}
+
+		function evaluateItemRemove() {
+			var selection = document.getElementById('itemRemoveCheckbox[]');
+			var len = [].slice.call(document.querySelectorAll("[name='itemRemoveCheckbox[]']"))
+	    .filter(function(e) { return e.checked; }).length;
+			if(len == 0) {
+				var alertbox = document.getElementById("alertboxitemremove");
+				alertbox.style.display = "block";
+				alertbox.style.visibility = "visible";
+				alertbox.innerHTML = "Select Ad Events.";
+				return false;
+			}
+			return true;
+		}
 		function evaluateSelection(i) {
 			var insertCode = document.getElementById("promo" + i).innerHTML;
 			// assign code to hidden field
 			var code = document.getElementById("promoCodeForAdEvent").value = insertCode;
+		}
+		function evaluateSelection2(i) {
+			var insertCode = document.getElementById("promo" + i).innerHTML;
+			// assign code to hidden field
+			var code = document.getElementById("promoCode").value = insertCode;
 		}
 
 		function testPromoName(message) {
@@ -235,13 +254,14 @@
 														<!-- Listing Search -->
 																<?php
 																	include('php/new_search.php');
+																	$promo_link = 0;
 																	$data = grab_sql_promo($_POST['promotionCode'], $_POST['promotionName'], $_POST['promotionDescription']);
 																	echo "<thead><tr>";
 																	for($i = 0; $i < mysql_num_fields($data); $i++) {
 																		$field_info = mysql_fetch_field($data, $i);
 																		echo "<th>{$field_info->name}</th>";
 																	}
-																	echo "<th>Edit Promotion</th><th>Add To Ad Event</th>
+																	echo "<th>Edit Promotion</th><th>Add To Ad Event</th><th>Remove Linked Items</th>
 																	</tr></thead>";
 
 																	echo "<tbody>";
@@ -249,9 +269,9 @@
 																	// Print the data
 																	$increment = 0;
 																	while($row = mysql_fetch_row($data)) {
-																		$bounce_back = 0;
 																		echo "<tr data-toggle='modal' data-target='#promotionDetailModal'>";
 																		foreach($row as $_column) {
+																			if($bounce_back == 0) $promo_link = $_column;
 																			echo "<td><p><div name='promo$increment' id='promo$increment'>{$_column}</div></p></td>";
 																			$bounce_back++;
 																			$increment++;
@@ -260,9 +280,12 @@
 																		// then simply iterate 6 times in evaluateData to grab all fields
 																		$adjust=$increment - $bounce_back;
 																		echo "<td><button style='padding: 10px 10px;' onclick='evaluateData($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#promotionEditModal'><span class='glyphicon glyphicon-pencil'></span></button></td>
-                                    			<td><button style='padding: 10px 10px;' onclick='evaluateSelection($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>
+                                    			<td><button style='padding: 10px 10px;' onclick='evaluateSelection($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectAdEventModal'><span class='glyphicon glyphicon-plus'></span></button></td>";
 
-																		</tr>";
+																		if(grab_linked_promotions_to_item($promo_link) != "no") {
+																			echo "<td><button style='padding: 10px 10px;' onclick='evaluateSelection2($adjust)' type='button' class='btn btn-primary' data-toggle='modal' data-target='#selectLinkedItems'><span class='glyphicon glyphicon-minus'></span></button></td>";
+																		}
+																		echo"</tr>";
 																	}
 
 																	echo "</tbody>
@@ -352,6 +375,71 @@
 					</form>
 		    </div>
 		  </div>
+		</div>
+		</div>
+
+		<div class='modal fade' id='selectLinkedItems' tabindex='-1' role='dialog' aria-labelledby='selectLinkedItems' aria-hidden='true'>
+			<div class='modal-dialog' role='document'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h3 class='modal-title' id='selectLinkedItems' style='bottom-padding: 10px;'><b>Select Items To Remove From Promotion:</b></h3>
+						<button type='button' class='close' data-dismiss='modal' style='bottom-padding: 10px;' aria-label='Close'>
+							<span aria-hidden='true'>&times;</span>
+						</button>
+					</div>
+					<div class='modal-body'>
+					<div id='alertboxitemremove' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
+
+					</div>
+					<form name='removeLinkedItems' id='removeLinkedItems' onsubmit='return evaluateItemRemove()' method='POST' action='php/new_remove_item_promo.php'>
+					<!-- Hidden but links to what itemcode/row was clicked -->
+						<input class='form-control' placeholder='' name='promoCode' id='promoCode' type='hidden' readonly>
+						<center>
+						<table class='table' id='selectPromoItemTable'>
+						<!-- Listing Search -->";
+
+
+																			$item_Data = grab_linked_promotions_to_item($promo_link);
+																			echo "<thead><tr>";
+																			for($i = 0; $i < mysql_num_fields($item_Data); $i++) {
+																				$field_infos = mysql_fetch_field($item_Data, $i);
+																				echo "<th>{$field_infos->name}</th>";
+																			}
+																			echo "<th>Remove Linked Promotion</th>
+																			</tr></thead>";
+
+																			echo "<tbody>";
+
+																			// Print the data
+																			$increment = 0;
+																			while($row = mysql_fetch_assoc($item_Data)) {
+																				$bounce_back = 0;
+																				$link_code = $row['ItemNumber'];
+																				echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
+																				foreach($row as $_column) {
+																					echo "<td><p><div name='promo$increment' id='promo$increment'>{$_column}</div></p></td>";
+																					$bounce_back++;
+																					$increment++;
+																				}
+																				// should readjust back to itemNumber designated index value
+																				// then simply iterate 5 times in evaluateData to grab all fields
+																				$adjust=$increment - $bounce_back;
+																				echo "<td><input type='checkbox' name='itemRemoveCheckbox[]' id='itemRemoveCheckbox[]' value='$link_code'></td>
+
+																				</tr>";
+																			}
+
+																			echo "</tbody>
+
+						</table>
+						</center>
+					<div class='modal-footer'>
+						 <input class='btn btn-secondary' data-dismiss='modal' value='Close'>
+						 <input class='btn' class='btn btn-lg btn-success btn-block' type='submit' value='Submit'>
+					</div>
+					</form>
+				</div>
+			</div>
 		</div>
 		</div>";
 					?>

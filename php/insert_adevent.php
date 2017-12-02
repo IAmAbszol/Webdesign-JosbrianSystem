@@ -22,11 +22,11 @@ function insert_adevent() {
 	$result = mysql_query($insertStatement);
 
 	$message = "";
-
+	$name = $_POST['adEventName']:
 	if(!$result) {
-		$message = "Error in inserting Ad: $_POST['adEventName']: ". mysql_error();
+		$message = "Error in inserting Ad: $name ". mysql_error();
 	} else {
-		$message = "Ad Event Successfully Added to Database: $_POST['adEventName'].";
+		$message = "Ad Event Successfully Added to Database: $name.";
 	}
 	display_result($message);
 }

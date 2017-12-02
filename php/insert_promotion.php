@@ -24,11 +24,11 @@ function insert_promotion() {
 	$result = mysql_query($insertStatement);
 
 	$message = "";
-
+	$name = $_POST['promotionName'];
 	if(!$result) {
-		$message = "Error in inserting Promotion: $_POST['promotionName']: ". mysql_error();
+		$message = "Error in inserting Promotion: $name: ". mysql_error();
 	} else {
-		$message = "Promotion Successfully Added to Database: " . $_POST['promotionName'];
+		$message = "Promotion Successfully Added to Database: " . $name;
 	}
 	display_result($message);
 }
