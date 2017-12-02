@@ -12,7 +12,7 @@ function remove_promo_item() {
   if(!empty($_POST['itemRemoveCheckbox'])) {
     $error_array = array();
       foreach($_POST['itemRemoveCheckbox'] as $check) {
-      	$promo_code 	=  mysql_real_escape_string($_POST["promoCode"]);
+      	$promo_code 	=  mysql_real_escape_string($_POST["promoCodeForLinked"]);
         $item_code    = mysql_real_escape_string($check);
 
         $verify_statement = "delete from PromotionItem where PromoCode='$promo_code' and ItemNumber='$item_code'";

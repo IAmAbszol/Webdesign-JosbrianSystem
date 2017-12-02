@@ -23,7 +23,7 @@ function update_promo() {
 	$promo_amount = mysql_real_escape_string($_POST['promoAmount']);
 
 	// first we grab the pre-existing entry and reapply amounts to the stored item values
-	$statement_getAmount = "select AmountOff, PromoType from Promotion where PromoCode='$promo_code'";
+	$statement_getAmount = "select PromotionItem.ItemNumber, Item.FullRetailPrice, Promotion.AmountOff, Promotion.PromoType from Promotion, PromotionItem, Item where (Item.ItemNumber=PromotionItem.ItemNumber) AND (Promotion.PromoCode = PromotionItem.PromoCode) AND Promotion.PromoCode='$promo_code'";
 	$returnResult = mysql_query($statement_getAmount);
 
 	// next we grab the PromotionItem table and reapply the sale price.
@@ -34,20 +34,23 @@ function update_promo() {
 			// run loop evaluating prices
 			$myAmount = $the_row['AmountOff'];
 			$myType 	= $the_row['PromoType'];
+			$myNumber	= $the_row['ItemNumber'];	// was leading to an infamous bug where it would simply grab the first number since were table hopping.
+			$myRetail = $the_row['FullRetailPrice'];	// part two of the glitch, reapply the previous price. If 0 then the number could've been negative, lets fix that
 
-			$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_code'";
+			$statement_getSalePrice = "select SalePrice from PromotionItem where PromoCode='$promo_code' and ItemNumber='$myNumber'";
 			$returnResultItem = mysql_query($statement_getSalePrice);
 
 			$the_row_item = mysql_fetch_array($returnResultItem);
 			$myPrice	= $the_row_item['SalePrice'];
 
-			$price = recalculatePrice($myAmount, $myType, $myPrice);
+			$price = recalculatePrice($myAmount, $myType, $myPrice, $myRetail);
 
 			// calculate new price
 			$new_price = calculatePrice($promo_amount, $promo_type, $price);
+				//display_result("Recalc $price, Calc $new_price values Amount $myAmount, Type $myType, Price $myPrice, FullRetail $myRetail, Promo Amount $promo_amount, Promo Type $promo_type");
 
 			// new price achieved, now add it back into the Promotion Item database
-			$update_statement = "update PromotionItem set SalePrice='$new_price' where PromoCode='$promo_code'";
+			$update_statement = "update PromotionItem set SalePrice='$new_price' where PromoCode='$promo_code' AND ItemNumber='$myNumber'";
 			$update_result = mysql_query($update_statement);
 		}
 	}
@@ -67,6 +70,7 @@ function update_promo() {
 	$appendString = str_lreplace(",","",$appendString);
 	// create the statement
 	$insertStatement = "update Promotion set $appendString where PromoCode='$promo_code';";
+
 	$result = mysql_query($insertStatement);
 
 	$message = "";
@@ -74,7 +78,7 @@ function update_promo() {
 	if(!$result) {
 		$message = "Error in updating promo: $promo_code: ". mysql_error();
 	} else {
-		$message = "Promotion Successfully Updated for PromoCode: $promo_name.";
+		$message = "Promotion Successfully Updated for PromoCode: $promo_code.";
 	}
 
 	display_result($message);
@@ -96,7 +100,10 @@ function applyDecimal($value) {
 	return number_format((float)$value, 2, '.', '');
 }
 
-function recalculatePrice($amount, $type, $price) {
+function recalculatePrice($amount, $type, $price, $retail) {
+	if($amount > $retail and $type == "Dollar") {
+		return $retail;
+	}
 	if($type == "Dollar") {
 		$price += $amount;
 	} else {

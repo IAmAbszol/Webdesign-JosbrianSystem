@@ -318,7 +318,6 @@
 							<table class='table' id='selectPromoItemTable'>
 							<!-- Listing Search -->";
 
-																			echo "$promo_link";
 																				function redirectIt() {
 																					echo "<script type='text/javascript'>document.getElementById('adEventCode').value</script>";
 																				}

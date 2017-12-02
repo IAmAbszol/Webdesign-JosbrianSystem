@@ -107,7 +107,7 @@
 		function evaluateSelection2(i) {
 			var insertCode = document.getElementById("promo" + i).innerHTML;
 			// assign code to hidden field
-			var code = document.getElementById("promoCode").value = insertCode;
+			var code = document.getElementById("promoCodeForLinked").value = insertCode;
 		}
 
 		function testPromoName(message) {
@@ -393,7 +393,7 @@
 					</div>
 					<form name='removeLinkedItems' id='removeLinkedItems' onsubmit='return evaluateItemRemove()' method='POST' action='php/new_remove_item_promo.php'>
 					<!-- Hidden but links to what itemcode/row was clicked -->
-						<input class='form-control' placeholder='' name='promoCode' id='promoCode' type='hidden' readonly>
+						<input class='form-control' placeholder='' name='promoCodeForLinked' id='promoCodeForLinked' type='hidden' readonly>
 						<center>
 						<table class='table' id='selectPromoItemTable'>
 						<!-- Listing Search -->";

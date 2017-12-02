@@ -37,7 +37,7 @@ function update_item_promotion() {
 
 		// apply discount, return value
 		$grabbed_price = calculatePrice($myAmount, $myType, $myPrice);
-
+		
 	  // insert into promoitem
 		$insertStatement = "insert PromotionItem (PromoCode, ItemNumber, SalePrice) values ( '$promo_code', '$item_code', '$grabbed_price')";
 		$results = mysql_query($insertStatement);
@@ -73,7 +73,7 @@ function calculatePrice($amount, $type, $price) {
 	} else {
 		$price = ($price*(1-$amount));	// apply percentage of original
 	}
-	if($p < 0) $p = 0;
+	if($price < 0) $price = 0;
 	return number_format((float)$price, 2, '.', '');
 }
 
