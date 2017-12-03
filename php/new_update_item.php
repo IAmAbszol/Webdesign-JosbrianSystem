@@ -111,7 +111,6 @@ function recalculatePrice($amount, $type, $price) {
 	} else {
 		$price = ($price/(1-$amount));	// reapply percentage of original
 	}
-	if($price < 0) $price = 0;
 	return number_format((float)$price, 2, '.', '');
 }
 

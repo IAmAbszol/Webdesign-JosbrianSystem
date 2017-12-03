@@ -69,6 +69,9 @@ function display_result($message)
             <li>
 							<a href='../adEvent.html'>Ad Events</a>
 						</li>
+  					<li>
+  						<a href='../reports.php'>Reports</a>
+  					</li>
 					</ul>
 				</div>
 			</div>

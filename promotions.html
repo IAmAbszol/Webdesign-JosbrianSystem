@@ -72,7 +72,10 @@
 
 			if (promoAmount != "") {
 				if (promoType == "Dollar") {
-					if (!promoAmount.match(/^[0-9]+[.][0-9]{2}$/) && !promoAmount.match(/^[0-9]+$/)) {
+					// no javascript wizard, also demorgans law would be the best here
+					if (promoAmount.match(/^[0-9]*[.][0-9]{2}$/) || promoAmount.match(/^[0-9]+$/) || promoAmount.match(/^[0-9]+[.]$/) || promoAmount.match(/^[0-9]*[.][0-9]$/)) {
+
+					} else {
 						message = "Please enter amount\n";
 					}
 				} else if (promoType == "Percent") {
@@ -193,6 +196,9 @@
 						</li>
 						<li>
 							<a href="adEvent.html">Ad Events</a>
+						</li>
+						<li>
+							<a href="reports.php">Reports</a>
 						</li>
 					</ul>
 				</div>

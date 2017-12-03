@@ -12,9 +12,9 @@ function remove_promo_adevent() {
   if(!empty($_POST['promoRemoveCheckbox'])) {
     $error_array = array();
       foreach($_POST['promoRemoveCheckbox'] as $check) {
-      	$promo_code 	=  mysql_real_escape_string($_POST["promoCode"]);
-        $adevent_code    = mysql_real_escape_string($check);
-
+      	$adevent_code 	=  mysql_real_escape_string($_POST["adEventCodes"]);
+        $promo_code    = mysql_real_escape_string($check);
+        echo "$adevent_code";
         $verify_statement = "delete from AdEventPromotion where PromoCode='$promo_code' and EventCode='$adevent_code'";
         $verify_result = mysql_query($verify_statement);
         array_push($error_array, "Ad Event Promotion $promo_code removed successfully.");

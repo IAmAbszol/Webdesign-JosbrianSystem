@@ -5,11 +5,11 @@
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     $new_id = mysql_real_escape_string($id);
     $searchStatement = "select * from AdEventPromotion where EventCode='$new_id'";
-    //echo "$id";
+  //  echo "$id";
     $result = mysql_query($searchStatement);
     if(mysql_num_rows($result) > 0) {
       // now grab item info from Linked
-      $item_search = "select Promotion.PromoCode, Promotion.Description from Promotion, AdEventPromotion where (AdEventPromotion.PromoCode = Promotion.PromotionCode) AND AdEventPromotion.PromoCode='$new_id';";
+      $item_search = "select Promotion.PromoCode, Promotion.Description from Promotion, AdEventPromotion where (AdEventPromotion.PromoCode = Promotion.PromoCode) AND AdEventPromotion.EventCode='$new_id';";
       $new_result = mysql_query($item_search);
       return $new_result;
     }
