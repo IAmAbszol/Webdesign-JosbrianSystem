@@ -378,7 +378,8 @@ $("select[title='department']").append("<option value='SALTY SNACKS'>SALTY SNACK
 
 																				if($sale_price != "no") {
 																					// promotion was attached, grabbing sale price
-																					echo "<td><p><div><span style='text-decoration: line-through; color: #ff7272; white-space: nowrap;'>{$_column}</span></div> <div name='item$increment' id='item$increment'>$sale_price</div></p></td>";
+																					$best_price = calculate_best_promotion_to_item($item_number);
+																					echo "<td><p><div><span style='text-decoration: line-through; color: #ff7272; white-space: nowrap;'>{$_column}</span></div> <div name='item$increment' id='item$increment'>$best_price</div></p></td>";
 																				} else
 																					echo "<td><p><div name='item$increment' id='item$increment'>{$_column}</div></p></td>";
 

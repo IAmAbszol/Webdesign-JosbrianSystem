@@ -15,11 +15,10 @@ function update_item_promotion() {
 	$item_code 	=  mysql_real_escape_string($_POST["itemCodeForPromo"]);
 	$promo_code	=  mysql_real_escape_string($_POST["promoAddCheckbox"]);
 
-	// first grab promoitem to see if it exists prior into the table
-	$question_there = "select PromoCode, ItemNumber from PromotionItem where ItemNumber='$item_code'";
-	$question_result = mysql_query($question_there);
+	$questionStatement = "select * from PromotionItem where (ItemNumber='$item_code') AND (PromoCode='$promo_code');";
+	$questionResult = mysql_query($questionStatement);
 
-	if(mysql_num_rows($question_result) == 0) {
+	if(mysql_num_rows($questionResult) == 0) {
 
 	  // grab item retail price via query
 		$searchStatement = "select FullRetailPrice from Item where ItemNumber='$item_code'";
@@ -37,7 +36,7 @@ function update_item_promotion() {
 
 		// apply discount, return value
 		$grabbed_price = calculatePrice($myAmount, $myType, $myPrice);
-		
+
 	  // insert into promoitem
 		$insertStatement = "insert PromotionItem (PromoCode, ItemNumber, SalePrice) values ( '$promo_code', '$item_code', '$grabbed_price')";
 		$results = mysql_query($insertStatement);
@@ -50,8 +49,9 @@ function update_item_promotion() {
 			$message = "PromotionItem Successfully Added to Database PromoCode: $promo_code and ItemNumber: $item_code with a SalePrice: $grabbed_price.";
 		}
 		display_result_item($message);
-	} else
-		display_result_item("Error in inserting PromotionItem: $promo_code. Item has been already linked into table.");
+	} else {
+		display_result_item("Error! Item $item_code is already linked to Promotion $promo_code");
+	}
 
 }
 

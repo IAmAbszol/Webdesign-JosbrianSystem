@@ -44,6 +44,21 @@
     return "no";
   }
 
+  function calculate_best_promotion_to_item($id) {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    $new_id = mysql_real_escape_string($id);
+    $searchStatement = "select PromotionItem.SalePrice from Item, PromotionItem where
+            (PromotionItem.ItemNumber = Item.ItemNumber) AND (PromotionItem.ItemNumber='$new_id')
+            ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) DESC LIMIT 1";
+    //echo "$id";
+    $result = mysql_query($searchStatement);
+    if(mysql_num_rows($result) > 0) {
+      $the_row = mysql_fetch_array($result);
+      return $the_row['SalePrice'];
+    }
+    return "no";
+  }
+
   // returns the linked promotion to that item if it exists
   function grab_linked_promotions($id) {
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
@@ -108,6 +123,11 @@
     connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
     // append string
   	$appendString="";
+
+    $item_number = mysql_real_escape_string($item_number);
+    $item_description = mysql_real_escape_string($item_description);
+    $item_category = mysql_real_escape_string($item_category);
+    $department_name = mysql_real_escape_string($department_name);
 
   	// setup string
   	if($item_number != '') 		$appendString .= "ItemNumber='$item_number' AND ";

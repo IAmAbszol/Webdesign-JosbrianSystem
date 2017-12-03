@@ -12,6 +12,104 @@
     <script>
 
 		// validate
+		function report3Validate() {
+			var description = document.forms["reportThreeForm"]["description"].value;
+			var itemNumber = document.forms["reportThreeForm"]["itemNumber"].value;
+			var category = document.forms["reportThreeForm"]["category"].value;
+			var department = document.forms["reportThreeForm"]["department"].value;
+			var alertvalue = document.getElementById('alertThirdReport');
+
+			description = toCapitalLetter(description);
+
+			if (itemNumber != "" || description != "" || category != "" || department != "") {
+
+				if (itemNumber != "") {
+
+					if (itemNumber.match(/^\d{6,7}$/)) {
+						return true;
+					} else {
+						alertvalue.style.display = "block";
+						alertvalue.style.visibility = "visible";
+						alertvalue.innerHTML = "Item Number is invalid: should have 6 or 7 digits\n";
+						return false;
+					}
+				}
+				return true;
+
+			} else {
+				alertvalue.style.display = "block";
+				alertvalue.style.visibility = "visible";
+				alertvalue.innerHTML = "Please fill at list one field for the search\n";
+				return false;
+			}
+		}
+
+		function hideAlertItemSearch() {
+			document.getElementById("alertThirdReport").style.display = "none";
+			document.getElementById("alertThirdReport").style.visibility = "hidden";
+		}
+
+
+		function toCapitalLetter(myElement) {
+
+			myElement = myElement.toUpperCase(); //Upper case to the entered parameters
+
+			return myElement;
+		}
+
+
+		function validateCost(error, x) {
+			if (x.match(/^\${0,1}\d+(?:\.{0,1}\d{0,2})$/)) {
+
+				//Erase the dollar sign
+				var res = x.replace("$", "");
+				x = res;
+
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Purchase Price\n";
+
+			} else {
+				error = "Purchase Cost is invalid\n";
+			}
+
+			return error;
+		}
+
+		function validatePrice(error, x) {
+			if (x.match(/^\${0,1}\d+(?:\.{0,1}\d{0,2})$/)) {
+
+				//Erase the dollar sign
+				var res = x.replace("$", "");
+				x = res;
+
+				error = "";
+				return error;
+			} else if (x == "") {
+				error = "Please Enter a Retail Price\n";
+
+			} else {
+				error = "Retail Price is invalid\n";
+			}
+
+			return error;
+		}
+
+		function validateItemNumber(error, x) {
+			if (x.match(/^\d{6,7}$/)) {
+				error = "";
+				return error;
+
+			} else if (x == "") {
+				error = "Please Enter an Item Number\n";
+
+			} else {
+				error = "Item Number is invalid: should have 6 or 7 digits\n";
+			}
+
+			return error;
+		}
 		function report2Validate() {
 			var errormessage = "";
 			var message = "";
@@ -71,34 +169,6 @@
 			}
 
 			return true;
-		}
-		function report3Validate() {
-			var errormessage = "";
-			var message = "";
-			var x = document.forms["thirdReportForm"]["itemNumber"].value;
-			errormessage += validateItemNumber(message,x);
-			if(errormessage != "") {
-				var alertvalue = document.getElementById("alertThirdReport");
-				alertvalue.style.display = "block";
-				alertvalue.innerHTML = "Error detected!\n" + errormessage;
-				return false;
-			}
-
-			return true;
-		}
-		function validateItemNumber(error, x) {
-			if (x.match(/^\d{6,7}$/)) {
-				error = "";
-				return error;
-
-			} else if (x == "") {
-				error = "Please Enter an Item Number\n";
-
-			} else {
-				error = "Item Number is invalid: should have 6 or 7 digits\n";
-			}
-
-			return error;
 		}
 		function checkDate(message, dateEval) {
 			message = "";
@@ -290,10 +360,43 @@
 									<h3 class="panel-title"><b>Third Report:</b></h3>
 								</div>
 								<div class="panel-body">
-									<form name="thirdReportForm" onsubmit="return report3Validate();" method="POST" action="reportThree.php">
-										<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
-										<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-									</form>
+								<form name="reportThreeForm" onsubmit="return report3Validate();" method="POST" action="reportThree.php">
+										<div class="form-group">
+												<input class="form-control" placeholder="Item Number" name="itemNumber" id="itemNumber" type="text">
+										</div>
+										<div class="form-group">
+											<td><h4><center>- OR -</center></h4></td>
+										</div>
+										<div class="form-group">
+												<textarea rows="1" class="form-control" placeholder="Item Description" name="description" id="description" type="text"></textarea>
+										</div>
+										<div class="form-group">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="category" title="categorySearch" name="category">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Item Category</option>
+													<option value="ACCESSORIES/FOOTWEAR">ACCESSORIES/FOOTWEAR</option>
+													<option value="BASIC APPAREL">BASIC APPAREL</option>
+													<option value="FOOD CONVENIENCE">FOOD CONVENIENCE</option>
+													<option value="FOOD GROCERY">FOOD GROCERY</option>
+												</select>
+										</div>
+										<div class="form-group">
+												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="department" title="departmentSearch" name="department">
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Department Name</option>
+													<option value="ACCESSORIES">ACCESSORIES</option>
+													<option value="FOOTWEAR">FOOTWEAR</option>
+													<option value="CHILDRENS BASICS">CHILDRENS BASICS</option>
+													<option value="LADIES BASICS">LADIES BASICS</option>
+													<option value="MENS BASIC">MENS BASIC</option>
+													<option value="CANDY">CANDY</option>
+													<option value="REFRIGERATED">REFRIGERATED</option>
+													<option value="COOKIES/CRACKERS">COOKIES/CRACKERS</option>
+													<option value="GROCERY">GROCERY</option>
+													<option value="SALTY SNACKS">SALTY SNACKS</option>
+												</select>
+										</div>
+									<input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
+									<input class="btn btn-lg btn-danger btn-block" type="reset" onclick="hideAlertItemSearch()" value="Reset">
+								</form>
 								</div>
 							</div>
 						</div>

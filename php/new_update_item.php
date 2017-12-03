@@ -48,7 +48,6 @@ function update_item() {
 
 	// first grab the promocodes
 	if(mysql_num_rows($return_promoResult) > 0) {
-		// the current schema only allows 1 promo to an item, thus only 1 promocode will actually be grabbed
 		// this is "future proofing" it if multiple promos are to be added, half the work is done
 		while($the_ro = mysql_fetch_assoc($return_promoResult)) {
 
@@ -72,7 +71,7 @@ function update_item() {
 					$price = calculatePrice($myAmount, $myType, $retail_price);
 
 					// new price achieved, now add it back into the Promotion Item database
-					$update_statement = "update PromotionItem set SalePrice='$price' where ItemNumber='$item_number'";
+					$update_statement = "update PromotionItem set SalePrice='$price' where ItemNumber='$item_number' AND PromoCode='$promo_code'";
 					$update_result = mysql_query($update_statement);
 				}
 			}

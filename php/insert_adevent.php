@@ -22,7 +22,7 @@ function insert_adevent() {
 	$result = mysql_query($insertStatement);
 
 	$message = "";
-	$name = $_POST['adEventName']:
+	$name = $_POST['adEventName'];
 	if(!$result) {
 		$message = "Error in inserting Ad: $name ". mysql_error();
 	} else {

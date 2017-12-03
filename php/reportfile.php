@@ -25,6 +25,34 @@
     return $result;
   }
 
+  function report_by_item($item_number, $item_description, $item_category, $department_name) {
+    connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
+    // append string
+  	$appendString="";
+
+    $item_number = mysql_real_escape_string($item_number);
+    $item_description = mysql_real_escape_string($item_description);
+    $item_category = mysql_real_escape_string($item_category);
+    $department_name = mysql_real_escape_string($department_name);
+
+  	// setup string search by item number OR the other components
+  	if($item_number != '') 		{
+      $appendString .= "Item.ItemNumber='$item_number' AND ";
+    } else {
+    	if($item_description != '') $appendString .= "Item.ItemDescription='$item_description' AND ";
+    	if($item_category != '') $appendString .= "Item.Category='$item_category' AND ";
+    	if($department_name != '') $appendString .= "Item.DepartmentName='$department_name' AND ";
+    }
+
+  	$appendString = str_lreplace("AND","",$appendString);
+    // first line is setup, second line is table linkages, third line is more linkages
+    $searchStatement = "select AdEvent.EventCode, AdEvent.Description, AdEvent.AdType, Item.ItemNumber, Item.FullRetailPrice, PromotionItem.SalePrice from AdEvent, AdEventPromotion, PromotionItem, Item where
+                        (AdEvent.EventCode = AdEventPromotion.EventCode) AND (AdEventPromotion.PromoCode = PromotionItem.PromoCode) AND (PromotionItem.ItemNumber = Item.ItemNumber) AND
+                        ($appendString) ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) DESC LIMIT 1;";
+    $result = mysql_query($searchStatement);
+    return $result;
+  }
+
   function report_top_sale_items() {
   	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
   	$searchStatement = "select Item.ItemNumber, Item.FullRetailPrice,
@@ -37,6 +65,18 @@
 
   function applyDecimal($value) {
   	return number_format((float)$value, 2, '.', '');
+  }
+
+  function str_lreplace($search, $replace, $subject)
+  {
+    $pos = strrpos($subject, $search);
+
+    if($pos !== false)
+    {
+        $subject = substr_replace($subject, $replace, $pos, strlen($search));
+    }
+
+    return $subject;
   }
 
   function connect_to_db($server, $username, $pwd, $dbname) {
