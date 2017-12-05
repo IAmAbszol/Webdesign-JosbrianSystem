@@ -13,18 +13,11 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Report Two</title>
   <script>
-    function printData()
-    {
-       var divToPrint=document.getElementById("printTable");
-       newWin= window.open("");
-       newWin.document.write(divToPrint.outerHTML);
-       newWin.print();
-       newWin.close();
-    }
-
-    $('button').on('click',function(){
-      printData();
-    })
+		function printDiv() {
+			window.frames["print_frame"].document.body.innerHTML = document.getElementById("printableTable").innerHTML;
+			window.frames["print_frame"].window.focus();
+			window.frames["print_frame"].window.print();
+		}
   </script>
 	<style>
 		@media (min-width: 768px)
@@ -131,8 +124,9 @@
                         <div id="searchResults" class="container">
                          <div class="jumbotron">
                             <h2 style="padding-bottom: 20px; text-align: left"><b>Report Two Results:</b></h2>
-                            <button id="printer"><span class="glyphicon glyphicon-print"></span></button>
+                            <button onclick="printDiv()"><span class="glyphicon glyphicon-print"></span></button>
                             <center>
+														<div id="printableTable">
                             <table class="table" id="printTable">
 														<!-- Listing Search -->
 																<?php
@@ -160,7 +154,9 @@
                                   ?>
 
 		                             </table>
+																 </div>
 		                             </center>
+																 <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 		                         </div>
 		                     	</div>
 

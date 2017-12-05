@@ -189,7 +189,7 @@
 			if (adName == "") {
 				message = "Please enter a name\n";
 			} else {
-				if (adName.match(/[^A-Za-z-'  ]/) || adName.match(/^-[A-Za-z]/) ) {
+				if (adName.match(/[^A-Za-z-0-9'  ]/) || adName.match(/^-[A-Za-z0-9]/) ) {
 					message = "Name must contain text only\n";
 				}
 			}
