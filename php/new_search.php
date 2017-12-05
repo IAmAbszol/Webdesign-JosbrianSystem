@@ -24,7 +24,7 @@
     $result = mysql_query($searchStatement);
     if(mysql_num_rows($result) > 0) {
       // now grab item info from Linked
-      $item_search = "select Item.ItemNumber, Item.ItemDescription from Item, PromotionItem where (PromotionItem.ItemNumber = Item.ItemNumber) AND PromotionItem.PromoCode='$new_id';";
+      $item_search = "select Item.ItemNumber, Item.ItemDescription, Item.FullRetailPrice, PromotionItem.SalePrice from Item, PromotionItem where (PromotionItem.ItemNumber = Item.ItemNumber) AND PromotionItem.PromoCode='$new_id';";
       $new_result = mysql_query($item_search);
       return $new_result;
     }

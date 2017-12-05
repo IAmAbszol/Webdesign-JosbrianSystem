@@ -108,6 +108,21 @@
 			var insertCode = document.getElementById("promo" + i).innerHTML;
 			// assign code to hidden field
 			var code = document.getElementById("promoCodeForLinked").value = insertCode;
+
+			if (window.XMLHttpRequest) {
+					 // code for IE7+, Firefox, Chrome, Opera, Safari
+					 xmlhttp = new XMLHttpRequest();
+			 } else {
+					 // code for IE6, IE5
+					 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			 }
+			 xmlhttp.onreadystatechange = function() {
+					 if (this.readyState == 4 && this.status == 200) {
+							 document.getElementById("ponzi").innerHTML = this.responseText;
+					 }
+			 };
+			 xmlhttp.open("GET","php/middle_man.php?c="+insertCode,true);
+			 xmlhttp.send();
 		}
 
 		function testPromoName(message) {
@@ -398,43 +413,14 @@
 					<form name='removeLinkedItems' id='removeLinkedItems' onsubmit='return evaluateItemRemove()' method='POST' action='php/new_remove_item_promo.php'>
 					<!-- Hidden but links to what itemcode/row was clicked -->
 						<input class='form-control' placeholder='' name='promoCodeForLinked' id='promoCodeForLinked' type='hidden' readonly>
+						<input class='form-control' placeholder='' name='indexPoint' id='indexPoint' type='hidden' readonly>
 						<center>
-						<table class='table' id='selectPromoItemTable'>
+						<div id='ponzi' name='ponzi'>
 						<!-- Listing Search -->";
 
-																				$item_Data = grab_linked_promotions_to_item($promo_link);
-																				echo "<thead><tr>";
-																				for($i = 0; $i < mysql_num_fields($item_Data); $i++) {
-																					$field_infos = mysql_fetch_field($item_Data, $i);
-																					echo "<th>{$field_infos->name}</th>";
-																				}
-																				echo "<th>Remove Linked Promotion</th>
-																				</tr></thead>";
 
-																				echo "<tbody>";
 
-																				// Print the data
-																				$increment = 0;
-																				while($row = mysql_fetch_assoc($item_Data)) {
-																					$bounce_back = 0;
-																					$link_code = $row['ItemNumber'];
-																					echo "<tr data-toggle='modal' data-target='#itemDetailModal'>";
-																					foreach($row as $_column) {
-																						echo "<td><p><div name='removepromo$increment' id='removepromo$increment'>{$_column}</div></p></td>";
-																						$bounce_back++;
-																						$increment++;
-																					}
-																					// should readjust back to itemNumber designated index value
-																					// then simply iterate 5 times in evaluateData to grab all fields
-																					$adjust=$increment - $bounce_back;
-																					echo "<td><input type='checkbox' name='itemRemoveCheckbox[]' id='itemRemoveCheckbox[]' value='$link_code'></td>
-
-																					</tr>";
-																				}
-
-																				echo "</tbody>";
-
-						echo "</table>
+						echo "</div>
 						</center>
 					<div class='modal-footer'>
 						 <input class='btn btn-secondary' data-dismiss='modal' value='Close'>
