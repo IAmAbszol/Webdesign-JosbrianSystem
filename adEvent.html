@@ -13,7 +13,8 @@
 
 		//CHANGES ROW COLOR & PLUS/MINUS
 		$(document).ready(function () {
-			hideSign();
+			hideSign();<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
 			$('tr').click(function () {
 				var minus = document.getElementById('minusSign');
 				if (minus.style.display != 'none') {
@@ -132,7 +133,7 @@
 		}
 
 	</script>
-
+    
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<title>Josbrian Interface - Ad Events</title>
@@ -155,6 +156,10 @@
    textarea:focus {
     height: 10em;
    }
+        
+   tr.spaceUnder>td {
+			padding-bottom: 1em;
+   }        
 
 	</style>
 
@@ -232,32 +237,64 @@
 								<div class="panel-body">
 									<fieldset>
 										<form name="adEventAddForm" onsubmit="return validateInput();" method="POST" action="php/insert_adevent.php">
-											<div class="form-group">
-												<input class="form-control" placeholder="Add an Ad Event Name" name="adEventName" id="adEventName" type="text">
-											</div>
-											<div class="form-group">
-												<textarea rows="1" class="form-control" placeholder="Add an Ad Event Description" name="adEventDescription" id="promotionDescription"
+                                            <table>
+											  <tr class="spaceUnder">
+                                                <td>
+                                                  <h5>Ad Event Name:&nbsp;&nbsp;</h5>    
+                                                </td>
+                                                <td>  
+												<input class="form-control" placeholder="Ad Event Name" name="adEventName" id="adEventName" type="text">
+                                                </td>    
+											  </tr>
+											<tr class="spaceUnder">
+                                              <td>
+                                                <h5>Description:</h5>      
+                                              </td>
+                                              <td>    
+												<textarea rows="1" class="form-control" placeholder="Description" name="adEventDescription" id="promotionDescription"
 												 type="text"></textarea>
-											</div>
-											<div class="form-group">
+                                              </td>      
+											</tr>
+											<tr class="spaceUnder">
+                                              <td>
+                                                <h5>Ad Event Type:</h5>  
+                                              </td>
+                                              <td>    
 												<select style="color: rgba(0,0,0,0.5);" class="form-control" id="adEventType" name="adEventType">
-													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Add an Ad Event Type</option>
+													<option style="color: rgba(0,0,0,0);" value="" disabled selected>Ad Event Type</option>
 													<option value="Circular">Circular</option>
 													<option value="PassOut">Pass Out</option>
 													<option value="Planner">Planner</option>
 												</select>
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Add a Starting date (YYYY-MM-DD Format)" name="adEventstart" id="adEventstart" type="text">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Add an Ending date (YYYY-MM-DD Format)" name="adEventend" id="adEventend" type="text">
-											</div>
-											<div class="form-group">
-												<input class="form-control" placeholder="Add an Event Code" name="adEventcode" id="adEventcode" type="text">
-											</div>
-											<button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
-											<button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>
+                                              </td>      
+											</tr>
+											<tr class="spaceUnder">
+                                              <td>
+                                                <h5>Start Date:</h5>      
+                                              </td>
+                                              <td>    
+                                                <input type='date' class="form-control" name="adEventstart" id="adEventstart" placeholder="Start Date" >
+                                              </td>      
+											</tr>
+											<tr class="spaceUnder">
+                                              <td>
+                                                <h5>End Date:</h5>      
+                                              </td>    
+                                              <td>    
+												<input class="form-control" placeholder="End Date" name="adEventend" id="adEventend" type="date">
+                                              </td>
+											</tr>
+											<tr class="spaceUnder">
+                                              <td>
+                                                <h5>Event Code:</h5>      
+                                              </td>
+                                              <td>    
+												<input class="form-control" placeholder="Event Code" name="adEventcode" id="adEventcode" type="text">
+                                              </td>      
+											</tr>
+                                          </table>
+                                          <button class="btn btn-lg btn-success btn-block" type="submit" value="Submit">Submit</button>
+								          <button class="btn btn-lg btn-danger btn-block" type="reset" value="Reset">Clear</button>    
 										</form>
 									</fieldset>
 								</div>
