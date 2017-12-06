@@ -11,7 +11,7 @@ function insert_adevent() {
 	connect_to_db(DB_SERVER, DB_UN, DB_PWD, DB_NAME);
 	$event_code = mysql_real_escape_string($_POST['adEventcode']);
 	$event_name =  mysql_real_escape_string($_POST['adEventName']);
-	$event_start =  mysql_real_escape_string($_POST['adEventstart']);
+	$event_start = mysql_real_escape_string($_POST['adEventstart']);
 	$event_end =  mysql_real_escape_string($_POST['adEventend']);
 	$event_description =  mysql_real_escape_string($_POST['adEventDescription']);
 	$event_type =  mysql_real_escape_string($_POST['adEventType']);
@@ -29,6 +29,11 @@ function insert_adevent() {
 		$message = "Ad Event Successfully Added to Database: $name.";
 	}
 	display_result($message);
+}
+
+function reformatDate($date) {
+	list($month, $day, $year) = $spliced = split("/", $date);
+	return "$year/$month/$day";
 }
 
 function connect_to_db($server, $username, $pwd, $dbname) {

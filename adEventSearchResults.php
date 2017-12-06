@@ -324,7 +324,7 @@
 								<span aria-hidden='true'>&times;</span>
 							</button>
 						</div>
-						<div class='modal-body' style="overflow-y: scroll; max-height: 85%">
+						<div class='modal-body' style='overflow-y: scroll; max-height: 85%'>
 						<div id='alertboxitemremove' class='alert alert-danger alert-dismissable fade in' style='display: none; color: black; white-space: pre-wrap;'>
 
 						</div>

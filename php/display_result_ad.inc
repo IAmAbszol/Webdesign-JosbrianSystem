@@ -14,7 +14,7 @@ function display_result($message)
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 	<!-- MAIN CSS -->
 	<link rel='stylesheet' href='../assets/css/main.css'>
-	<title>Josbrian Interface - Items</title>
+	<title>Josbrian Interface - Ad Event</title>
 	<style>
 		@media (min-width: 768px) .sidebar {
 			position: fixed;
@@ -89,11 +89,11 @@ function display_result($message)
 								<b>Ad Events</b>
 							</li>
 						</center>
-						<li name='adItem' id='adItem'>
+						<li name='adItem' id='adItem' class='active'>
 							<a href='../adEvent.html'>Add Ad Event</a>
 						</li>
 						<li name='searchAd' id='searchAd'>
-   				 <li name='searchAdEvent' id='searchAdEvent' class='active'><a href='adEvent.html'><span class='glyphicon glyphicon-search'></span> Search Ad Events</a></li>
+   				 <li name='searchAdEvent' id='searchAdEvent'><a href='adEvent.html'><span class='glyphicon glyphicon-search'></span> Search Ad Events</a></li>
 						</li>
 					</ul>
 				</div>
